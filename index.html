@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bortakväll 🍬</title>
-  </head>
-  <body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bortakväll 🍬</title>
+</head>
+
+<body>
     <div class="container">
       <header>
         <div
@@ -17,11 +19,11 @@
           <i class="fa-solid fa-cart-shopping fs-4"></i>
         </div>
       </header>
-      <div id="app"></div>
-      <h1 class="mt-4">HEJSAN.</h1>
-      <button class="goToPage">Product-page</button>
-      <button class="goToPage2">Checkout-page</button>
-      <button class="goToPage3">Order complete</button>
+    <div id="app"></div>
+    <h1 class="mt-4">HEJSAN!.</h1>
+    <button class="goToPage">Product-page</button>
+    <button class="goToPage2">Checkout-page</button>
+    <button class="goToPage3">Order complete</button>
       <footer
         class="d-flex justify-content-between align-items-center py-3 border-top mt-3"
       >
@@ -40,7 +42,22 @@
           </li>
         </ul>
       </footer>
-      <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/main.ts"></script>
+
+  <div class="container">
+    <main class="productPageMain">
+      <div class="card candyCardDiv" style="width: 18rem;">
+        <img src="src/assets/images/Godis till projekt.jpg" class="card-img-top" alt="Bild på godis">
+        <div class="card-body">
+          <h5 class="card-title candyCardTitle">Namn på godiset</h5>
+          <p class="card-text">Pris:</p>
+          <a href="#" class="btn candyCardBtn">Lägg i varukorg</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
     </div>
-  </body>
+</body>
+
 </html>
