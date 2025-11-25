@@ -6,9 +6,6 @@
 
 git add .
 git commit -m "text"
-
-# första pushen
-
 git push -u origin (branch)
 
 # 🔁 2. Merga in i dev
