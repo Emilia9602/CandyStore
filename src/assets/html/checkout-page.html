@@ -7,6 +7,34 @@
   </head>
   <body>
     <h1>Checkout-page</h1>
+
+    <div class="container">
+      <div class="row justify-content-center m-5">
+        <form>
+          <label for="name" class="form-label mt-2">Namn</label>
+          <input type="text" id="name" class="form-control" placeholder="Namn" required>
+
+          <label for="adress" class="form-label mt-2">Adress</label>
+          <input type="text" id="adress" class="form-control" placeholder="Adress" required>
+
+          <label for="postNum" class="form-label mt-2">Postnummer</label>
+          <input type="text" id="postNum" class="form-control" placeholder="Postnummer" required>
+
+          <label for="place" class="form-label mt-2">Ort</label>
+          <input type="text" id="place" class="form-control" placeholder="Ort" required>
+
+          <label for="phone" class="form-label mt-2">Telefonnummer</label>
+          <input type="tel" id="phone" class="form-control" placeholder="070 123 45 67">
+
+          <label for="email" class="form-label mt-2">E-post</label>
+          <input type="email" id="email" class="form-control" placeholder="E-post" required>
+
+          <div class="text-center">
+            <button id="submitBtn" type="submit" class="btn btn-dark fw-bold mt-3">Skicka</button>
+          </div>
+        </form>
+      </div>
+    </div>
     <script type="module" src="../ts/checkout-page.ts"></script>
   </body>
 </html>
