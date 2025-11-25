@@ -15,14 +15,14 @@ git push -u origin (branch)
 
 git checkout dev
 git pull
-git merge feature/header # konflikter kan uppstå
+git merge (branch) -m "text" # konflikter kan uppstå
 git push origin dev
 
 # 🚀 3. Merga dev in i main
 
 git checkout main
 git pull
-git merge dev
+git merge dev -m "text"
 git push origin main
 
 ---
