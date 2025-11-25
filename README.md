@@ -48,7 +48,7 @@ Fredag 🔄 - Daily Scrum + Sprint Retrospektiv + (maybe) förberedelse inför n
 
 ---
 
-🕒 Daily Scrum (varje dag, tid ??)
+🕒 Daily Scrum (varje dag (förutom måndag), tid 09:00)
 
 Varje morgon håller vi ett kort möte där alla svarar på tre frågor:
 
@@ -62,7 +62,7 @@ Varje morgon håller vi ett kort möte där alla svarar på tre frågor:
 
 ---
 
-🟣 Sprint Planning (varje ??, tid ??)
+🟣 Sprint Planning (varje måndag, 09:00 eller när tid finns)
 
 Vi delar upp olika roller för veckan
 
@@ -80,7 +80,7 @@ Stories bryts ner i tasks ifall de behövs. Tasks skrivs i beskrivningen under U
 
 ---
 
-🔄 Sprint Retrospektiv (varje ??, tid ??)
+🔄 Sprint Retrospektiv (varje fredag, tid 14:00)
 
 När sprinten är klar gör vi en kort återblick för att tillsammans förbättra vårt arbetssätt. Kolla vad som gick bra/dåligt.
 
