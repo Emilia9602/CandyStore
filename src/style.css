@@ -1,3 +1,32 @@
 body {
   background-color: aqua;
 }
+
+.productPageMain {
+  display: flex;
+}
+
+.candyCardDiv {
+  margin: 1rem;
+}
+
+.candyCardTitle {
+  font-size: 100%;
+}
+
+.candyCardBtn {
+  background-color:rgb(237, 246, 103);
+  border: 1px solid black;
+  font-size: 75%;
+}
+
+@media screen and (min-width: 400px) {
+
+  .candyCardTitle {
+    font-size: 1.25rem;
+  }
+
+  .candyCardBtn {
+    font-size: 1rem;
+  }
+}
