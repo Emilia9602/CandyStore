@@ -51,7 +51,7 @@ Fredag 🔄 - Daily Scrum + Sprint Retrospektiv + (maybe) förberedelse inför n
 🕒 Daily Scrum (varje dag (förutom måndag), tid 09:00)
 
 Varje morgon håller vi ett kort möte där alla svarar på tre frågor:
-
+.
 🔹 Vad gjorde jag igår?
 🔹 Vad ska jag göra idag?
 🔹 Finns det hinder?
