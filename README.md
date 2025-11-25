@@ -45,7 +45,6 @@ Onsdag 🕒 - Daily Scrum + utveckling under dagen.
 Torsdag 🕒 - Daily Scrum + utveckling under dagen.
 
 Fredag 🔄 - Daily Scrum + Sprint Retrospektiv + (maybe) förberedelse inför nästa sprint.
-.
 
 ---
 
