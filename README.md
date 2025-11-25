@@ -2,6 +2,29 @@
 
 ![alt text](./src/assets/images/Scrum-image.webp)
 
+# 📌 1. På feature-branchen
+
+git add .
+git commit -m "text"
+
+# första pushen
+
+git push -u origin (branch)
+
+# 🔁 2. Merga in i dev
+
+git checkout dev
+git pull
+git merge feature/header # konflikter kan uppstå
+git push origin dev
+
+# 🚀 3. Merga dev in i main
+
+git checkout main
+git pull
+git merge dev
+git push origin main
+
 ---
 
 🧩 Roller (veckovis) ↓
