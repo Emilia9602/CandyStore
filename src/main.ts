@@ -1,7 +1,12 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./style.css";
-import { cartPopup, cartIcon } from "./assets/ts/selector";
+import {
+  cartOverlay,
+  cartIcon,
+  closeCart,
+  cartSection,
+} from "./assets/ts/selector";
 
 const button = document.querySelector<HTMLButtonElement>(".goToPage")!;
 
@@ -22,5 +27,15 @@ button3.addEventListener("click", () => {
 });
 
 cartIcon?.addEventListener("click", () => {
-  cartPopup?.classList.remove("invisible");
+  cartOverlay?.classList.remove("invisible");
+});
+
+closeCart?.addEventListener("click", () => {
+  cartOverlay?.classList.add("invisible");
+});
+
+cartOverlay?.addEventListener("click", (e) => {
+  if (!cartSection?.contains(e.target as Node)) {
+    cartOverlay?.classList.add("invisible");
+  }
 });
