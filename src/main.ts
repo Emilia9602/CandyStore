@@ -24,6 +24,12 @@ button3.addEventListener("click", () => {
   window.location.href = "src/assets/html/order-complete-page.html";
 });
 
+const productButton = document.querySelector<HTMLButtonElement>(".goToProductPage")!;
+
+productButton.addEventListener("click", () => {
+  window.location.href = "src/assets/html/product-page.html";
+});
+
 const renderCandyProducts = async () => {
   const fetchedProduct = await getProductsData();
   console.log(fetchedProduct);
