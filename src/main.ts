@@ -1,10 +1,14 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./style.css";
-
+import {
+  cartOverlay,
+  cartIcon,
+  closeCart,
+  cartSection,
+  candyCardDiv,
+} from "./assets/ts/selector";
 import { getProductsData } from "./assets/ts/bortakvall-API";
-
-import { candyCardDiv } from "./assets/ts/selector";
 
 const button = document.querySelector<HTMLButtonElement>(".goToPage")!;
 
@@ -24,7 +28,22 @@ button3.addEventListener("click", () => {
   window.location.href = "src/assets/html/order-complete-page.html";
 });
 
-const productButton = document.querySelector<HTMLButtonElement>(".goToProductPage")!;
+cartIcon?.addEventListener("click", () => {
+  cartOverlay?.classList.remove("invisible");
+});
+
+closeCart?.addEventListener("click", () => {
+  cartOverlay?.classList.add("invisible");
+});
+
+cartOverlay?.addEventListener("click", (e) => {
+  if (!cartSection?.contains(e.target as Node)) {
+    cartOverlay?.classList.add("invisible");
+  }
+});
+
+const productButton =
+  document.querySelector<HTMLButtonElement>(".goToProductPage")!;
 
 productButton.addEventListener("click", () => {
   window.location.href = "src/assets/html/product-page.html";
