@@ -21,9 +21,15 @@
           <i class="fa-solid fa-cart-shopping fs-4 invisible"></i>
         </div>
       </header>
+
       <div class="row justify-content-center m-5">
-        <form>
-          <label for="name" class="form-label mt-2">Namn</label>
+        <div class="col-md-4 border rounded">
+          <p>Box där varukorgen ska visas</p>
+        </div>
+      </div>
+      <div class="row justify-content-center m-5">
+        <form class="col-md-4">
+          <label for="name" class="form-label mt-2 ms-1">Namn</label>
           <input
             type="text"
             id="name"
@@ -32,7 +38,7 @@
             required
           />
 
-          <label for="adress" class="form-label mt-2">Adress</label>
+          <label for="adress" class="form-label mt-2 ms-1">Adress</label>
           <input
             type="text"
             id="adress"
@@ -41,7 +47,7 @@
             required
           />
 
-          <label for="postNum" class="form-label mt-2">Postnummer</label>
+          <label for="postNum" class="form-label mt-2 ms-1">Postnummer</label>
           <input
             type="text"
             id="postNum"
@@ -50,7 +56,7 @@
             required
           />
 
-          <label for="place" class="form-label mt-2">Ort</label>
+          <label for="place" class="form-label mt-2 ms-1">Ort</label>
           <input
             type="text"
             id="place"
@@ -59,7 +65,7 @@
             required
           />
 
-          <label for="phone" class="form-label mt-2">Telefonnummer</label>
+          <label for="phone" class="form-label mt-2 ms-1">Telefonnummer</label>
           <input
             type="tel"
             id="phone"
@@ -67,7 +73,7 @@
             placeholder="070 123 45 67"
           />
 
-          <label for="email" class="form-label mt-2">E-post</label>
+          <label for="email" class="form-label mt-2 ms-1">E-post</label>
           <input
             type="email"
             id="email"
@@ -82,7 +88,7 @@
               type="submit"
               class="btn btn-dark fw-bold mt-3"
             >
-              Skicka
+              Bekräfta
             </button>
           </div>
         </form>
