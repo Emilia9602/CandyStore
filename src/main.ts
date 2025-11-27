@@ -70,15 +70,14 @@ const renderCandyProducts = async () => {
             <h5 class="card-title candyCardTitle">${product.name}</h5>
             <p class="card-text">Pris: ${product.price}kr</p>
             <div class="d-flex gap-3 justify-content-center">
-            <a href="#" class="btn candyCardBtn" data-id="${product.id}>Lägg i varukorg</a>
+            <a href="#" class="btn candyCardBtn" data-id="${product.id}">Lägg i varukorg</a>
             <!--Ska ta användaren till produktens sida-->
-            <a href="#" class="goToProductPage btn candyCardBtn" data-id="${product.id}>Läs mer</a>
+            <a href="#" class="goToProductPage btn candyCardBtn" data-id="${product.id}">Läs mer</a>
             </div>
           </div>
         </div>
     `;
-
-    candyCardMain.innerHTML = renderCandyCards;
   });
+  candyCardMain.innerHTML = renderCandyCards;
 };
 renderCandyProducts();
