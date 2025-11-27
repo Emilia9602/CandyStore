@@ -19,11 +19,13 @@ export const cartSection =
   document.querySelector<HTMLDivElement>(".cart-section")!;
 
 //Cards
-export const candyCardDiv =
-  document.querySelector<HTMLDivElement>(".candyCardDiv")!;
 export const candyCardMain =
   document.querySelector<HTMLDivElement>(".productPageMain")!;
 
 // checkout-page
 export const checkoutCartListEl =
   document.querySelector<HTMLDivElement>("#checkoutCartList");
+
+  //Product-page
+  export const oneProductMain =
+  document.querySelector<HTMLDivElement>(".oneProductMain")!;

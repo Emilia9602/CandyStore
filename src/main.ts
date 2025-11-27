@@ -6,7 +6,6 @@ import {
   cartIcon,
   closeCart,
   cartSection,
-  candyCardDiv,
   candyCardMain,
   BASE_URL,
 } from "./assets/ts/selector";
@@ -60,7 +59,7 @@ const renderCandyProducts = async () => {
   fetchedProducts.data.map((product: CandyData) => {
     console.log(product);
     renderCandyCards += `
-    <div class="card candyCardDiv" style="width: 18rem">
+    <div class="card" style="width: 18rem">
           <img
             src="${BASE_URL}${product.images.thumbnail}"
             class="card-img-top"
