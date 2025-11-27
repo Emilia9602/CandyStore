@@ -7,8 +7,11 @@ import {
   closeCart,
   cartSection,
   candyCardDiv,
+  candyCardMain,
+  BASE_URL,
 } from "./assets/ts/selector";
 import { getProductsData } from "./assets/ts/bortakvall-API";
+import { type CandyData } from "./assets/ts/bortakvall-API.types";
 
 const button = document.querySelector<HTMLButtonElement>(".goToPage")!;
 
@@ -50,7 +53,51 @@ productButton.addEventListener("click", () => {
 });
 
 const renderCandyProducts = async () => {
-  const fetchedProduct = await getProductsData();
-  console.log(fetchedProduct);
+  const fetchedProducts = await getProductsData();
+  console.log(fetchedProducts);
+  let renderCandyCards: string = "";
+
+  fetchedProducts.data.map((product: CandyData) => {
+    console.log(product);
+    renderCandyCards += `
+    <div class="card candyCardDiv" style="width: 18rem">
+          <img
+            src="${BASE_URL}${product.images.thumbnail}"
+            class="card-img-top"
+            alt="Bild på godis"
+          />
+          <div class="card-body">
+            <h5 class="card-title candyCardTitle">${product.name}</h5>
+            <p class="card-text">Pris: ${product.price}kr</p>
+            <div class="d-flex gap-3 justify-content-center">
+            <a href="#" class="btn candyCardBtn">Lägg i varukorg</a>
+            <!--Ska ta användaren till produktens sida-->
+            <a href="#" class="goToProductPage btn candyCardBtn">Läs mer</a>
+            </div>
+          </div>
+        </div>
+    `;
+
+    candyCardMain.innerHTML = renderCandyCards;
+
+    // candyCardMain.innerHTML += `
+    // <div class="card candyCardDiv" style="width: 18rem">
+    //       <img
+    //         src="${BASE_URL}${product.images.thumbnail}"
+    //         class="card-img-top"
+    //         alt="Bild på godis"
+    //       />
+    //       <div class="card-body">
+    //         <h5 class="card-title candyCardTitle">Namn på godiset</h5>
+    //         <p class="card-text">Pris:</p>
+    //         <div class="d-flex gap-3 justify-content-center">
+    //         <a href="#" class="btn candyCardBtn">Lägg i varukorg</a>
+    //         <!--Ska ta användaren till produktens sida-->
+    //         <a href="#" class="goToProductPage btn candyCardBtn">Läs mer</a>
+    //         </div>
+    //       </div>
+    //     </div>
+    // `;
+  });
 };
 renderCandyProducts();
