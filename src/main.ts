@@ -44,17 +44,29 @@ closeCart?.addEventListener("click", () => {
 });
 
 cartOverlay?.addEventListener("click", (e) => {
+  const target = e.target as HTMLElement;
   if (!cartSection?.contains(e.target as Node)) {
     cartOverlay?.classList.add("invisible");
+  }
+  if (target.classList.contains("cart-product-trashcan")) {
+    console.log(target.dataset.id);
+    console.log("before:", localStorageCart);
+    const filteredStorageCart = localStorageCart.filter((product) => {
+      return product.id != Number(target.dataset.id);
+    });
+    localStorageCart = filteredStorageCart;
+    localStorage.setItem("cart", JSON.stringify(filteredStorageCart));
+    renderCartProducts();
   }
 });
 
 const renderCartProducts = async () => {
-  let cartSectionData = "";
+  let cartSectionHTML = "";
+  let totalPrice = 0;
   localStorageCart.map((product: OneCandyData) => {
-    console.log(product);
-    cartSectionData += `
-    <div class="row pb-2 pt-2">
+    totalPrice += product.price;
+    cartSectionHTML += `
+    <div class="row pb-2 pt-2 ${product.id}">
             <img
               src="${BASE_URL}${product.images.thumbnail}"
               class="cart-product-img img-thumbnail col-3 ms-3"
@@ -67,12 +79,16 @@ const renderCartProducts = async () => {
               class="cart-product-price col-3 d-flex flex-column align-items-end"
             >
               ${product.price}kr
-              <span class="cart-product-trashcan mt-auto">🗑️</span>
+              <span class="cart-product-trashcan mt-auto" data-id="${product.id}">🗑️</span>
             </h4>
           </div>
           `;
   });
-  cartProductSection.innerHTML = cartSectionData;
+  cartProductSection.innerHTML = cartSectionHTML;
+
+  document.querySelector<HTMLParagraphElement>(
+    ".total-price"
+  )!.textContent = `${totalPrice}kr`;
 };
 
 const renderCandyProducts = async () => {
@@ -109,6 +125,7 @@ const renderCandyProducts = async () => {
       //Hämtar Produktdata
       const productData = await getOneProduct(Number(target.dataset.id));
       //Lägger till produkt i local storage
+      console.log(productData.data);
       localStorageCart.push(productData.data);
       localStorage.setItem("cart", JSON.stringify(localStorageCart));
       console.log("LocalStorage/Kundvagn:", localStorageCart);
