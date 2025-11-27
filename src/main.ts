@@ -79,25 +79,6 @@ const renderCandyProducts = async () => {
     `;
 
     candyCardMain.innerHTML = renderCandyCards;
-
-    // candyCardMain.innerHTML += `
-    // <div class="card candyCardDiv" style="width: 18rem">
-    //       <img
-    //         src="${BASE_URL}${product.images.thumbnail}"
-    //         class="card-img-top"
-    //         alt="Bild på godis"
-    //       />
-    //       <div class="card-body">
-    //         <h5 class="card-title candyCardTitle">Namn på godiset</h5>
-    //         <p class="card-text">Pris:</p>
-    //         <div class="d-flex gap-3 justify-content-center">
-    //         <a href="#" class="btn candyCardBtn">Lägg i varukorg</a>
-    //         <!--Ska ta användaren till produktens sida-->
-    //         <a href="#" class="goToProductPage btn candyCardBtn">Läs mer</a>
-    //         </div>
-    //       </div>
-    //     </div>
-    // `;
   });
 };
 renderCandyProducts();
