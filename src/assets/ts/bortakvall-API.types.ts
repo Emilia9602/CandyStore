@@ -10,6 +10,7 @@ export interface CandyData {
 
 export interface CandyDataOrderItem {
   product_id: number;
+  product_name: string;
   qty: number;
   item_price: number;
   item_total: number;
