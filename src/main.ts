@@ -6,12 +6,15 @@ import {
   cartIcon,
   closeCart,
   cartSection,
+  cartProductSection,
   candyCardMain,
   BASE_URL,
-  addToCartButton,
 } from "./assets/ts/selector";
 import { getProductsData, getOneProduct } from "./assets/ts/bortakvall-API";
-import { type CandyData } from "./assets/ts/bortakvall-API.types";
+import {
+  type CandyData,
+  type OneCandyData,
+} from "./assets/ts/bortakvall-API.types";
 
 const button = document.querySelector<HTMLButtonElement>(".goToPage")!;
 
@@ -33,6 +36,7 @@ button3.addEventListener("click", () => {
 
 cartIcon?.addEventListener("click", () => {
   cartOverlay?.classList.remove("invisible");
+  renderCartProducts();
 });
 
 closeCart?.addEventListener("click", () => {
@@ -44,6 +48,32 @@ cartOverlay?.addEventListener("click", (e) => {
     cartOverlay?.classList.add("invisible");
   }
 });
+
+const renderCartProducts = async () => {
+  let cartSectionData = "";
+  localStorageCart.map((product: OneCandyData) => {
+    console.log(product);
+    cartSectionData += `
+    <div class="row pb-2 pt-2">
+            <img
+              src="${BASE_URL}${product.images.thumbnail}"
+              class="cart-product-img img-thumbnail col-3 ms-3"
+            />
+            <h3 class="cart-product-header text-start col-4 d-flex flex-column">
+              ${product.name}
+              <span class="cart-product-trashcan mt-auto">- HG +</span>
+            </h3>
+            <h4
+              class="cart-product-price col-3 d-flex flex-column align-items-end"
+            >
+              ${product.price}kr
+              <span class="cart-product-trashcan mt-auto">🗑️</span>
+            </h4>
+          </div>
+          `;
+  });
+  cartProductSection.innerHTML = cartSectionData;
+};
 
 const renderCandyProducts = async () => {
   const fetchedProducts = await getProductsData();
@@ -78,7 +108,6 @@ const renderCandyProducts = async () => {
     if (target.classList.contains("add-to-cart")) {
       //Hämtar Produktdata
       const productData = await getOneProduct(Number(target.dataset.id));
-
       //Lägger till produkt i local storage
       localStorageCart.push(productData.data);
       localStorage.setItem("cart", JSON.stringify(localStorageCart));
@@ -88,7 +117,7 @@ const renderCandyProducts = async () => {
 };
 
 //Hämtar kundvagn från LocalStorage
-let localStorageCart: string[] = JSON.parse(
+let localStorageCart: OneCandyData[] = JSON.parse(
   localStorage.getItem("cart") || "[]"
 );
 renderCandyProducts();
