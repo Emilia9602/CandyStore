@@ -46,9 +46,9 @@ cartOverlay?.addEventListener("click", (e) => {
 });
 
 const productButton =
-  document.querySelector<HTMLButtonElement>(".goToProductPage")!;
+  document.querySelector<HTMLButtonElement>(".goToProductPage");
 
-productButton.addEventListener("click", () => {
+productButton?.addEventListener("click", () => {
   window.location.href = "src/assets/html/product-page.html";
 });
 
