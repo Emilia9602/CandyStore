@@ -13,6 +13,7 @@ arrowLeft!.addEventListener("click", () => {
   window.location.href = "/";
 });
 
+//Render one Candy
 const renderCandyProduct = async () => {
   const fetchedProducts = await getProductsData();
   console.log(fetchedProducts);
