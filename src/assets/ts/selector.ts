@@ -21,7 +21,8 @@ export const cartSection =
 //Cards
 export const candyCardMain =
   document.querySelector<HTMLDivElement>(".productPageMain")!;
-
+export const addToCartButton =
+  document.querySelector<HTMLAnchorElement>(".add-to-cart");
 // checkout-page
 export const checkoutCartListEl =
   document.querySelector<HTMLDivElement>("#checkoutCartList");
