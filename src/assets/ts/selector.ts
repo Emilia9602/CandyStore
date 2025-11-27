@@ -16,3 +16,8 @@ export const cartSection =
 
 export const candyCardDiv =
   document.querySelector<HTMLDivElement>(".candyCardDiv")!;
+
+
+// checkout-page
+export const checkoutCartListEl =
+document.querySelector<HTMLDivElement>("#checkoutCartList");
