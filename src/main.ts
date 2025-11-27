@@ -82,7 +82,7 @@ const renderCandyProducts = async () => {
       //Lägger till produkt i local storage
       localStorageCart.push(productData.data);
       localStorage.setItem("cart", JSON.stringify(localStorageCart));
-      console.log(localStorageCart);
+      console.log("LocalStorage/Kundvagn:", localStorageCart);
     }
   });
 };
