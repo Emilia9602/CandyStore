@@ -7,3 +7,10 @@ export interface CandyData {
   stock_status: string;
   images: { large: string; thumbnail: string };
 }
+
+export interface CandyDataOrderItem {
+  product_id: number;
+  qty: number;
+  item_price: number;
+  item_total: number;
+}
