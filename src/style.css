@@ -58,6 +58,8 @@ Kundvagn
 
 .cart-product-section {
   border-bottom: 1px solid rgba(33, 37, 41, 0.5);
+  height: 80%;
+  overflow-y: auto;
 }
 
 .cart-product-img {
@@ -67,6 +69,7 @@ Kundvagn
 .cart-product-header {
   font-size: 0.8rem;
   margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
 }
 
 .cart-product-price {
@@ -76,4 +79,7 @@ Kundvagn
 
 .cart-product-trashcan {
   margin-top: auto;
+}
+.pagination .page-link {
+  color: black;
 }

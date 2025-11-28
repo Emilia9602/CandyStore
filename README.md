@@ -44,13 +44,9 @@ Delar upp arbete, bygger, testar och visar resultatet.
 
 ✔ Kod fungerar utan console-errors
 ✔ Funktionen uppfyller beskrivnings kriterierna
-✔ Felhantering finns (catch + UI-feedback)
+✔ Felhantering finns (catch + UI-feedback) (njaaa)
 ✔ Kod pushad på GitHub + PR godkänd
 ✔ Testad i desktop + mobil läge
-
----
-
-??? Estimera med Story Points ???
 
 ---
 
@@ -94,10 +90,6 @@ Vi väljer userstories vi tror vi hinner med under sprinten.
 Stories bryts ner i tasks ifall de behövs. Tasks skrivs i beskrivningen under User Storien.
 
 🎯 Målet är att varje sprint ska resultera i en färdig och fungerande del av produkten som går att demonstrera.
-
----
-
-?? Sprint review ??
 
 ---
 
