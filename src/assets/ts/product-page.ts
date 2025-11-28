@@ -2,8 +2,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../css/product-page.css";
 import { arrowLeft, BASE_URL, oneProductMain } from "./selector";
-import { getProductsData, getOneProduct } from "./bortakvall-API";
-import type { CandyData, OneCandyData } from "./bortakvall-API.types";
+import { getOneProduct } from "./bortakvall-API";
+import type { productPageOneCandyData } from "./bortakvall-API.types";
 
 arrowLeft!.addEventListener("click", () => {
   window.location.href = "/";
@@ -16,23 +16,26 @@ const renderCandyProduct = async () => {
   const newId: number = JSON.parse(currentId);
   console.log(newId);
   const fetchedProducts = await getOneProduct(newId);
-  console.log(fetchedProducts.data);
-  let renderCandy: string = "";
+  console.log(fetchedProducts);
 
-  fetchedProducts.data.map((product: OneCandyData) => {
+  renderCandyData(fetchedProducts.data);
+  }
+
+  const renderCandyData = (product: productPageOneCandyData) => {
     console.log(product);
+    let renderCandy: string = "";
     renderCandy += `
       <div class="row justify-content-center mt-5">
         <div class="col-12 col-md-8 col-lg-6 d-flex flex-column">
           <img src="${BASE_URL}${product.data.images.large}" alt="Bild på godiset" class="img-fluid">
         </div>
-        <div>
-          <div class="card text-center">
+        <div class="row justify-content-center mt-5">
+          <div class="card text-center col-12 col-md-8 col-lg-6 d-flex flex-column">
             <div class="card-body">
-              <h5 class="card-title">${product.data.name}</h5>
-              <p class="card-text">Pris: ${product.data.price}</p>
+              <h5 class="card-title">${product.name}</h5>
+              <p class="card-text">Pris: ${product.price}kr</p>
               <hr>
-              <p class="card-text">Beskrivning av godis</p>
+              <p class="card-text">Beskrivning: ${product.description}</p>
             </div>
           </div>
         </div>
@@ -42,7 +45,7 @@ const renderCandyProduct = async () => {
           </button>
         </div>
       </div>`;
-  });
-  oneProductMain.innerHTML = renderCandy;
-};
+      oneProductMain.innerHTML = renderCandy;
+  };
+
 renderCandyProduct();
