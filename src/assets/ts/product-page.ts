@@ -1,13 +1,9 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../css/product-page.css";
-import {
-  arrowLeft,
-  BASE_URL,
-  oneProductMain
-} from "./selector";
-import { getProductsData } from "./bortakvall-API";
-import type { CandyData } from "./bortakvall-API.types";
+import { arrowLeft, BASE_URL, oneProductMain } from "./selector";
+import { getProductsData, getOneProduct } from "./bortakvall-API";
+import type { CandyData, OneCandyData } from "./bortakvall-API.types";
 
 arrowLeft!.addEventListener("click", () => {
   window.location.href = "/";
@@ -15,11 +11,15 @@ arrowLeft!.addEventListener("click", () => {
 
 //Render one Candy
 const renderCandyProduct = async () => {
-  const fetchedProducts = await getProductsData();
-  console.log(fetchedProducts);
+  const currentId: string = localStorage.getItem("currentId") || "[]";
+  console.log("inside:", currentId);
+  const newId: number = JSON.parse(currentId);
+  console.log(newId);
+  const fetchedProducts = await getOneProduct(newId);
+  console.log(fetchedProducts.data);
   let renderCandy: string = "";
 
-  fetchedProducts.data.map((product: CandyData) => {
+  fetchedProducts.data.map((product: OneCandyData) => {
     console.log(product);
     renderCandy += `
       <div class="row justify-content-center mt-5">
@@ -42,8 +42,7 @@ const renderCandyProduct = async () => {
           </button>
         </div>
       </div>`;
-  }
-  )
+  });
   oneProductMain.innerHTML = renderCandy;
 };
 renderCandyProduct();

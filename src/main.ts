@@ -16,21 +16,21 @@ import {
   type OneCandyData,
 } from "./assets/ts/bortakvall-API.types";
 
-const button = document.querySelector<HTMLButtonElement>(".goToPage")!;
+const button = document.querySelector<HTMLButtonElement>(".goToPage");
 
-button.addEventListener("click", () => {
+button?.addEventListener("click", () => {
   window.location.href = "src/assets/html/product-page.html";
 });
 
-const button2 = document.querySelector<HTMLButtonElement>(".goToPage2")!;
+const button2 = document.querySelector<HTMLButtonElement>(".goToPage2");
 
-button2.addEventListener("click", () => {
+button2?.addEventListener("click", () => {
   window.location.href = "src/assets/html/checkout-page.html";
 });
 
-const button3 = document.querySelector<HTMLButtonElement>(".goToPage3")!;
+const button3 = document.querySelector<HTMLButtonElement>(".goToPage3");
 
-button3.addEventListener("click", () => {
+button3?.addEventListener("click", () => {
   window.location.href = "src/assets/html/order-complete-page.html";
 });
 
@@ -95,6 +95,7 @@ const renderCandyProducts = async () => {
   const fetchedProducts = await getProductsData();
   //console.log(fetchedProducts);
   let renderCandyCards: string = "";
+  console.log(fetchedProducts.data);
 
   fetchedProducts.data.map((product: CandyData) => {
     //console.log(product);
@@ -121,6 +122,7 @@ const renderCandyProducts = async () => {
 
   candyCardMain.addEventListener("click", async (e) => {
     const target = e.target as HTMLElement;
+
     if (target.classList.contains("add-to-cart")) {
       //Hämtar Produktdata
       const productData = await getOneProduct(Number(target.dataset.id));
@@ -129,6 +131,9 @@ const renderCandyProducts = async () => {
       localStorageCart.push(productData.data);
       localStorage.setItem("cart", JSON.stringify(localStorageCart));
       console.log("LocalStorage/Kundvagn:", localStorageCart);
+    }
+    if (target.classList.contains("goToProductPage")) {
+      localStorage.setItem("currentId", JSON.stringify(target.dataset.id));
     }
   });
 };
