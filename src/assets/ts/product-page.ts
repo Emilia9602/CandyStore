@@ -27,7 +27,7 @@ const renderCandyProduct = async () => {
     renderCandy += `
       <div class="row justify-content-center mt-5">
         <div class="col-12 col-md-8 col-lg-6 d-flex flex-column">
-          <img src="${BASE_URL}${product.data.images.large}" alt="Bild på godiset" class="img-fluid">
+          <img src="${BASE_URL}${product.images.large}" alt="Bild på godiset" class="img-fluid">
         </div>
         <div class="row justify-content-center mt-5">
           <div class="card text-center col-12 col-md-8 col-lg-6 d-flex flex-column">
