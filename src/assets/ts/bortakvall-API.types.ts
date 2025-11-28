@@ -24,3 +24,14 @@ export interface CandyDataOrderItem {
   item_price: number;
   item_total: number;
 }
+
+export interface productPageOneCandyData {
+    description: string;
+    id: number;
+    images: { thumbnail: string; large: string };
+    name: string;
+    on_sale: boolean;
+    price: number;
+    stock_quantity: number;
+    stock_status: string;
+}
