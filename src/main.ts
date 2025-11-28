@@ -8,6 +8,7 @@ import {
   cartSection,
   candyCardMain,
   BASE_URL,
+  //clickedCandyEl
 } from "./assets/ts/selector";
 import { getProductsData } from "./assets/ts/bortakvall-API";
 import { type CandyData } from "./assets/ts/bortakvall-API.types";
@@ -46,13 +47,13 @@ cartOverlay?.addEventListener("click", (e) => {
 
 const renderCandyProducts = async () => {
   const fetchedProducts = await getProductsData();
-  console.log(fetchedProducts);
+  //console.log(fetchedProducts);
   let renderCandyCards: string = "";
 
   fetchedProducts.data.map((product: CandyData) => {
-    console.log(product);
+    //console.log(product);
     renderCandyCards += `
-    <div class="card" style="width: 18rem">
+        <div class="card" style="width: 18rem">
           <img
             src="${BASE_URL}${product.images.thumbnail}"
             class="card-img-top"
@@ -71,5 +72,16 @@ const renderCandyProducts = async () => {
     `;
   });
   candyCardMain.innerHTML = renderCandyCards;
+
+  //let clickedCandyEl = document.querySelector<HTMLAnchorElement>(".goToProductPage")!;
+
+  let clickedCandyEl = fetchedProducts.data.find((product: CandyData) => {
+    return product.id;
+  }); 
+
+  //Måste ju spara det man trycker på, kommer ej åt det utanför denna funktionen. Kan då ej göra export till productpage.ts och visa bara den
+
+  console.log(clickedCandyEl);
 };
+
 renderCandyProducts();
