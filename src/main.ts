@@ -60,12 +60,33 @@ cartOverlay?.addEventListener("click", (e) => {
     localStorage.setItem("cart", JSON.stringify(filteredStorageCart));
     renderCartProducts();
   }
+  if (target.classList.contains("increase-qty")) {
+    const productUpdate = localStorageCart.find((product) => {
+      return product.id === Number(target.dataset.id);
+    });
+
+    if (!productUpdate) return;
+
+    productUpdate.cartQty += 1;
+    localStorage.setItem("cart", JSON.stringify(localStorageCart));
+    renderCartProducts();
+  }
+  if (target.classList.contains("decrease-qty")) {
+    const prodcutUpdate = localStorageCart.find((product) => {
+      return product.id === Number(target.dataset.id);
+    });
+
+    if (!prodcutUpdate) return;
+
+    prodcutUpdate.cartQty -= 1;
+    localStorage.setItem("cart", JSON.stringify(localStorageCart));
+    renderCartProducts();
+  }
 });
 
 const renderCartProducts = async () => {
   let cartSectionHTML = "";
   let totalPrice = 0;
-  console.log(localStorageCart);
   localStorageCart.map((product: CartItem) => {
     totalPrice += product.price * product.cartQty;
     cartSectionHTML += `
@@ -76,7 +97,13 @@ const renderCartProducts = async () => {
             />
             <h3 class="cart-product-header text-start col-4 d-flex flex-column">
               ${product.name}
-              <span class="cart-product-trashcan mt-auto">- HG +</span>
+              <div class="mt-auto">
+                <ul class="pagination pagination-sm m-0">
+                  <li class="page-item"><p class="decrease-qty page-link m-0" data-id="${product.id}">-</p></li>
+                  <li class="page-item"><p class="page-link m-0">${product.cartQty}</p></li>
+                  <li class="page-item"><p class="increase-qty page-link m-0" data-id="${product.id}">+</p></li>
+                </ul>
+              </div>
             </h3>
             <h4
               class="cart-product-price col-3 d-flex flex-column align-items-end"
