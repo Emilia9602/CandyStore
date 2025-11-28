@@ -70,7 +70,8 @@ Kundvagn
 }
 
 .cart-product-price {
-  font-size: 1rem;
+  padding: 0;
+  font-size: 0.8rem;
 }
 
 .cart-product-trashcan {

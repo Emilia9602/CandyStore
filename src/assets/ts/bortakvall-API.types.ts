@@ -8,13 +8,22 @@ export interface CandyData {
   images: { large: string; thumbnail: string };
 }
 
-export interface OneCandyData {
+export interface Product {
   id: number;
   name: string;
   description: string;
   price: number;
   on_sale: boolean;
   images: { thumbnail: string; large: string };
+}
+
+export interface OneCandyData {
+  status: string;
+  data: Product;
+}
+
+export interface CartItem extends Product {
+  cartQty: number;
 }
 
 export interface CandyDataOrderItem {
