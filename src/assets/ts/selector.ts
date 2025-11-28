@@ -33,3 +33,6 @@ export const checkoutCartListEl =
 //Product-page
 export const oneProductMain =
   document.querySelector<HTMLDivElement>(".oneProductMain")!;
+
+  //export const clickedCandyEl =
+  //document.querySelector<HTMLAnchorElement>(".goToProductPage")!;

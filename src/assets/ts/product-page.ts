@@ -4,10 +4,12 @@ import "../css/product-page.css";
 import {
   arrowLeft,
   BASE_URL,
-  oneProductMain
+  oneProductMain,
+  //clickedCandyEl
 } from "./selector";
 import { getProductsData } from "./bortakvall-API";
 import type { CandyData } from "./bortakvall-API.types";
+//import { clickedCandy } from "../../main";
 
 arrowLeft!.addEventListener("click", () => {
   window.location.href = "/";
@@ -16,11 +18,11 @@ arrowLeft!.addEventListener("click", () => {
 //Render one Candy
 const renderCandyProduct = async () => {
   const fetchedProducts = await getProductsData();
-  console.log(fetchedProducts);
+  //console.log(fetchedProducts);
   let renderCandy: string = "";
 
   fetchedProducts.data.map((product: CandyData) => {
-    console.log(product);
+    //console.log(product);
     renderCandy += `
       <div class="row justify-content-center mt-5">
         <div class="col-12 col-md-8 col-lg-6 d-flex flex-column">
@@ -30,9 +32,9 @@ const renderCandyProduct = async () => {
           <div class="card text-center">
             <div class="card-body">
               <h5 class="card-title">${product.name}</h5>
-              <p class="card-text">Pris: ${product.price}</p>
+              <p class="card-text">Pris: ${product.price}kr</p>
               <hr>
-              <p class="card-text">Beskrivning av godis</p>
+              <p class="card-text">Finns i lager: ${product.stock_quantity}</p>
             </div>
           </div>
         </div>
@@ -46,4 +48,5 @@ const renderCandyProduct = async () => {
   )
   oneProductMain.innerHTML = renderCandy;
 };
+
 renderCandyProduct();

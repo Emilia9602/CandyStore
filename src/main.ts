@@ -9,6 +9,7 @@ import {
   cartProductSection,
   candyCardMain,
   BASE_URL,
+  //clickedCandyEl
 } from "./assets/ts/selector";
 import { getProductsData, getOneProduct } from "./assets/ts/bortakvall-API";
 import {
@@ -99,7 +100,7 @@ const renderCandyProducts = async () => {
   fetchedProducts.data.map((product: CandyData) => {
     //console.log(product);
     renderCandyCards += `
-    <div class="card" style="width: 18rem">
+        <div class="card" style="width: 18rem">
           <img
             src="${BASE_URL}${product.images.thumbnail}"
             class="card-img-top"
