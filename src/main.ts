@@ -7,6 +7,7 @@ import {
   closeCart,
   cartSection,
   cartProductSection,
+  cartCheckoutButton,
   candyCardMain,
   BASE_URL,
   //clickedCandyEl
@@ -45,20 +46,27 @@ closeCart?.addEventListener("click", () => {
   cartOverlay?.classList.add("invisible");
 });
 
+cartCheckoutButton.addEventListener("click", () => {
+  window.location.href = "src/assets/html/checkout-page.html";
+});
+
+const deleteProductFromCart = (id: number) => {
+  const filteredStorageCart = localStorageCart.filter((product) => {
+    return product.id != id;
+  });
+  localStorageCart = filteredStorageCart;
+  localStorage.setItem("cart", JSON.stringify(filteredStorageCart));
+  renderCartProducts();
+};
+
 cartOverlay?.addEventListener("click", (e) => {
   const target = e.target as HTMLElement;
   if (!cartSection?.contains(e.target as Node)) {
     cartOverlay?.classList.add("invisible");
   }
   if (target.classList.contains("cart-product-trashcan")) {
-    console.log(target.dataset.id);
-    console.log("before:", localStorageCart);
-    const filteredStorageCart = localStorageCart.filter((product) => {
-      return product.id != Number(target.dataset.id);
-    });
-    localStorageCart = filteredStorageCart;
-    localStorage.setItem("cart", JSON.stringify(filteredStorageCart));
-    renderCartProducts();
+    const currentId = Number(target.dataset.id);
+    deleteProductFromCart(currentId);
   }
   if (target.classList.contains("increase-qty")) {
     const productUpdate = localStorageCart.find((product) => {
@@ -79,8 +87,14 @@ cartOverlay?.addEventListener("click", (e) => {
     if (!prodcutUpdate) return;
 
     prodcutUpdate.cartQty -= 1;
-    localStorage.setItem("cart", JSON.stringify(localStorageCart));
-    renderCartProducts();
+
+    if (prodcutUpdate.cartQty === 0) {
+      const currentId = Number(target.dataset.id);
+      deleteProductFromCart(currentId);
+    } else {
+      localStorage.setItem("cart", JSON.stringify(localStorageCart));
+      renderCartProducts();
+    }
   }
 });
 
