@@ -3,7 +3,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../css/checkout-page.css";
 import "../css/global.css";
 import { arrowLeft } from "./selector";
-import type { CandyData } from "./bortakvall-API.types";
+import type { CandyData, CartItem } from "./bortakvall-API.types";
 import type { CandyDataOrderItem } from "./bortakvall-API.types";
 import { checkoutCartListEl } from "./selector";
 
@@ -11,7 +11,7 @@ arrowLeft!.addEventListener("click", () => {
   window.location.href = "/";
 });
 
-let localStorageCart: CandyData[] = JSON.parse(
+let localStorageCart: CartItem[] = JSON.parse(
   localStorage.getItem("cart") || "[]"
 );
 
@@ -31,7 +31,7 @@ const renderCart = () => {
       let candyDataOrderItem: CandyDataOrderItem = {
         product_id: item.id,
         product_name: item.name,
-        qty: 1,
+        qty: item.cartQty,
         item_price: item.price,
         item_total: 0,
       };
