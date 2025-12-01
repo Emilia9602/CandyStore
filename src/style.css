@@ -1,11 +1,20 @@
-.logo-img {
-  width: 140px; /* välj valfri storlek */
-}
-
 .productPageMain {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 1rem;
+  max-width: 1200px;
+}
+
+.card {
+  background-color: rgba(128, 121, 121, 0.4);
+  border: 1px solid #222;
+  max-width: 160px;
+}
+
+.card-button-container {
+  display: flex;
+  align-items: end;
 }
 
 .candyCardDiv {
@@ -19,16 +28,25 @@
 .candyCardBtn {
   background-color: rgb(237, 246, 103);
   border: 1px solid black;
-  font-size: 75%;
+  font-size: 0.7rem;
+  padding: 0.2rem;
+  border-radius: 0.6rem;
+  text-align: center;
+  color: #222;
+  text-decoration: none;
 }
 
-@media screen and (min-width: 400px) {
-  .candyCardTitle {
-    font-size: 1.25rem;
+.candyCardBtn:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 450px) {
+  .card {
+    max-width: 200px;
   }
 
   .candyCardBtn {
-    font-size: 1rem;
+    padding: 6px 4px;
   }
 }
 
@@ -63,7 +81,7 @@ Kundvagn
 
 .cart-product-section {
   border-bottom: 1px solid rgba(33, 37, 41, 0.5);
-  height: 78%;
+  height: 75%;
   overflow-y: auto;
 }
 
@@ -94,4 +112,8 @@ Kundvagn
 }
 .cart-close-button:hover {
   transform: scale(1.15);
+}
+
+.cart-checkout-button:hover {
+  text-decoration: underline;
 }

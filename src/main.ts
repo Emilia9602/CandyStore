@@ -150,13 +150,13 @@ const renderCandyProducts = async () => {
             class="card-img-top"
             alt="Bild på godis"
           />
-          <div class="card-body">
+          <div class="card-body d-flex flex-column p-3">
             <h5 class="card-title candyCardTitle">${product.name}</h5>
             <p class="card-text">Pris: ${product.price}kr</p>
-            <div class="d-flex gap-3 justify-content-center">
-            <a href="#" class="btn candyCardBtn add-to-cart" data-id="${product.id}">Lägg i varukorg</a>
+            <div class="card-button-container d-flex gap-1 justify-content-center mt-auto">
+            <a class="candyCardBtn add-to-cart" data-id="${product.id}">Lägg i varukorg</a>
             <!--Ska ta användaren till produktens sida-->
-            <a href="src/assets/html/product-page.html" class="goToProductPage btn candyCardBtn" data-id="${product.id}">Läs mer</a>
+            <a href="src/assets/html/product-page.html" class="goToProductPage candyCardBtn" data-id="${product.id}">Läs mer</a>
             </div>
           </div>
         </div>
