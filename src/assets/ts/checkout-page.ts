@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../css/checkout-page.css";
+import "../css/global.css";
 import { arrowLeft } from "./selector";
 import type { CandyData } from "./bortakvall-API.types";
 import type { CandyDataOrderItem } from "./bortakvall-API.types";

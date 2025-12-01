@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../css/product-page.css";
+import "../css/global.css";
 import { arrowLeft, BASE_URL, oneProductMain } from "./selector";
 import { getOneProduct } from "./bortakvall-API";
 import type { productPageOneCandyData } from "./bortakvall-API.types";
@@ -19,12 +20,12 @@ const renderCandyProduct = async () => {
   console.log(fetchedProducts);
 
   renderCandyData(fetchedProducts.data);
-  }
+};
 
-  const renderCandyData = (product: productPageOneCandyData) => {
-    console.log(product);
-    let renderCandy: string = "";
-    renderCandy += `
+const renderCandyData = (product: productPageOneCandyData) => {
+  console.log(product);
+  let renderCandy: string = "";
+  renderCandy += `
       <div class="row justify-content-center mt-5">
         <div class="col-12 col-md-8 col-lg-6 d-flex flex-column">
           <img src="${BASE_URL}${product.images.large}" alt="Bild på godiset" class="img-fluid">
@@ -45,7 +46,7 @@ const renderCandyProduct = async () => {
           </button>
         </div>
       </div>`;
-      oneProductMain.innerHTML = renderCandy;
-  };
+  oneProductMain.innerHTML = renderCandy;
+};
 
 renderCandyProduct();

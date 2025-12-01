@@ -1,3 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Coiny&family=Honk&family=Kranky&family=Patrick+Hand&display=swap");
+
+body {
+  font-family: Coiny;
+}
+
 .logo-img {
   width: 140px; /* välj valfri storlek */
 }
@@ -58,7 +64,7 @@ Kundvagn
 
 .cart-product-section {
   border-bottom: 1px solid rgba(33, 37, 41, 0.5);
-  height: 80%;
+  height: 78%;
   overflow-y: auto;
 }
 
@@ -82,4 +88,11 @@ Kundvagn
 }
 .pagination .page-link {
   color: black;
+}
+
+.cart-close-button {
+  transition: transform 0.2s;
+}
+.cart-close-button:hover {
+  transform: scale(1.15);
 }
