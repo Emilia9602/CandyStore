@@ -48,6 +48,9 @@
   .candyCardBtn {
     padding: 6px 4px;
   }
+  .cart-header-img {
+    width: 50% !important;
+  }
 }
 
 /* 
@@ -55,6 +58,30 @@
 Kundvagn
 
 */
+
+.cart-icon {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: -0.8em;
+  right: -0.6em;
+
+  width: 1.6em;
+  height: 1.6em;
+
+  background: linear-gradient(to bottom, #f2d324, #f02b2b);
+  color: #222;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 0.75em;
+  font-weight: bold;
+}
 
 .cart-overlay {
   background: rgba(0, 0, 0, 0.75);
@@ -74,9 +101,8 @@ Kundvagn
   border-bottom: 1px solid #212529;
 }
 
-.cart-header {
-  font-family: Honk;
-  font-size: 1.8rem;
+.cart-header-img {
+  width: 65%;
 }
 
 .cart-product-section {
