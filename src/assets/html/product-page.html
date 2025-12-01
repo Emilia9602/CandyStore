@@ -1,64 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+          <text y='.9em' font-size='90'>🍬</text>
+        </svg>"
+    />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-</head>
+  <body>
+    <div class="container">
+      <header>
+        <div
+          class="d-flex p-3 justify-content-between align-items-center border-bottom"
+        >
+          <i class="fa-solid fa-arrow-left-long fs-5"></i>
 
-<body>
-  <div class="container">
-    <header>
-      <div class="d-flex p-3 justify-content-between align-items-center border-bottom">
-        <i class="fa-solid fa-arrow-left-long fs-5"></i>
-
-        <h1>
-          <a href="/" class="d-flex justify-content-center">
-            <img src="../images/bortakvall-logo.png" class="w-50" />
-          </a>
-        </h1>
-        <i class="fa-solid fa-cart-shopping fs-4"></i>
-      </div>
-    </header>
-
-    <main class="container oneProductMain">
-      <div class="row justify-content-center mt-5">
-        <div class="col-12 col-md-8 col-lg-6 d-flex flex-column">
-          <img src="/src/assets/images/Godis till projekt.jpg" alt="Bild på godiset" class="img-fluid">
+          <h1>
+            <a href="/" class="d-flex justify-content-center">
+              <img src="../images/bortakvall-logo.png" class="w-50" />
+            </a>
+          </h1>
+          <i class="fa-solid fa-cart-shopping fs-4"></i>
         </div>
-        <div>
-          <div class="card text-center">
-            <div class="card-body">
-              <h5 class="card-title">Namn på godis</h5>
-              <p class="card-text">Pris:</p>
-              <hr>
-              <p class="card-text">Beskrivning av godis</p>
+      </header>
+
+      <main class="container oneProductMain">
+        <div class="row justify-content-center mt-5">
+          <div class="col-12 col-md-8 col-lg-6 d-flex flex-column">
+            <img
+              src="/src/assets/images/Godis till projekt.jpg"
+              alt="Bild på godiset"
+              class="img-fluid"
+            />
+          </div>
+          <div>
+            <div class="card text-center">
+              <div class="card-body">
+                <h5 class="card-title">Namn på godis</h5>
+                <p class="card-text">Pris:</p>
+                <hr />
+                <p class="card-text">Beskrivning av godis</p>
+              </div>
             </div>
           </div>
+          <div class="text-center">
+            <button class="btn btn-dark fw-bold mt-3">
+              Lägg till i varukorgen
+            </button>
+          </div>
         </div>
-        <div class="text-center">
-          <button class="btn btn-dark fw-bold mt-3">
-            Lägg till i varukorgen
-          </button>
-        </div>
-      </div>
-    </main>
+      </main>
 
-    <footer class="d-flex justify-content-between align-items-center py-3 border-top mt-3">
-      <span class="text-muted ms-2">© 2025 Bortakväll</span>
+      <footer
+        class="d-flex justify-content-between align-items-center py-3 border-top mt-3"
+      >
+        <span class="text-muted ms-2">© 2025 Bortakväll</span>
 
-      <ul class="nav d-flex me-2">
-        <li class="ms-3">
-          <a class="text-muted" href="#"><i class="fa-brands fa-instagram fs-5"></i></a>
-        </li>
-        <li class="ms-3">
-          <a class="text-muted" href="#"><i class="fa-brands fa-facebook fs-5"></i></a>
-        </li>
-      </ul>
-    </footer>
-  </div>
-  <script type="module" src="../ts/product-page.ts"></script>
-</body>
-
+        <ul class="nav d-flex me-2">
+          <li class="ms-3">
+            <a class="text-muted" href="#"
+              ><i class="fa-brands fa-instagram fs-5"></i
+            ></a>
+          </li>
+          <li class="ms-3">
+            <a class="text-muted" href="#"
+              ><i class="fa-brands fa-facebook fs-5"></i
+            ></a>
+          </li>
+        </ul>
+      </footer>
+    </div>
+    <script type="module" src="../ts/product-page.ts"></script>
+  </body>
 </html>

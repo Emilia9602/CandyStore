@@ -1,9 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Coiny&family=Honk&family=Kranky&family=Patrick+Hand&display=swap");
-
-body {
-  font-family: Coiny;
-}
-
 .logo-img {
   width: 140px; /* välj valfri storlek */
 }
@@ -60,6 +54,11 @@ Kundvagn
 
 .cart-header-section {
   border-bottom: 1px solid #212529;
+}
+
+.cart-header {
+  font-family: Honk;
+  font-size: 1.8rem;
 }
 
 .cart-product-section {

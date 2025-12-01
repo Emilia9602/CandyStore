@@ -123,8 +123,8 @@ const renderCartProducts = async () => {
             <h4
               class="cart-product-price col-3 d-flex flex-column align-items-end"
             >
-              ${product.cartQty}HG x ${product.price}kr
-              <span class="cart-product-trashcan mt-auto" data-id="${product.id}">🗑️</span>
+              ${product.cartQty}x ${product.price}kr
+              <i class="fa-solid fa-trash-can cart-product-trashcan mt-auto" data-id="${product.id}"></i>
             </h4>
           </div>
           `;
