@@ -45,7 +45,7 @@ export interface productPageOneCandyData {
   stock_status: string;
 }
 
-type oneCandyOrderData = Omit<CandyDataOrderItem, "product_name">;
+export type oneCandyOrderData = Omit<CandyDataOrderItem, "product_name">;
 
 export interface orderData {
   customer_first_name: string;

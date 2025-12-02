@@ -4,7 +4,7 @@ import "../css/checkout-page.css";
 import "../css/global.css";
 import { arrowLeft } from "./selector";
 import type { CandyData, CartItem } from "./bortakvall-API.types";
-import type { CandyDataOrderItem, orderData } from "./bortakvall-API.types";
+import type { CandyDataOrderItem, orderData, oneCandyOrderData } from "./bortakvall-API.types";
 import { OrderComplete } from "./bortakvall-API";
 import {
   checkoutCartListEl,
@@ -75,6 +75,14 @@ const order: orderData = {
   order_items: [],
 };
 
+/*let wantThisCandy: oneCandyOrderData = {
+  product_id: 0,
+  qty: 0,
+  item_price: 0,
+  item_total: 0,
+}*/
+//let wantThisCandy: oneCandyOrderData[] = [];
+
 const name = document.querySelector<HTMLInputElement>("#name")!;
 const surName = document.querySelector<HTMLInputElement>("#surname")!;
 const adress = document.querySelector<HTMLInputElement>("#adress")!;
@@ -93,8 +101,20 @@ checkoutForm.addEventListener("submit", (e) => {
   order.customer_email = email.value;
   order.customer_phone = phone.value;
 
-  order.customer_postcode = postNr.value;
-});
+  order.order_items.map((item) => {
+    checkoutCart.forEach((product) => {
+      item.product_id = product.product_id;
+      item.qty = product.qty;
+      item.item_price = product.item_price;
+      item.item_total = product.item_total;
+    });
+  });
+
+  console.log(order.order_items);
+  });
+
+  //order.customer_postcode = postNr.value;
+//});
 
 console.log(checkoutCart);
 
