@@ -44,3 +44,17 @@ export interface productPageOneCandyData {
     stock_quantity: number;
     stock_status: string;
 }
+
+type oneCandyOrderData = Omit<CandyDataOrderItem, "product_name">;
+
+ export interface orderData {
+  customer_first_name: string,
+  customer_last_name: string,
+  customer_address: string | number,
+  customer_postcode: number,
+  customer_city: string,
+  customer_email: string | number,
+  customer_phone?: number,
+  order_total: number,
+  order_items: oneCandyOrderData[];
+ }

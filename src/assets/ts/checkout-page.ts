@@ -4,8 +4,8 @@ import "../css/checkout-page.css";
 import "../css/global.css";
 import { arrowLeft } from "./selector";
 import type { CandyData, CartItem } from "./bortakvall-API.types";
-import type { CandyDataOrderItem } from "./bortakvall-API.types";
-import { checkoutCartListEl } from "./selector";
+import type { CandyDataOrderItem, orderData } from "./bortakvall-API.types";
+import { checkoutCartListEl, BASE_URL, submitBtn, checkoutForm } from "./selector";
 
 arrowLeft!.addEventListener("click", () => {
   window.location.href = "/";
@@ -19,6 +19,7 @@ let checkoutCart: CandyDataOrderItem[] = [];
 let renderedItems: Number[] = [];
 let totalPrice = 0;
 let listHtml = "";
+let orderNr = 0;
 
 const renderCart = () => {
   localStorageCart.forEach((item) => {
@@ -57,6 +58,43 @@ const showCart = () => {
   checkoutCartListEl!.innerHTML += `<li>Totalt - ${totalPrice} kr</li>`;
 };
 
+const createOrder = async (order: orderData) => {
+  const response = await fetch(`${BASE_URL}/users/83/orders`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(order),
+  });
+  if (!response.ok) {
+    throw new Error("No");
+  }
+  const data = await response.json();
+
+  return data;
+};
+
+let checkoutFormInput = [...checkoutForm.childNodes];
+let checkoutOrder: string;
+
+submitBtn.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  checkoutFormInput.forEach((input) => {
+
+    if(input.nodeName === "INPUT") {
+      //return input.textContent;
+      checkoutOrder = input.textContent!;
+    }
+  });
+  console.log(checkoutOrder);
+  //createOrder(Det som ska skickas in);
+});
+
 renderCart();
 calculateItemTotal();
 showCart();
+
+console.log(localStorageCart);
+//console.log(checkoutForm.childNodes);
+console.log(checkoutFormInput);

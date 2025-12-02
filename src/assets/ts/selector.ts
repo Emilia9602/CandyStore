@@ -32,6 +32,11 @@ export const addToCartButton =
 // checkout-page
 export const checkoutCartListEl =
   document.querySelector<HTMLDivElement>("#checkoutCartList");
+export const submitBtn =
+  document.querySelector<HTMLButtonElement>("#submitBtn")!;
+export const checkoutForm =
+document.querySelector<HTMLFormElement>(".checkoutForm")!;
+//export let checkoutInput = [...checkoutInputNode]
 
 //Product-page
 export const oneProductMain =
