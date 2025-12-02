@@ -5,7 +5,13 @@ import "../css/global.css";
 import { arrowLeft } from "./selector";
 import type { CandyData, CartItem } from "./bortakvall-API.types";
 import type { CandyDataOrderItem, orderData } from "./bortakvall-API.types";
-import { checkoutCartListEl, BASE_URL, submitBtn, checkoutForm } from "./selector";
+import { OrderComplete } from "./bortakvall-API";
+import {
+  checkoutCartListEl,
+  BASE_URL,
+  submitBtn,
+  checkoutForm,
+} from "./selector";
 
 arrowLeft!.addEventListener("click", () => {
   window.location.href = "/";
@@ -19,7 +25,6 @@ let checkoutCart: CandyDataOrderItem[] = [];
 let renderedItems: Number[] = [];
 let totalPrice = 0;
 let listHtml = "";
-let orderNr = 0;
 
 const renderCart = () => {
   localStorageCart.forEach((item) => {
@@ -58,43 +63,41 @@ const showCart = () => {
   checkoutCartListEl!.innerHTML += `<li>Totalt - ${totalPrice} kr</li>`;
 };
 
-const createOrder = async (order: orderData) => {
-  const response = await fetch(`${BASE_URL}/users/83/orders`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(order),
-  });
-  if (!response.ok) {
-    throw new Error("No");
-  }
-  const data = await response.json();
-
-  return data;
+const order: orderData = {
+  customer_first_name: "",
+  customer_last_name: "",
+  customer_address: "",
+  customer_postcode: "",
+  customer_city: "",
+  customer_email: "",
+  customer_phone: "",
+  order_total: 0,
+  order_items: [],
 };
 
-let checkoutFormInput = [...checkoutForm.childNodes];
-let checkoutOrder: string;
+const name = document.querySelector<HTMLInputElement>("#name")!;
+const surName = document.querySelector<HTMLInputElement>("#surname")!;
+const adress = document.querySelector<HTMLInputElement>("#adress")!;
+const postNr = document.querySelector<HTMLInputElement>("#postNum")!;
+const place = document.querySelector<HTMLInputElement>("#place")!;
+const phone = document.querySelector<HTMLInputElement>("#phone")!;
+const email = document.querySelector<HTMLInputElement>("#email")!;
 
-submitBtn.addEventListener("submit", (e) => {
+checkoutForm.addEventListener("submit", (e) => {
   e.preventDefault();
+  order.customer_first_name = name.value;
+  order.customer_last_name = surName.value;
+  order.customer_address = adress.value;
+  order.customer_postcode = postNr.value;
+  order.customer_city = place.value;
+  order.customer_email = email.value;
+  order.customer_phone = phone.value;
 
-  checkoutFormInput.forEach((input) => {
-
-    if(input.nodeName === "INPUT") {
-      //return input.textContent;
-      checkoutOrder = input.textContent!;
-    }
-  });
-  console.log(checkoutOrder);
-  //createOrder(Det som ska skickas in);
+  order.customer_postcode = postNr.value;
 });
+
+console.log(checkoutCart);
 
 renderCart();
 calculateItemTotal();
 showCart();
-
-console.log(localStorageCart);
-//console.log(checkoutForm.childNodes);
-console.log(checkoutFormInput);

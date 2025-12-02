@@ -21,3 +21,17 @@ export const getOneProduct = async (id: number) => {
   const data = await response.json();
   return data;
 };
+
+export const OrderComplete = async () => {
+  const response = await fetch(
+    "https://www.bortakvall.se/api/v2/users/83/orders"
+  );
+
+  if (!response.ok) {
+    throw new Error(`HTTP Error ${response.status}: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+
+  return data;
+};
