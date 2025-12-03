@@ -60,6 +60,16 @@ const deleteProductFromCart = (id: number) => {
   renderCartProducts();
 };
 
+const getCartAmount = () => {
+  console.log("getCartAmount:", localStorageCart);
+  let totalQty: number = 0;
+  localStorageCart.forEach((product) => {
+    totalQty += product.cartQty;
+  });
+  document.querySelector<HTMLSpanElement>(".cart-count")!.textContent =
+    String(totalQty);
+};
+
 cartOverlay?.addEventListener("click", (e) => {
   const target = e.target as HTMLElement;
   if (!cartSection?.contains(e.target as Node)) {
@@ -68,6 +78,7 @@ cartOverlay?.addEventListener("click", (e) => {
   if (target.classList.contains("cart-product-trashcan")) {
     const currentId = Number(target.dataset.id);
     deleteProductFromCart(currentId);
+    getCartAmount();
   }
   if (target.classList.contains("increase-qty")) {
     const productUpdate = localStorageCart.find((product) => {
@@ -78,6 +89,7 @@ cartOverlay?.addEventListener("click", (e) => {
 
     productUpdate.cartQty += 1;
     localStorage.setItem("cart", JSON.stringify(localStorageCart));
+    getCartAmount();
     renderCartProducts();
   }
   if (target.classList.contains("decrease-qty")) {
@@ -91,9 +103,11 @@ cartOverlay?.addEventListener("click", (e) => {
 
     if (prodcutUpdate.cartQty === 0) {
       const currentId = Number(target.dataset.id);
+      getCartAmount();
       deleteProductFromCart(currentId);
     } else {
       localStorage.setItem("cart", JSON.stringify(localStorageCart));
+      getCartAmount();
       renderCartProducts();
     }
   }
@@ -172,9 +186,7 @@ const renderCandyProducts = async () => {
       const productData: OneCandyData = await getOneProduct(
         Number(target.dataset.id)
       );
-      console.log(productData);
       //Lägger till produkt i local storage
-      console.log(productData.data);
       const existing = localStorageCart.find(
         (item) => item.id === productData.data.id
       );
@@ -184,7 +196,7 @@ const renderCandyProducts = async () => {
         localStorageCart.push({ ...productData.data, cartQty: 1 });
       }
       localStorage.setItem("cart", JSON.stringify(localStorageCart));
-      console.log("LocalStorage/Kundvagn:", localStorageCart);
+      getCartAmount();
     }
     if (target.classList.contains("goToProductPage")) {
       localStorage.setItem("currentId", JSON.stringify(target.dataset.id));
@@ -196,4 +208,5 @@ const renderCandyProducts = async () => {
 let localStorageCart: CartItem[] = JSON.parse(
   localStorage.getItem("cart") || "[]"
 );
+getCartAmount();
 renderCandyProducts();
