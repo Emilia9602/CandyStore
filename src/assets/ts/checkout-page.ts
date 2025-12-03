@@ -74,7 +74,7 @@ const order: orderData = {
 };
 
 let wantThisCandy: oneCandyOrderData[] = [];
-let finishedOrder: completedOrder[] = []
+let finishedOrder: completedOrder[] = [];
 
 const getOrderItems = () => {
   checkoutCart.forEach((product) => {
@@ -87,10 +87,6 @@ const getOrderItems = () => {
     wantThisCandy.push(oneCandyOrderData);
   });
 };
-
-//const goToCompletePage = () => {
-//window.location.href = "src/assets/html/order-complete-page.html";
-//};
 
 const name = document.querySelector<HTMLInputElement>("#name")!;
 const surName = document.querySelector<HTMLInputElement>("#surname")!;
@@ -115,6 +111,7 @@ checkoutForm.addEventListener("submit", async (e) => {
   try {
     finishedOrder = await OrderComplete(order);
     localStorage.setItem("finishedOrder", JSON.stringify(finishedOrder));
+    window.location.href = "/src/assets/html/order-complete-page.html";
   } catch (Error) {
     console.log(Error);
   }

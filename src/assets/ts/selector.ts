@@ -45,3 +45,7 @@ export const oneProductMain =
 export const prodcutPage = document.querySelector<HTMLAnchorElement>(
   ".goToProductPage"!
 );
+
+//Order-Complete-page
+export const completeDiv = 
+document.querySelector<HTMLDivElement>(".completeDiv")!;

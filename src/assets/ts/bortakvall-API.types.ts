@@ -59,7 +59,11 @@ export interface orderData {
   order_items: oneCandyOrderData[];
 }
 
-export interface completedOrder extends orderData {
+interface completedOrderId extends orderData {
   id: number;
+}
+
+export interface completedOrder {
+  data: completedOrderId;
   status: string;
 }
