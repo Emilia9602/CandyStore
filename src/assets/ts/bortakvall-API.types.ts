@@ -35,12 +35,35 @@ export interface CandyDataOrderItem {
 }
 
 export interface productPageOneCandyData {
-    description: string;
-    id: number;
-    images: { thumbnail: string; large: string };
-    name: string;
-    on_sale: boolean;
-    price: number;
-    stock_quantity: number;
-    stock_status: string;
+  description: string;
+  id: number;
+  images: { thumbnail: string; large: string };
+  name: string;
+  on_sale: boolean;
+  price: number;
+  stock_quantity: number;
+  stock_status: string;
+}
+
+export type oneCandyOrderData = Omit<CandyDataOrderItem, "product_name">;
+
+export interface orderData {
+  customer_first_name: string;
+  customer_last_name: string;
+  customer_address: string;
+  customer_postcode: string;
+  customer_city: string;
+  customer_email: string;
+  customer_phone?: string;
+  order_total: number;
+  order_items: oneCandyOrderData[];
+}
+
+interface completedOrderId extends orderData {
+  id: number;
+}
+
+export interface completedOrder {
+  data: completedOrderId;
+  status: string;
 }
