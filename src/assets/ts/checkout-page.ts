@@ -2,14 +2,12 @@ import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../css/checkout-page.css";
 import "../css/global.css";
-import { arrowLeft } from "./selector";
+import { arrowLeft, prodcutPage, submitBtn } from "./selector";
 import type { CandyData, CartItem } from "./bortakvall-API.types";
-import type { CandyDataOrderItem, orderData, oneCandyOrderData } from "./bortakvall-API.types";
+import type { CandyDataOrderItem, orderData, oneCandyOrderData, completedOrder } from "./bortakvall-API.types";
 import { OrderComplete } from "./bortakvall-API";
 import {
   checkoutCartListEl,
-  BASE_URL,
-  submitBtn,
   checkoutForm,
 } from "./selector";
 
@@ -75,13 +73,24 @@ const order: orderData = {
   order_items: [],
 };
 
-/*let wantThisCandy: oneCandyOrderData = {
-  product_id: 0,
-  qty: 0,
-  item_price: 0,
-  item_total: 0,
-}*/
-//let wantThisCandy: oneCandyOrderData[] = [];
+let wantThisCandy: oneCandyOrderData[] = [];
+let finishedOrder: completedOrder[] = []
+
+const getOrderItems = () => {
+  checkoutCart.forEach((product) => {
+    let oneCandyOrderData: oneCandyOrderData = {
+      product_id: product.product_id,
+      qty: product.qty,
+      item_price: product.item_price,
+      item_total: product.item_total
+    };
+    wantThisCandy.push(oneCandyOrderData);
+  });
+};
+
+//const goToCompletePage = () => {
+//window.location.href = "src/assets/html/order-complete-page.html";
+//};
 
 const name = document.querySelector<HTMLInputElement>("#name")!;
 const surName = document.querySelector<HTMLInputElement>("#surname")!;
@@ -91,7 +100,7 @@ const place = document.querySelector<HTMLInputElement>("#place")!;
 const phone = document.querySelector<HTMLInputElement>("#phone")!;
 const email = document.querySelector<HTMLInputElement>("#email")!;
 
-checkoutForm.addEventListener("submit", (e) => {
+checkoutForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   order.customer_first_name = name.value;
   order.customer_last_name = surName.value;
@@ -100,24 +109,20 @@ checkoutForm.addEventListener("submit", (e) => {
   order.customer_city = place.value;
   order.customer_email = email.value;
   order.customer_phone = phone.value;
+  order.order_total = totalPrice;
+  order.order_items = wantThisCandy;
 
-  order.order_items.map((item) => {
-    checkoutCart.forEach((product) => {
-      item.product_id = product.product_id;
-      item.qty = product.qty;
-      item.item_price = product.item_price;
-      item.item_total = product.item_total;
-    });
-  });
-
-  console.log(order.order_items);
-  });
-
-  //order.customer_postcode = postNr.value;
-//});
+  try {
+    finishedOrder = await OrderComplete(order);
+    localStorage.setItem("finishedOrder", JSON.stringify(finishedOrder));
+  } catch (Error) {
+    console.log(Error);
+  }
+});
 
 console.log(checkoutCart);
 
 renderCart();
 calculateItemTotal();
 showCart();
+getOrderItems();
