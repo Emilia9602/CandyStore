@@ -62,7 +62,6 @@ const deleteProductFromCart = (id: number) => {
 };
 
 const getCartAmount = () => {
-  console.log("getCartAmount:", localStorageCart);
   let totalQty: number = 0;
   localStorageCart.forEach((product) => {
     totalQty += product.cartQty;
