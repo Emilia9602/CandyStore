@@ -1,14 +1,93 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import "../css/product-page.css";
+import "../css/cart.css";
 import "../css/global.css";
-import { arrowLeft, BASE_URL, oneProductMain } from "./selector";
+import {
+  arrowLeft,
+  BASE_URL,
+  oneProductMain,
+  closeCart,
+  cartIcon,
+  cartOverlay,
+  cartProductSection,
+  cartSection,
+} from "./selector";
 import { getOneProduct } from "./bortakvall-API";
-import type { productPageOneCandyData } from "./bortakvall-API.types";
+import type {
+  CartItem,
+  productPageOneCandyData,
+  OneCandyData,
+} from "./bortakvall-API.types";
 
 arrowLeft!.addEventListener("click", () => {
   window.location.href = "/";
 });
+
+cartIcon?.addEventListener("click", () => {
+  cartOverlay?.classList.remove("invisible");
+  renderCartProducts();
+});
+
+closeCart?.addEventListener("click", () => {
+  cartOverlay?.classList.add("invisible");
+});
+
+const getCartAmount = () => {
+  console.log("getCartAmount:", localStorageCart);
+  let totalQty: number = 0;
+  localStorageCart.forEach((product) => {
+    totalQty += product.cartQty;
+  });
+  document.querySelector<HTMLSpanElement>(".cart-count")!.textContent =
+    String(totalQty);
+};
+
+const deleteProductFromCart = (id: number) => {
+  const filteredStorageCart = localStorageCart.filter((product) => {
+    return product.id != id;
+  });
+  localStorageCart = filteredStorageCart;
+  localStorage.setItem("cart", JSON.stringify(filteredStorageCart));
+  renderCartProducts();
+};
+
+//Render Cart products
+const renderCartProducts = async () => {
+  let cartSectionHTML = "";
+  let totalPrice = 0;
+  localStorageCart.map((product: CartItem) => {
+    totalPrice += product.price * product.cartQty;
+    cartSectionHTML += `
+    <div class="row pb-2 pt-2 ${product.id}">
+            <img
+              src="${BASE_URL}${product.images.thumbnail}"
+              class="cart-product-img img-thumbnail col-3 ms-3"
+            />
+            <h3 class="cart-product-header text-start col-4 d-flex flex-column">
+              ${product.name}
+              <div class="mt-auto">
+                <ul class="pagination pagination-sm m-0">
+                  <li class="page-item"><p class="decrease-qty page-link m-0" data-id="${product.id}">-</p></li>
+                  <li class="page-item"><p class="page-link m-0">${product.cartQty}</p></li>
+                  <li class="page-item"><p class="increase-qty page-link m-0" data-id="${product.id}">+</p></li>
+                </ul>
+              </div>
+            </h3>
+            <h4
+              class="cart-product-price col-3 d-flex flex-column align-items-end"
+            >
+              ${product.cartQty}x ${product.price}kr
+              <i class="fa-solid fa-trash-can cart-product-trashcan mt-auto" data-id="${product.id}"></i>
+            </h4>
+          </div>
+          `;
+  });
+  cartProductSection.innerHTML = cartSectionHTML;
+
+  document.querySelector<HTMLParagraphElement>(
+    ".total-price"
+  )!.textContent = `${totalPrice}kr`;
+};
 
 //Render one Candy
 const renderCandyProduct = async () => {
@@ -41,7 +120,7 @@ const renderCandyData = (product: productPageOneCandyData) => {
           </div>
         </div>
         <div class="text-center">
-          <button class="btn btn-dark fw-bold mt-3">
+          <button class="add-to-cart btn btn-dark fw-bold mt-3" data-id="${product.id}">
             Lägg till i varukorgen
           </button>
         </div>
@@ -49,4 +128,74 @@ const renderCandyData = (product: productPageOneCandyData) => {
   oneProductMain.innerHTML = renderCandy;
 };
 
+oneProductMain.addEventListener("click", async (e) => {
+  const target = e.target as HTMLElement;
+  if (target.classList.contains("add-to-cart")) {
+    //Hämtar Produktdata
+    const productData: OneCandyData = await getOneProduct(
+      Number(target.dataset.id)
+    );
+    //Lägger till produkt i local storage
+    const existing = localStorageCart.find(
+      (item) => item.id === productData.data.id
+    );
+    if (existing) {
+      existing.cartQty += 1;
+    } else {
+      localStorageCart.push({ ...productData.data, cartQty: 1 });
+    }
+    localStorage.setItem("cart", JSON.stringify(localStorageCart));
+    getCartAmount();
+  }
+});
+
+cartOverlay?.addEventListener("click", (e) => {
+  const target = e.target as HTMLElement;
+  if (!cartSection?.contains(e.target as Node)) {
+    cartOverlay?.classList.add("invisible");
+  }
+  if (target.classList.contains("cart-product-trashcan")) {
+    const currentId = Number(target.dataset.id);
+    deleteProductFromCart(currentId);
+    getCartAmount();
+  }
+  if (target.classList.contains("increase-qty")) {
+    const productUpdate = localStorageCart.find((product) => {
+      return product.id === Number(target.dataset.id);
+    });
+
+    if (!productUpdate) return;
+
+    productUpdate.cartQty += 1;
+    localStorage.setItem("cart", JSON.stringify(localStorageCart));
+    getCartAmount();
+    renderCartProducts();
+  }
+  if (target.classList.contains("decrease-qty")) {
+    const prodcutUpdate = localStorageCart.find((product) => {
+      return product.id === Number(target.dataset.id);
+    });
+
+    if (!prodcutUpdate) return;
+
+    prodcutUpdate.cartQty -= 1;
+
+    if (prodcutUpdate.cartQty === 0) {
+      const currentId = Number(target.dataset.id);
+      getCartAmount();
+      deleteProductFromCart(currentId);
+    } else {
+      localStorage.setItem("cart", JSON.stringify(localStorageCart));
+      getCartAmount();
+      renderCartProducts();
+    }
+  }
+});
+
+let localStorageCart: CartItem[] = JSON.parse(
+  localStorage.getItem("cart") || "[]"
+);
+console.log(localStorageCart);
+
+getCartAmount();
 renderCandyProduct();

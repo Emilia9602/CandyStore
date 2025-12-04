@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./style.css";
+import "./assets/css/cart.css";
 import "./assets/css/global.css";
 import {
   cartOverlay,
@@ -154,9 +155,9 @@ const renderCandyProducts = async () => {
   const fetchedProducts = await getProductsData();
   //console.log(fetchedProducts);
   let renderCandyCards: string = "";
-
+  let countCandy = 0;
   fetchedProducts.data.map((product: CandyData) => {
-    //console.log(product);
+    countCandy++;
     renderCandyCards += `
         <div class="card" style="width: 18rem">
           <img
@@ -176,6 +177,9 @@ const renderCandyProducts = async () => {
         </div>
     `;
   });
+  document.querySelector(
+    ".count-candy"
+  )!.innerHTML = `<p class="d-flex justify-content-end">Antal: ${countCandy}`;
   candyCardMain.innerHTML = renderCandyCards;
 
   candyCardMain.addEventListener("click", async (e) => {

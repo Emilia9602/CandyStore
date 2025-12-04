@@ -10,10 +10,40 @@
           <text y='.9em' font-size='90'>🍬</text>
         </svg>"
     />
-    <title>Document</title>
+    <title>Bortakväll</title>
   </head>
 
   <body>
+    <!-- Kundvagn -->
+    <div class="cart-overlay w-100 h-100 modal-backdrop invisible">
+      <div class="cart-section text-center p-2">
+        <div class="cart-header-section d-flex justify-content-between">
+          <p class="invisible">x</p>
+          <img
+            src="../images/kundvagn-header.png"
+            alt="kundvagn-header"
+            class="cart-header-img"
+          />
+          <p class="cart-close-button pe-2">x</p>
+        </div>
+        <div class="cart-product-section"></div>
+        <div class="botton-cart-container">
+          <div class="d-flex justify-content-between align-items-center p-2">
+            <p>Totalt:</p>
+            <p class="total-price fs-5">0kr</p>
+          </div>
+          <div
+            class="checkout-button-section d-flex justify-content-center mt-auto"
+          >
+            <button
+              class="cart-checkout-button btn p-4 pt-2 pb-2 mb-5 bg-warning"
+            >
+              Till Kassan
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <header>
         <div
@@ -26,36 +56,14 @@
               <img src="../images/bortakvall-logo.png" class="w-75" />
             </a>
           </h1>
-          <i class="fa-solid fa-cart-shopping fs-4"></i>
+          <div class="cart-icon">
+            <i class="fa-solid fa-cart-shopping fs-4"></i>
+            <span class="cart-count">0</span>
+          </div>
         </div>
       </header>
 
-      <main class="container oneProductMain">
-        <div class="row justify-content-center mt-5">
-          <div class="col-12 col-md-8 col-lg-6 d-flex flex-column">
-            <img
-              src="/src/assets/images/Godis till projekt.jpg"
-              alt="Bild på godiset"
-              class="img-fluid"
-            />
-          </div>
-          <div>
-            <div class="card text-center">
-              <div class="card-body">
-                <h5 class="card-title">Namn på godis</h5>
-                <p class="card-text">Pris:</p>
-                <hr />
-                <p class="card-text">Beskrivning av godis</p>
-              </div>
-            </div>
-          </div>
-          <div class="text-center">
-            <button class="btn btn-dark fw-bold mt-3">
-              Lägg till i varukorgen
-            </button>
-          </div>
-        </div>
-      </main>
+      <main class="container oneProductMain"></main>
 
       <footer
         class="d-flex justify-content-between align-items-center py-3 border-top mt-3"
