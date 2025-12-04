@@ -1,24 +1,36 @@
+//Import everything needed
 import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../css/order-complete-page.css";
 import "../css/global.css";
-import { arrowLeft, startPageButton, completeDiv } from "./selector";
-import type { completedOrder } from "./bortakvall-API.types";
+import {
+  arrowLeft,
+  startPageButton,
+  completeDiv
+} from "./selector";
+import type {
+  completedOrder
+} from "./bortakvall-API.types";
 
+//Go back one page
 arrowLeft!.addEventListener("click", () => {
   window.location.href = "/";
 });
+
+//Go to start-page
 startPageButton!.addEventListener("click", () => {
   window.location.href = "/";
 });
 
+//Get finished order from local storage and parse
 let orderFromLocalStorage: completedOrder = JSON.parse(
-    localStorage.getItem("finishedOrder") || "[]"
-  );;
+  localStorage.getItem("finishedOrder") || "[]"
+);
 
+//Function to show success or fail order on complete-page
 const orderSuccessOrFail = (data: completedOrder) => {
 
-  if(data.status === "success") {
+  if (data.status === "success") {
     completeDiv.innerHTML = `
           <h2 class="pb-3 pt-3">Ordernummer: ${data.data.id}</h2>
           <h3 class="pt-2">Tack för din beställning! 🎉</h3>
@@ -31,10 +43,10 @@ const orderSuccessOrFail = (data: completedOrder) => {
           </button>`
   } else {
     completeDiv.innerHTML = `
-          <h2 class="pb-3 pt-3">Error</h2>
+          <h2 class="pb-3 pt-3">Vi ber om ursäkt!</h2>
           <h3 class="pt-2">Din beställning kunde inte genomföras</h3>
           <p class="mt-3">
-            Vad felet är?
+            ${data.message}
           </p>
           <button class="startpage-button btn btn-secondary mt-4 mb-3">
             Gå till startsidan
@@ -42,5 +54,5 @@ const orderSuccessOrFail = (data: completedOrder) => {
   }
 };
 
-console.log(orderFromLocalStorage);
+//Activate function
 orderSuccessOrFail(orderFromLocalStorage);

@@ -1,20 +1,31 @@
+//Import everything needed
 import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../css/checkout-page.css";
 import "../css/global.css";
-import { arrowLeft, prodcutPage, submitBtn } from "./selector";
-import type { CandyData, CartItem } from "./bortakvall-API.types";
-import type { CandyDataOrderItem, orderData, oneCandyOrderData, completedOrder } from "./bortakvall-API.types";
-import { OrderComplete } from "./bortakvall-API";
+import type {
+  CandyDataOrderItem,
+  orderData,
+  oneCandyOrderData,
+  completedOrder,
+  CartItem
+} from "./bortakvall-API.types";
+import {
+  OrderComplete
+} from "./bortakvall-API";
 import {
   checkoutCartListEl,
   checkoutForm,
+  arrowLeft,
+  name, surName, adress, postNr, place, phone, email
 } from "./selector";
 
+//Go back one page
 arrowLeft!.addEventListener("click", () => {
   window.location.href = "/";
 });
 
+//Create variables
 let localStorageCart: CartItem[] = JSON.parse(
   localStorage.getItem("cart") || "[]"
 );
@@ -24,6 +35,22 @@ let renderedItems: Number[] = [];
 let totalPrice = 0;
 let listHtml = "";
 
+let wantThisCandy: oneCandyOrderData[] = [];
+let finishedOrder: completedOrder[] = [];
+
+const order: orderData = {
+  customer_first_name: "",
+  customer_last_name: "",
+  customer_address: "",
+  customer_postcode: "",
+  customer_city: "",
+  customer_email: "",
+  customer_phone: "",
+  order_total: 0,
+  order_items: [],
+};
+
+//Show orderded products on checkout-page
 const renderCart = () => {
   localStorageCart.forEach((item) => {
     if (checkoutCart.some((cartItem) => item.id === cartItem.product_id)) {
@@ -61,21 +88,7 @@ const showCart = () => {
   checkoutCartListEl!.innerHTML += `<li>Totalt - ${totalPrice} kr</li>`;
 };
 
-const order: orderData = {
-  customer_first_name: "",
-  customer_last_name: "",
-  customer_address: "",
-  customer_postcode: "",
-  customer_city: "",
-  customer_email: "",
-  customer_phone: "",
-  order_total: 0,
-  order_items: [],
-};
-
-let wantThisCandy: oneCandyOrderData[] = [];
-let finishedOrder: completedOrder[] = [];
-
+//Get orderded products to correct type in new array
 const getOrderItems = () => {
   checkoutCart.forEach((product) => {
     let oneCandyOrderData: oneCandyOrderData = {
@@ -88,14 +101,7 @@ const getOrderItems = () => {
   });
 };
 
-const name = document.querySelector<HTMLInputElement>("#name")!;
-const surName = document.querySelector<HTMLInputElement>("#surname")!;
-const adress = document.querySelector<HTMLInputElement>("#adress")!;
-const postNr = document.querySelector<HTMLInputElement>("#postNum")!;
-const place = document.querySelector<HTMLInputElement>("#place")!;
-const phone = document.querySelector<HTMLInputElement>("#phone")!;
-const email = document.querySelector<HTMLInputElement>("#email")!;
-
+//Listener for when order is done and put finished order in localStorage
 checkoutForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   order.customer_first_name = name.value;
@@ -117,8 +123,7 @@ checkoutForm.addEventListener("submit", async (e) => {
   }
 });
 
-console.log(checkoutCart);
-
+//Activate functions
 renderCart();
 calculateItemTotal();
 showCart();

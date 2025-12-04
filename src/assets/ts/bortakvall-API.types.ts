@@ -65,5 +65,6 @@ interface completedOrderId extends orderData {
 
 export interface completedOrder {
   data: completedOrderId;
+  message: string;
   status: string;
 }

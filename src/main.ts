@@ -1,3 +1,4 @@
+//Import everything needed
 import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./style.css";
@@ -12,9 +13,11 @@ import {
   cartCheckoutButton,
   candyCardMain,
   BASE_URL,
-  //clickedCandyEl
 } from "./assets/ts/selector";
-import { getProductsData, getOneProduct } from "./assets/ts/bortakvall-API";
+import {
+  getProductsData,
+  getOneProduct
+} from "./assets/ts/bortakvall-API";
 import {
   type CandyData,
   type CartItem,
@@ -150,9 +153,10 @@ const renderCartProducts = async () => {
   )!.textContent = `${totalPrice}kr`;
 };
 
+//Render all the candy cards on first page
 const renderCandyProducts = async () => {
   const fetchedProducts = await getProductsData();
-  //console.log(fetchedProducts);
+
   let renderCandyCards: string = "";
   let countCandy = 0;
   fetchedProducts.data.map((product: CandyData) => {
@@ -176,6 +180,8 @@ const renderCandyProducts = async () => {
         </div>
     `;
   });
+
+  //Shows productcount on first page
   document.querySelector(
     ".count-candy"
   )!.innerHTML = `<p class="d-flex justify-content-end">Antal: ${countCandy}`;
@@ -211,5 +217,7 @@ const renderCandyProducts = async () => {
 let localStorageCart: CartItem[] = JSON.parse(
   localStorage.getItem("cart") || "[]"
 );
+
+//Activate functions
 getCartAmount();
 renderCandyProducts();

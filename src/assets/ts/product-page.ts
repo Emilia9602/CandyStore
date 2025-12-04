@@ -1,3 +1,4 @@
+//Import everything needed
 import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../css/cart.css";
@@ -12,13 +13,16 @@ import {
   cartProductSection,
   cartSection,
 } from "./selector";
-import { getOneProduct } from "./bortakvall-API";
+import { 
+  getOneProduct 
+} from "./bortakvall-API";
 import type {
   CartItem,
   productPageOneCandyData,
   OneCandyData,
 } from "./bortakvall-API.types";
 
+//Go back one page
 arrowLeft!.addEventListener("click", () => {
   window.location.href = "/";
 });
@@ -31,6 +35,11 @@ cartIcon?.addEventListener("click", () => {
 closeCart?.addEventListener("click", () => {
   cartOverlay?.classList.add("invisible");
 });
+
+//Create variables
+let localStorageCart: CartItem[] = JSON.parse(
+  localStorage.getItem("cart") || "[]"
+);
 
 const getCartAmount = () => {
   let totalQty: number = 0;
@@ -88,20 +97,20 @@ const renderCartProducts = async () => {
   )!.textContent = `${totalPrice}kr`;
 };
 
-//Render one Candy
+//Get choosen product from local storage and render on product-page
 const renderCandyProduct = async () => {
   const currentId: string = localStorage.getItem("currentId") || "[]";
-  console.log("inside:", currentId);
+  
   const newId: number = JSON.parse(currentId);
-  console.log(newId);
+  
   const fetchedProducts = await getOneProduct(newId);
-  console.log(fetchedProducts);
 
   renderCandyData(fetchedProducts.data);
 };
 
+//Function how to render choosen product on product-page
 const renderCandyData = (product: productPageOneCandyData) => {
-  console.log(product);
+  
   let renderCandy: string = "";
   renderCandy += `
       <div class="row justify-content-center mt-5">
@@ -191,10 +200,6 @@ cartOverlay?.addEventListener("click", (e) => {
   }
 });
 
-let localStorageCart: CartItem[] = JSON.parse(
-  localStorage.getItem("cart") || "[]"
-);
-console.log(localStorageCart);
-
+//Activate functions
 getCartAmount();
 renderCandyProduct();
