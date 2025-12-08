@@ -40,6 +40,10 @@
   text-decoration: underline;
 }
 
+.cartHover:hover {
+    cursor: pointer;
+}
+
 @media (min-width: 450px) {
   .card {
     max-width: 200px;

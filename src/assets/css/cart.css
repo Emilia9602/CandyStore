@@ -84,3 +84,7 @@
 .cart-checkout-button:hover {
   text-decoration: underline;
 }
+
+.cartHover:hover {
+    cursor: pointer;
+}

@@ -1,0 +1,27 @@
+.checkoutDiv {
+    background-color: rgb(255, 251, 129, 0.9);
+    min-width: 70%;
+}
+
+#checkoutCartList {
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.checkoutForm {
+    min-width: 70%;
+}
+
+#checkoutTotal {
+    text-decoration: underline;
+}
+
+@media (min-width: 992px) {
+    .checkoutDiv {
+        min-width: 50%;
+    }
+
+    .checkoutForm {
+        min-width: 50%;
+    }
+}
