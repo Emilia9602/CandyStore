@@ -80,12 +80,13 @@
   transform: scale(1.15);
 }
 
-.botton-cart-container {
-}
-
 .cart-checkout-button:hover {
   text-decoration: underline;
 }
 .checkout-button-secion {
   margin-top: auto;
+}
+
+.cartHover:hover {
+  cursor: pointer;
 }

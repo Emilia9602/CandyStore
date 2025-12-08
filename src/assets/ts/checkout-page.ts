@@ -85,7 +85,7 @@ const showCart = () => {
   });
 
   checkoutCartListEl!.innerHTML = listHtml;
-  checkoutCartListEl!.innerHTML += `<li>Totalt - ${totalPrice} kr</li>`;
+  checkoutCartListEl!.innerHTML += `<li id="checkoutTotal">Totalt - ${totalPrice} kr</li>`;
 };
 
 //Get orderded products to correct type in new array
