@@ -1,12 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Coiny&family=Honk&display=swap");
 
-html {
-  background-image: url("../src/assets/images/candy-background.png");
-  background-repeat: repeat;
-  background-size: auto;
-}
-
 body {
-  background-image: url("/candy-background.png");
+  background: #e6e6e6;
+  background-image: url(../images/top-view-candies-lollipops-with-copy-space.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
   font-family: Coiny;
 }
