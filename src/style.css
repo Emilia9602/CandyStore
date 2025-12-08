@@ -11,6 +11,7 @@
   gap: 0.5rem;
   overflow-x: auto;
   padding: 0.8rem;
+  justify-content: center;
 }
 
 .categories.circles {
@@ -18,6 +19,7 @@
   gap: 2rem;
   overflow-x: auto;
   padding: 0.8rem 1rem;
+  justify-content: flex-start;
 }
 
 .circle {
@@ -26,6 +28,11 @@
   align-items: center;
   width: 70px;
   padding: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.circle:hover {
+  transform: scale(1.08);
 }
 
 .circle span {
@@ -48,18 +55,14 @@
   gap: 1rem;
 }
 
-.product-topbar,
-.productPageMain {
-  max-width: 1250px;
-}
-
 .card {
-  background-color: rgba(248, 239, 240, 0.5);
+  background-color: rgba(248, 239, 240, 0.8);
   border: 1px solid #222;
   max-width: 160px;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 18px rgba(0, 0, 0, 0.35), 0 8px 10px rgba(0, 0, 0, 0.25),
+    0 4px 4px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease;
 }
 
@@ -83,24 +86,77 @@
 .candyCardTitle {
   font-size: 100%;
 }
-
-.candyCardBtn {
-  background-color: rgb(237, 246, 103);
-  border: 1px solid black;
-  font-size: 0.7rem;
-  padding: 0.2rem;
-  border-radius: 0.6rem;
-  text-align: center;
-  color: #222;
-  text-decoration: none;
+.btn-light {
+  background: linear-gradient(to bottom, #f2d324, #f02b2b);
+  opacity: 0.9;
 }
 
-.candyCardBtn:hover {
-  text-decoration: underline;
+/* Tablet-ish: lite större hero + cirklar */
+@media (min-width: 600px) {
+  .hero {
+    padding: 2rem 2rem;
+    margin: 0 2rem 1.5rem;
+  }
+
+  .hero h2 {
+    font-size: 1.8rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .categories.circles {
+    gap: 2.5rem;
+  }
+
+  .circle {
+    width: 90px;
+    padding: 0.7rem;
+  }
+
+  .circle span {
+    font-size: 2.4rem;
+    padding: 1.2rem;
+  }
+
+  .circle p {
+    font-size: 0.9rem;
+  }
 }
 
-@media (min-width: 450px) {
+/* Större skärmar: ännu lite större cirklar + mer luft kring produkter */
+@media (min-width: 1000px) {
+  .product-topbar,
+  .productPageMain {
+    padding: 0 2rem;
+  }
+
+  .categories.circles {
+    gap: 3rem;
+    padding: 1rem 2rem 1.5rem;
+  }
+
+  .circle {
+    width: 110px;
+  }
+
+  .circle span {
+    font-size: 2.8rem;
+    padding: 1.4rem;
+  }
+
+  .circle p {
+    font-size: 1rem;
+  }
+
   .card {
     max-width: 200px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .product-topbar {
+    padding: 0rem 7em;
   }
 }

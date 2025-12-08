@@ -29,8 +29,9 @@
   display: flex;
   justify-content: flex-end;
 }
+
 .cart-section {
-  background-color: rgb(214, 203, 193);
+  background: #f8eff0;
   max-width: 400px;
   max-height: 95vh;
   margin: 20px;
@@ -80,13 +81,12 @@
   transform: scale(1.15);
 }
 
+.botton-cart-container {
+}
+
 .cart-checkout-button:hover {
   text-decoration: underline;
 }
 .checkout-button-secion {
   margin-top: auto;
-}
-
-.cartHover:hover {
-  cursor: pointer;
 }
