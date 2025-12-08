@@ -81,9 +81,6 @@
   transform: scale(1.15);
 }
 
-.botton-cart-container {
-}
-
 .cart-checkout-button:hover {
   text-decoration: underline;
 }
