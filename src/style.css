@@ -131,6 +131,10 @@
   }
 
   .categories.circles {
+    justify-content: center;
+  }
+
+  .categories.circles {
     gap: 3rem;
     padding: 1rem 2rem 1.5rem;
   }
