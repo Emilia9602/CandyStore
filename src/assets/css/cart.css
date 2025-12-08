@@ -2,15 +2,16 @@
 
 .cart-icon {
   position: relative;
+  font-size: 1.6rem;
 }
 
 .cart-count {
   position: absolute;
-  top: -0.8em;
-  right: -0.6em;
+  top: -0.4em;
+  right: -0.3em;
 
-  width: 1.6em;
-  height: 1.6em;
+  width: 1.2em;
+  height: 1.2em;
 
   background: linear-gradient(to bottom, #f2d324, #f02b2b);
   color: #222;
@@ -20,7 +21,8 @@
   justify-content: center;
   align-items: center;
 
-  font-size: 0.75em;
+  padding: 9px;
+  font-size: 0.6em;
   font-weight: bold;
 }
 
@@ -131,5 +133,12 @@
     font-size: 1rem;
     padding: 1rem 2rem;
     border-radius: 10px;
+  }
+  .cart-icon {
+    font-size: 1.8rem;
+  }
+
+  .header-container {
+    margin: 0px 50px;
   }
 }
