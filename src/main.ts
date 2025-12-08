@@ -141,7 +141,7 @@ const renderCandyProducts = async () => {
   fetchedProducts.data.map((product: CandyData) => {
     countCandy++;
     renderCandyCards += `
-        <div class="card">
+        <div class="card" data-id="${product.id}">
           <img
             src="${BASE_URL}${product.images.thumbnail}"
             class="card-img-top"
@@ -191,8 +191,18 @@ const renderCandyProducts = async () => {
       localStorage.setItem("cart", JSON.stringify(localStorageCart));
       getCartAmount();
     }
-    if (target.classList.contains("goToProductPage")) {
-      localStorage.setItem("currentId", JSON.stringify(target.dataset.id));
+    if (
+      target.classList.contains("goToProductPage") ||
+      (target.closest(".card") && !target.classList.contains("add-to-cart"))
+    ) {
+      const card = target.closest(".card") as HTMLElement;
+      if (!card) return;
+      console.log(target.parentElement);
+
+      const id = card.dataset.id;
+      console.log(id);
+      localStorage.setItem("currentId", JSON.stringify(id));
+      window.location.href = "/src/assets/html/product-page.html";
     }
   });
 };
