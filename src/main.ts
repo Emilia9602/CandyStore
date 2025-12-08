@@ -14,33 +14,12 @@ import {
   candyCardMain,
   BASE_URL,
 } from "./assets/ts/selector";
-import {
-  getProductsData,
-  getOneProduct
-} from "./assets/ts/bortakvall-API";
+import { getProductsData, getOneProduct } from "./assets/ts/bortakvall-API";
 import {
   type CandyData,
   type CartItem,
   type OneCandyData,
 } from "./assets/ts/bortakvall-API.types";
-
-const button = document.querySelector<HTMLButtonElement>(".goToPage");
-
-button?.addEventListener("click", () => {
-  window.location.href = "src/assets/html/product-page.html";
-});
-
-const button2 = document.querySelector<HTMLButtonElement>(".goToPage2");
-
-button2?.addEventListener("click", () => {
-  window.location.href = "src/assets/html/checkout-page.html";
-});
-
-const button3 = document.querySelector<HTMLButtonElement>(".goToPage3");
-
-button3?.addEventListener("click", () => {
-  window.location.href = "src/assets/html/order-complete-page.html";
-});
 
 cartIcon?.addEventListener("click", () => {
   cartOverlay?.classList.remove("invisible");
@@ -162,7 +141,7 @@ const renderCandyProducts = async () => {
   fetchedProducts.data.map((product: CandyData) => {
     countCandy++;
     renderCandyCards += `
-        <div class="card" style="width: 18rem">
+        <div class="card" data-id="${product.id}">
           <img
             src="${BASE_URL}${product.images.thumbnail}"
             class="card-img-top"
@@ -172,9 +151,14 @@ const renderCandyProducts = async () => {
             <h5 class="card-title candyCardTitle">${product.name}</h5>
             <p class="card-text">Pris: ${product.price}kr</p>
             <div class="card-button-container d-flex gap-1 justify-content-center mt-auto">
-            <a class="candyCardBtn add-to-cart" data-id="${product.id}">Lägg i varukorg</a>
-            <!--Ska ta användaren till produktens sida-->
-            <a href="src/assets/html/product-page.html" class="goToProductPage candyCardBtn" data-id="${product.id}">Läs mer</a>
+            <button class="btn btn-light btn-sm add-to-cart" data-id="${product.id}">
+              Lägg i varukorg
+            </button>
+            <a href="src/assets/html/product-page.html"
+              class="btn btn-light btn-sm goToProductPage"
+              data-id="${product.id}">
+              <i class="fa-solid fa-circle-info"></i>
+            </a>
             </div>
           </div>
         </div>
@@ -184,7 +168,7 @@ const renderCandyProducts = async () => {
   //Shows productcount on first page
   document.querySelector(
     ".count-candy"
-  )!.innerHTML = `<p class="d-flex justify-content-end">Antal: ${countCandy}`;
+  )!.innerHTML = `<p class="m-0">Antal: ${countCandy}</p>`;
   candyCardMain.innerHTML = renderCandyCards;
 
   candyCardMain.addEventListener("click", async (e) => {
@@ -207,8 +191,18 @@ const renderCandyProducts = async () => {
       localStorage.setItem("cart", JSON.stringify(localStorageCart));
       getCartAmount();
     }
-    if (target.classList.contains("goToProductPage")) {
-      localStorage.setItem("currentId", JSON.stringify(target.dataset.id));
+    if (
+      target.classList.contains("goToProductPage") ||
+      (target.closest(".card") && !target.classList.contains("add-to-cart"))
+    ) {
+      const card = target.closest(".card") as HTMLElement;
+      if (!card) return;
+      console.log(target.parentElement);
+
+      const id = card.dataset.id;
+      console.log(id);
+      localStorage.setItem("currentId", JSON.stringify(id));
+      window.location.href = "/src/assets/html/product-page.html";
     }
   });
 };

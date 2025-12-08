@@ -28,12 +28,12 @@
   background: rgba(0, 0, 0, 0.75);
   display: flex;
   justify-content: flex-end;
-  align-items: center;
 }
+
 .cart-section {
-  background-color: rgb(214, 203, 193);
-  width: 70%;
-  height: 95%;
+  background: #f8eff0;
+  max-width: 400px;
+  max-height: 95vh;
   margin: 20px;
   border-radius: 10px;
 }
@@ -48,7 +48,7 @@
 
 .cart-product-section {
   border-bottom: 1px solid rgba(33, 37, 41, 0.5);
-  height: 75%;
+  height: 70vh;
   overflow-y: auto;
 }
 
@@ -81,10 +81,12 @@
   transform: scale(1.15);
 }
 
+.botton-cart-container {
+}
+
 .cart-checkout-button:hover {
   text-decoration: underline;
 }
-
-.cartHover:hover {
-    cursor: pointer;
+.checkout-button-secion {
+  margin-top: auto;
 }

@@ -1,15 +1,77 @@
+.hero {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background: #f8eff0;
+  border-radius: 0.8rem;
+  margin: 0 1rem 1rem;
+}
+
+.categories {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.8rem;
+  justify-content: center;
+}
+
+.categories.circles {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  padding: 0.8rem 1rem;
+  justify-content: flex-start;
+}
+
+.circle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70px;
+  padding: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.circle:hover {
+  transform: scale(1.08);
+}
+
+.circle span {
+  font-size: 2rem;
+  background: #f8eff0;
+  padding: 1rem;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+}
+
+.circle p {
+  margin: 0.3rem;
+  font-size: 0.8rem;
+}
+
 .productPageMain {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
-  max-width: 1200px;
 }
 
 .card {
-  background-color: rgba(128, 121, 121, 0.4);
+  background-color: rgba(248, 239, 240, 0.8);
   border: 1px solid #222;
   max-width: 160px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 12px 18px rgba(0, 0, 0, 0.35), 0 8px 10px rgba(0, 0, 0, 0.25),
+    0 4px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card:hover .candyCardTitle {
+  text-decoration: underline;
 }
 
 .card-button-container {
@@ -37,23 +99,11 @@
 }
 
 .candyCardBtn:hover {
-  background-color: #E6E6FA;
+  text-decoration: underline;
 }
 
 .cartHover:hover {
-    cursor: pointer;
-}
-
-.card .candyCardBtn .cart-icon {
-  transition: 0.15s;
-}
-
-.card:hover {
-    transform: scale(1.05);
-}
-
-.cart-icon:hover {
-  transform: scale(1.05);
+  cursor: pointer;
 }
 
 @media (min-width: 450px) {
@@ -64,7 +114,6 @@
   .candyCardBtn {
     padding: 6px 4px;
   }
-
   .cart-header-img {
     width: 50% !important;
   }
