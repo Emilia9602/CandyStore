@@ -91,7 +91,6 @@
   opacity: 0.9;
 }
 
-/* Tablet-ish: lite större hero + cirklar */
 @media (min-width: 600px) {
   .hero {
     padding: 2rem 2rem;
@@ -125,11 +124,14 @@
   }
 }
 
-/* Större skärmar: ännu lite större cirklar + mer luft kring produkter */
 @media (min-width: 1000px) {
   .product-topbar,
   .productPageMain {
     padding: 0 2rem;
+  }
+
+  .categories.circles {
+    justify-content: center;
   }
 
   .categories.circles {
