@@ -37,11 +37,23 @@
 }
 
 .candyCardBtn:hover {
-  text-decoration: underline;
+  background-color: #E6E6FA;
 }
 
 .cartHover:hover {
     cursor: pointer;
+}
+
+.card .candyCardBtn .cart-icon {
+  transition: 0.15s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.cart-icon:hover {
+  transform: scale(1.05);
 }
 
 @media (min-width: 450px) {
@@ -52,6 +64,7 @@
   .candyCardBtn {
     padding: 6px 4px;
   }
+
   .cart-header-img {
     width: 50% !important;
   }
