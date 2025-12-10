@@ -1,4 +1,11 @@
-.oneProductMain {
+.cartHover:hover {
+  cursor: pointer;
+}
+
+.arrowLeft:hover {
+  cursor: pointer;
+  
+}.oneProductMain {
   max-width: 500px;
   margin: 0 auto;
 }

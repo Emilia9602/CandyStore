@@ -68,3 +68,7 @@ export interface completedOrder {
   message: string;
   status: string;
 }
+
+export interface orderNamesArrayType {
+  items: CartItem[];
+}

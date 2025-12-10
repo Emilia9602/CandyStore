@@ -1,0 +1,52 @@
+.arrowLeft:hover {
+    cursor: pointer;
+}
+
+h2 {
+    display: inline-block;
+    background-color: #f8eff0;
+    border: 1px solid white;
+    border-radius: 10px;
+    width: fit-content;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 10px;
+}
+
+#orderNamesUl {
+    padding-bottom: 5px;
+    padding-top: 5px;
+    list-style-type: none;
+    background-color: #f8eff0;
+    border-radius: 10px;
+    border: 1px solid white;
+
+}
+
+#orderP {
+    text-decoration: underline;
+}
+
+@media (min-width: 500px) {
+
+    #orderNamesUl {
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+}
+
+@media (min-width: 768px) {
+
+    #orderNamesUl {
+        margin-left: 25%;
+        margin-right: 25%;
+    }
+}
+
+@media (min-width: 1189px) {
+
+    #orderNamesUl {
+        margin-left: 30%;
+        margin-right: 30%;
+    }
+}
