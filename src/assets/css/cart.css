@@ -85,11 +85,6 @@
   transform: scale(1.15);
 }
 
-.btn-light {
-  background: linear-gradient(to bottom, #f2d324, #f02b2b);
-  opacity: 0.9;
-}
-
 .cart-checkout-button:hover {
   text-decoration: underline;
 }

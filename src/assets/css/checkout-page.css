@@ -1,19 +1,19 @@
 .checkoutDiv {
-    background-color: rgb(248, 239, 240, 0.9);
-    min-width: 70%;
+  background-color: rgb(248, 239, 240, 0.9);
+  min-width: 70%;
 }
 
 #checkoutCartList {
-    margin-top: 7px;
-    margin-bottom: 7px;
+  margin-top: 7px;
+  margin-bottom: 7px;
 }
 
 .checkoutForm {
-    min-width: 70%;
+  min-width: 70%;
 }
 
 #checkoutTotal {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .arrowLeft:hover {
@@ -21,11 +21,11 @@
 }
 
 @media (min-width: 992px) {
-    .checkoutDiv {
-        min-width: 50%;
-    }
+  .checkoutDiv {
+    min-width: 50%;
+  }
 
-    .checkoutForm {
-        min-width: 50%;
-    }
+  .checkoutForm {
+    min-width: 50%;
+  }
 }
