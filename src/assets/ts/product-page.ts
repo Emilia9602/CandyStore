@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../css/cart.css";
 import "../css/global.css";
-import "../css/product-page.css"
+import "../css/product-page.css";
 import {
   arrowLeft,
   BASE_URL,
@@ -14,12 +14,14 @@ import {
   cartProductSection,
   cartCheckoutButton,
   cartSection,
+  otherProductsCarousel,
 } from "./selector";
-import { getOneProduct } from "./bortakvall-API";
+import { getOneProduct, getProductsData } from "./bortakvall-API";
 import type {
   CartItem,
   productPageOneCandyData,
   OneCandyData,
+  CandyData,
 } from "./bortakvall-API.types";
 
 //Go back one page
@@ -123,16 +125,54 @@ const renderCandyProduct = async () => {
   }
 };
 
+const getRandomSix = (arr: CandyData[]) => {
+  const copy = [...arr];
+
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+
+  return copy.slice(0, 6);
+};
+
+const renderOtherProducts = async () => {
+  const fetchedProducts = await getProductsData();
+  const otherProducts = getRandomSix(fetchedProducts.data);
+  let count = 0;
+  let otherProductsList = "";
+
+  otherProducts.map((product) => {
+    otherProductsList += `
+    <div class="other-product-container">
+      <img src="${BASE_URL}${product.images.large}" />
+      <div class="other-rating-star py-2 px-2 fs-6">
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+        <i class="fa-solid fa-star"></i>
+      </div>
+      <div class="other-product-info px-2">
+        <p class="other-product-name mb-1">${product.name}</p>
+        <p class="other-product-price mb-0">${product.price}kr</p>
+      </div>
+    </div>
+    `;
+  });
+  otherProductsCarousel.innerHTML = otherProductsList;
+};
+
 //Function how to render choosen product on product-page
 const renderCandyData = (product: productPageOneCandyData) => {
   let renderCandy: string = "";
   renderCandy += `
-      <div class="row justify-content-center mt-5">
+      <div class="product-img-info-container row justify-content-center mt-5">
         <div class="img-cotnainer col-12 col-lg-6 d-flex flex-column">
           <img src="${BASE_URL}${product.images.large}" alt="Bild på godiset" class="product-img img-fluid">
         </div>
         <div class="product-info col-12 col-lg-6 d-flex flex-column mt-4 mt-lg-0">
-          <div class="card">
+          <div class="card mb-md-4">
             <div class="card-body p-xxl-4">
               <h5 class="card-title fs-3">${product.name}</h5>
               <div class="rating-wrapper d-flex align-items-center">
@@ -233,3 +273,4 @@ cartOverlay?.addEventListener("click", (e) => {
 //Activate functions
 getCartAmount();
 renderCandyProduct();
+renderOtherProducts();

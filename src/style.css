@@ -13,7 +13,6 @@
 .categories {
   display: flex;
   gap: 0.5rem;
-  overflow-x: auto;
   padding: 0.8rem;
   justify-content: center;
 }
@@ -130,7 +129,6 @@
 }
 
 @media (min-width: 1000px) {
-
   .product-topbar,
   .productPageMain {
     padding: 0 2rem;

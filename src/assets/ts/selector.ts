@@ -1,9 +1,9 @@
 //Base Url
 export const BASE_URL = "https://www.bortakvall.se";
 
-
-export const arrowLeft =
-  document.querySelector<HTMLElement>(".fa-arrow-left-long")!;
+export const arrowLeft = document.querySelector<HTMLElement>(
+  ".fa-arrow-left-long"
+)!;
 export const startPageButton =
   document.querySelector<HTMLButtonElement>(".startpage-button")!;
 
@@ -16,10 +16,12 @@ export const closeCart =
   document.querySelector<HTMLParagraphElement>(".cart-close-button")!;
 export const cartSection =
   document.querySelector<HTMLDivElement>(".cart-section")!;
-export const cartProductSection =
-  document.querySelector<HTMLDivElement>(".cart-product-section")!;
-export const cartCheckoutButton =
-  document.querySelector<HTMLButtonElement>(".cart-checkout-button")!;
+export const cartProductSection = document.querySelector<HTMLDivElement>(
+  ".cart-product-section"
+)!;
+export const cartCheckoutButton = document.querySelector<HTMLButtonElement>(
+  ".cart-checkout-button"
+)!;
 
 //Cards
 export const candyCardMain =
@@ -34,27 +36,25 @@ export const submitBtn =
   document.querySelector<HTMLButtonElement>("#submitBtn")!;
 export const checkoutForm =
   document.querySelector<HTMLFormElement>(".checkoutForm")!;
-export const name =
-  document.querySelector<HTMLInputElement>("#name")!;
-export const surName =
-  document.querySelector<HTMLInputElement>("#surname")!;
-export const adress =
-  document.querySelector<HTMLInputElement>("#adress")!;
-export const postNr =
-  document.querySelector<HTMLInputElement>("#postNum")!;
-export const place =
-  document.querySelector<HTMLInputElement>("#place")!;
-export const phone =
-  document.querySelector<HTMLInputElement>("#phone")!;
-export const email =
-  document.querySelector<HTMLInputElement>("#email")!;
+export const name = document.querySelector<HTMLInputElement>("#name")!;
+export const surName = document.querySelector<HTMLInputElement>("#surname")!;
+export const adress = document.querySelector<HTMLInputElement>("#adress")!;
+export const postNr = document.querySelector<HTMLInputElement>("#postNum")!;
+export const place = document.querySelector<HTMLInputElement>("#place")!;
+export const phone = document.querySelector<HTMLInputElement>("#phone")!;
+export const email = document.querySelector<HTMLInputElement>("#email")!;
 
 //Product-page
 export const oneProductMain =
   document.querySelector<HTMLDivElement>(".oneProductMain")!;
-export const prodcutPage =
-  document.querySelector<HTMLAnchorElement>(".goToProductPage"!);
+export const prodcutPage = document.querySelector<HTMLAnchorElement>(
+  ".goToProductPage"!
+);
 
 //Order-Complete-page
 export const completeDiv =
   document.querySelector<HTMLDivElement>(".completeDiv")!;
+
+export const otherProductsCarousel = document.querySelector<HTMLDivElement>(
+  ".other-products-carousel"
+)!;
