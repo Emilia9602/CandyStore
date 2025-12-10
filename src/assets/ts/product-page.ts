@@ -14,7 +14,6 @@ import {
   cartProductSection,
   cartCheckoutButton,
   cartSection,
-  cartCheckoutButton
 } from "./selector";
 import { getOneProduct } from "./bortakvall-API";
 import type {
