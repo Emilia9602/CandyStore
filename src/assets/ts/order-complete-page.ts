@@ -3,15 +3,11 @@ import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../css/order-complete-page.css";
 import "../css/global.css";
-import {
-  arrowLeft,
-  startPageButton,
-  completeDiv
-} from "./selector";
+import { arrowLeft, startPageButton, completeDiv } from "./selector";
 import type {
   completedOrder,
   CartItem,
-  orderNamesArrayType
+  orderNamesArrayType,
 } from "./bortakvall-API.types";
 
 //Go back one page
@@ -49,26 +45,26 @@ const getOrderNames = () => {
       price: item.price,
       cartQty: item.cartQty,
       on_sale: item.on_sale,
-      images: item.images
-    }
+      images: item.images,
+    };
     orderNames.items.push(cartItem);
   });
-}
+};
 
 //Function to show success or fail order on complete-page
 const orderSuccessOrFail = (data: completedOrder) => {
-
   if (data.status === "success") {
     completeDiv.innerHTML = `
-          <h2 class="pb-3 pt-3">Ordernummer: ${data.data.id}</h2>
-          <h3 class="pt-2">Tack för din beställning! 🎉</h3>
-          <p class="mt-3">
+          <h2 class=" pt-3 fs-1">Ordernummer: ${data.data.id}</h2>
+          <i class="fa-solid fa-circle-check fs-1 text-success d-block py-2 m-auto"></i>
+          <h3 class="pt-2 fs-2">Tack för din beställning!</h3>
+          <p class="mt-3 px-4 py-2">
             Din order är nu på väg. Vi hoppas du får en riktigt trevlig
             Bortakväll!
           </p>
-          <p id="orderP">Beställning:</p>
-          <ul id="orderNamesUl"></ul>
-          <button class="startpage-button btn btn-secondary mt-4 mb-3">
+          <p id="orderP" class="fs-2 mb-0 mt-4">Beställning:</p>
+          <ul id="orderNamesUl" class="d-flex flex-column align-items-start p-3 gap-1"></ul>
+          <button class="startpage-button btn btn-light mt-4 mb-4">
             Gå till startsidan
           </button>`;
 
@@ -77,9 +73,8 @@ const orderSuccessOrFail = (data: completedOrder) => {
 
     orderNames.items.forEach((item) => {
       orderNamesUl.innerHTML += `
-      <li>${item.cartQty}st - ${item.name}</li>`
+      <li>${item.cartQty}st - ${item.name}</li>`;
     });
-    
   } else {
     completeDiv.innerHTML = `
           <h2 class="pb-3 pt-3">Vi ber om ursäkt!</h2>
@@ -89,7 +84,7 @@ const orderSuccessOrFail = (data: completedOrder) => {
           </p>
           <button class="startpage-button btn btn-secondary mt-4 mb-3">
             Gå till startsidan
-          </button>`
+          </button>`;
   }
 };
 
