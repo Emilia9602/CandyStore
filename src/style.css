@@ -1,3 +1,10 @@
+body {
+  background-color: #e6e6e6;
+  background-image: url(/src/assets/images/top-view-candies-lollipops-with-copy-space.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 .hero {
   text-align: center;
   padding: 1.5rem 1rem;
