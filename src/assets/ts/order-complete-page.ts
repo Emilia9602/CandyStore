@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../css/order-complete-page.css";
 import "../css/global.css";
-import { arrowLeft, startPageButton, completeDiv } from "./selector";
+import { arrowLeft, startPageButton, completeDiv, BASE_URL } from "./selector";
 import type {
   completedOrder,
   CartItem,
@@ -63,18 +63,32 @@ const orderSuccessOrFail = (data: completedOrder) => {
             Bortakväll!
           </p>
           <p id="orderP" class="fs-2 mb-0 mt-4">Beställning:</p>
-          <ul id="orderNamesUl" class="d-flex flex-column align-items-start p-3 gap-1"></ul>
+          <div id="orderNamesUl" class="p-3 gap-1"></div>
           <button class="startpage-button btn btn-light mt-4 mb-4">
             Gå till startsidan
-          </button>`;
+          </button>
+          `;
 
     const orderNamesUl =
       document.querySelector<HTMLUListElement>("#orderNamesUl")!;
-
+    let totalPrice = 0;
     orderNames.items.forEach((item) => {
+      totalPrice += item.price * item.cartQty;
       orderNamesUl.innerHTML += `
-      <li>${item.cartQty}st - ${item.name}</li>`;
+      <div class="row px-2 mb-2 d-flex">
+        <img src="${BASE_URL}${item.images.thumbnail}" class="col-3 rounded-3 p-0">
+        <p class="col-5 text-start">${item.name}</p>
+        <p class="col-4 text-end">${item.cartQty}x ${item.price}kr</p>
+      </div>
+      `;
     });
+    orderNamesUl.innerHTML += `
+    <hr>
+    <div class="d-flex justify-content-between">
+      <p>Totalt:</p>
+      <p class="fs-4">${totalPrice}kr</p>
+    </div>
+    `;
   } else {
     completeDiv.innerHTML = `
           <h2 class="pb-3 pt-3">Vi ber om ursäkt!</h2>
@@ -84,7 +98,8 @@ const orderSuccessOrFail = (data: completedOrder) => {
           </p>
           <button class="startpage-button btn btn-secondary mt-4 mb-3">
             Gå till startsidan
-          </button>`;
+          </button>
+          `;
   }
 };
 
