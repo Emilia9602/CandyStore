@@ -31,7 +31,7 @@ closeCart?.addEventListener("click", () => {
 });
 
 cartCheckoutButton.addEventListener("click", () => {
-  window.location.href = "src/assets/html/checkout-page.html";
+  window.location.href = "/src/assets/html/checkout-page.html";
 });
 
 const deleteProductFromCart = (id: number) => {

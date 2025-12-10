@@ -11,11 +11,10 @@ import {
   cartIcon,
   cartOverlay,
   cartProductSection,
+  cartCheckoutButton,
   cartSection,
 } from "./selector";
-import { 
-  getOneProduct 
-} from "./bortakvall-API";
+import { getOneProduct } from "./bortakvall-API";
 import type {
   CartItem,
   productPageOneCandyData,
@@ -25,6 +24,10 @@ import type {
 //Go back one page
 arrowLeft!.addEventListener("click", () => {
   window.location.href = "/";
+});
+
+cartCheckoutButton.addEventListener("click", () => {
+  window.location.href = "/src/assets/html/checkout-page.html";
 });
 
 cartIcon?.addEventListener("click", () => {
@@ -100,39 +103,61 @@ const renderCartProducts = async () => {
 //Get choosen product from local storage and render on product-page
 const renderCandyProduct = async () => {
   const currentId: string = localStorage.getItem("currentId") || "[]";
-  
-  const newId: number = JSON.parse(currentId);
-  
-  const fetchedProducts = await getOneProduct(newId);
 
+  const newId: number = JSON.parse(currentId);
+
+  const fetchedProducts = await getOneProduct(newId);
+  console.log(fetchedProducts.data);
   renderCandyData(fetchedProducts.data);
+
+  if (fetchedProducts.data.stock_status === "outofstock") {
+    document.querySelector(".stock-wrapper")!.innerHTML = `
+      <i class="fa-solid fa-circle-xmark text-danger fs-5"></i>
+      <p class="m-0 ms-2">(0) I lager</p>
+    `;
+  }
 };
 
 //Function how to render choosen product on product-page
 const renderCandyData = (product: productPageOneCandyData) => {
-  
   let renderCandy: string = "";
   renderCandy += `
       <div class="row justify-content-center mt-5">
-        <div class="col-12 col-md-8 col-lg-6 d-flex flex-column">
-          <img src="${BASE_URL}${product.images.large}" alt="Bild på godiset" class="img-fluid">
+        <div class="img-cotnainer col-12 col-lg-6 d-flex flex-column">
+          <img src="${BASE_URL}${product.images.large}" alt="Bild på godiset" class="product-img img-fluid">
         </div>
-        <div class="row justify-content-center mt-5">
-          <div class="card text-center col-12 col-md-8 col-lg-6 d-flex flex-column">
-            <div class="card-body">
-              <h5 class="card-title">${product.name}</h5>
-              <p class="card-text">Pris: ${product.price}kr</p>
-              <hr>
-              <p class="card-text">Beskrivning: ${product.description}</p>
+        <div class="product-info col-12 col-lg-6 d-flex flex-column mt-4 mt-lg-0">
+          <div class="card">
+            <div class="card-body p-xxl-4">
+              <h5 class="card-title fs-3">${product.name}</h5>
+              <div class="rating-wrapper d-flex align-items-center">
+                <div class="rating-star">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <p class="mx-2 my-0">(14)</p>
+              </div>        
+              <p class="card-text mt-2 fs-1 mb-1">${product.price}kr</p>
+              <hr class="mt-0 mb-4">
+              <div class="stock-wrapper d-flex align-items-center">
+                <i class="fa-solid fa-circle-check text-success fs-5"></i> 
+                <p class="m-0 ms-2">(${product.stock_quantity}) I lager</p>
+              </div>
+              <div class="description-container">
+              <p class="card-text mt-4 fs-4">Beskrivning:</p>
+              <p class="card-text mt-3">${product.description}</p>
+              <div>
+              <button class="add-to-cart btn btn-light fw-bold mt-3 d-block m-auto" data-id="${product.id}">
+                Lägg till i varukorgen
+              </button>
             </div>
           </div>
         </div>
-        <div class="text-center">
-          <button class="add-to-cart btn btn-dark fw-bold mt-3" data-id="${product.id}">
-            Lägg till i varukorgen
-          </button>
-        </div>
-      </div>`;
+      </div>
+`;
   oneProductMain.innerHTML = renderCandy;
 };
 

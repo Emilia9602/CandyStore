@@ -1,0 +1,43 @@
+.oneProductMain {
+  max-width: 500px;
+  margin: 0 auto;
+}
+.img-cotnainer {
+  max-width: 550px !important;
+}
+
+@media (min-width: 992px) {
+  .oneProductMain {
+    max-width: none;
+  }
+}
+
+.product-banner {
+  background-color: rgb(54 54 54 / 1);
+}
+
+.product-banner-text {
+  color: #ec8638;
+}
+.card-body {
+  background-color: rgba(248, 239, 240, 0.8);
+}
+.rating-star {
+  color: #ec8638;
+}
+
+.btn-light {
+  background: linear-gradient(to bottom, #f2d324, #f02b2b);
+  opacity: 0.9;
+}
+
+.add-to-cart:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 1200px) {
+  .add-to-cart {
+    font-size: 1.1rem !important;
+    padding: 0.5rem 1rem !important;
+  }
+}

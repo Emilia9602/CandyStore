@@ -38,6 +38,9 @@
   max-height: 95vh;
   margin: 20px;
   border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .cart-header-section {
@@ -50,7 +53,6 @@
 
 .cart-product-section {
   border-bottom: 1px solid rgba(33, 37, 41, 0.5);
-  height: 70vh;
   overflow-y: auto;
 }
 
@@ -83,14 +85,15 @@
   transform: scale(1.15);
 }
 
-.cart-checkout-button {
+.btn-light {
   background: linear-gradient(to bottom, #f2d324, #f02b2b);
+  opacity: 0.9;
 }
 
 .cart-checkout-button:hover {
   text-decoration: underline;
 }
-.checkout-button-secion {
+.checkout-button-section {
   margin-top: auto;
 }
 
