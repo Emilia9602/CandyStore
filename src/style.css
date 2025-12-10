@@ -6,6 +6,10 @@
   margin: 0 1rem 1rem;
 }
 
+.cartHover:hover {
+  cursor: pointer;
+}
+
 .categories {
   display: flex;
   gap: 0.5rem;
@@ -86,6 +90,7 @@
 .candyCardTitle {
   font-size: 100%;
 }
+
 .btn-light {
   background: linear-gradient(to bottom, #f2d324, #f02b2b);
   opacity: 0.9;
@@ -125,6 +130,7 @@
 }
 
 @media (min-width: 1000px) {
+
   .product-topbar,
   .productPageMain {
     padding: 0 2rem;

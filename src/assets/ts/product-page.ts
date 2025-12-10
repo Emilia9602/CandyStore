@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../css/cart.css";
 import "../css/global.css";
+import "../css/product-page.css"
 import {
   arrowLeft,
   BASE_URL,
@@ -12,6 +13,7 @@ import {
   cartOverlay,
   cartProductSection,
   cartSection,
+  cartCheckoutButton
 } from "./selector";
 import { 
   getOneProduct 
@@ -34,6 +36,10 @@ cartIcon?.addEventListener("click", () => {
 
 closeCart?.addEventListener("click", () => {
   cartOverlay?.classList.add("invisible");
+});
+
+cartCheckoutButton.addEventListener("click", () => {
+  window.location.href = "/src/assets/html/checkout-page.html";
 });
 
 //Create variables
