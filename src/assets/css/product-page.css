@@ -73,6 +73,10 @@ body {
   transform: scale(1.02);
 }
 
+.other-product-container:hover .other-product-name {
+  text-decoration: underline;
+}
+
 .other-product-container img {
   width: 100%;
   border-top-right-radius: 6px;

@@ -50,11 +50,18 @@ export const oneProductMain =
 export const prodcutPage = document.querySelector<HTMLAnchorElement>(
   ".goToProductPage"!
 );
+export const otherProductsCarousel = document.querySelector<HTMLDivElement>(
+  ".other-products-carousel"
+)!;
 
 //Order-Complete-page
 export const completeDiv =
   document.querySelector<HTMLDivElement>(".completeDiv")!;
 
-export const otherProductsCarousel = document.querySelector<HTMLDivElement>(
-  ".other-products-carousel"
-)!;
+// Sortera knapp
+export const sortButton =
+  document.querySelector<HTMLButtonElement>(".sort-button")!;
+
+//Filter button
+export const restoreButton =
+  document.querySelector<HTMLButtonElement>(".restore-button")!;

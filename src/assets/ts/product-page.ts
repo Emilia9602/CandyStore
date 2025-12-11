@@ -144,7 +144,7 @@ const renderOtherProducts = async () => {
 
   otherProducts.map((product) => {
     otherProductsList += `
-    <div class="other-product-container">
+    <div class="other-product-container" data-id=${product.id}>
       <img src="${BASE_URL}${product.images.large}" />
       <div class="other-rating-star py-2 px-2 fs-6">
         <i class="fa-solid fa-star"></i>
@@ -162,6 +162,17 @@ const renderOtherProducts = async () => {
   });
   otherProductsCarousel.innerHTML = otherProductsList;
 };
+
+otherProductsCarousel.addEventListener("click", (e) => {
+  const target = e.target as HTMLElement;
+
+  if (target.closest(".other-product-container")) {
+    const cardEl = target.closest(".other-product-container") as HTMLElement;
+    const currentId = cardEl.dataset.id;
+    localStorage.setItem("currentId", JSON.stringify(currentId));
+    window.location.href = "/src/assets/html/product-page.html";
+  }
+});
 
 //Function how to render choosen product on product-page
 const renderCandyData = (product: productPageOneCandyData) => {
