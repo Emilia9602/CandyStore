@@ -156,7 +156,7 @@ const renderCandyProductsSorted = (products: CandyData[]) => {
           <div class="card-body d-flex flex-column p-3">
             <h5 class="card-title candyCardTitle">${product.name}</h5>
             <p class="card-text">Pris: ${product.price}kr</p>
-            <div class="card-button-container d-flex gap-1 justify-content-center mt-auto">
+            <div class="card-button-container d-flex gap-1 justify-content-between mt-auto">
             <button class="btn btn-light btn-sm add-to-cart" data-id="${product.id}">
               Lägg i varukorg
             </button>
@@ -198,12 +198,11 @@ const renderCandyProducts = async () => {
   let countCandyInstock = 0;
   let countCandy = 0;
   fetchedProductsWithoutData.map((product: CandyData) => {
+    countCandy++;
     if (product.stock_status === "instock") {
       countCandyInstock++;
-    }
-    countCandy++;
-    renderCandyCards += `
-        <div class="card" data-id="${product.id}">
+      renderCandyCards += `
+        <div class="card candyCard" data-id="${product.id}">
           <img
             src="${BASE_URL}${product.images.thumbnail}"
             class="card-img-top"
@@ -212,7 +211,7 @@ const renderCandyProducts = async () => {
           <div class="card-body d-flex flex-column p-3">
             <h5 class="card-title candyCardTitle">${product.name}</h5>
             <p class="card-text">Pris: ${product.price}kr</p>
-            <div class="card-button-container d-flex gap-1 justify-content-center mt-auto">
+            <div class="card-button-container d-flex gap-1 justify-content-between mt-auto">
             <button class="btn btn-light btn-sm add-to-cart" data-id="${product.id}">
               Lägg i varukorg
             </button>
@@ -225,6 +224,31 @@ const renderCandyProducts = async () => {
           </div>
         </div>
     `;
+    } else if (product.stock_status === "outofstock") {
+      renderCandyCards += `
+        <div class="card candyCard" data-id="${product.id}">
+          <img
+            src="${BASE_URL}${product.images.thumbnail}"
+            class="card-img-top"
+            alt="Bild på godis"
+          />
+          <div class="card-body d-flex flex-column p-3">
+            <h5 class="card-title candyCardTitle">${product.name}</h5>
+            <p class="card-text">Pris: ${product.price}kr</p>
+            <div class="card-button-container d-flex gap-1 justify-content-between mt-auto">
+            <button class="btn btn-light btn-sm add-to-cart" disabled>
+              Ej i lager
+            </button>
+            <a href="src/assets/html/product-page.html"
+              class="btn btn-light btn-sm goToProductPage"
+              data-id="${product.id}">
+              <i class="fa-solid fa-circle-info"></i>
+            </a>
+            </div>
+          </div>
+        </div>
+    `;
+    }
   });
 
   //Shows productcount on first page
