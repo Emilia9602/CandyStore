@@ -16,7 +16,10 @@ import {
   cartSection,
   otherProductsCarousel,
 } from "./selector";
-import { getOneProduct, getProductsData } from "./bortakvall-API";
+import { 
+  getOneProduct, 
+  getProductsData 
+} from "./bortakvall-API";
 import type {
   CartItem,
   productPageOneCandyData,

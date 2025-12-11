@@ -146,6 +146,7 @@ const renderCandyProductsSorted = (products: CandyData[]) => {
   let renderCandyCards: string = "";
 
   products.map((product) => {
+    if (product.stock_status === "instock") {
     renderCandyCards += `
         <div class="card" data-id="${product.id}">
           <img
@@ -169,6 +170,31 @@ const renderCandyProductsSorted = (products: CandyData[]) => {
           </div>
         </div>
     `;
+    } else if (product.stock_status === "outofstock") {
+      renderCandyCards += `
+        <div class="card candyCard" data-id="${product.id}">
+          <img
+            src="${BASE_URL}${product.images.thumbnail}"
+            class="card-img-top"
+            alt="Bild på godis"
+          />
+          <div class="card-body d-flex flex-column p-3">
+            <h5 class="card-title candyCardTitle">${product.name}</h5>
+            <p class="card-text">Pris: ${product.price}kr</p>
+            <div class="card-button-container d-flex gap-1 justify-content-center mt-auto">
+            <button class="btn btn-light btn-sm add-to-cart" disabled>
+              Ej i lager
+            </button>
+            <a href="src/assets/html/product-page.html"
+              class="btn btn-light btn-sm goToProductPage"
+              data-id="${product.id}">
+              <i class="fa-solid fa-circle-info"></i>
+            </a>
+            </div>
+          </div>
+        </div>
+    `;
+    }
   });
   candyCardMain.innerHTML = renderCandyCards;
 };
