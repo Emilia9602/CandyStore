@@ -206,7 +206,7 @@ const renderCandyData = (product: productPageOneCandyData) => {
               <p class="card-text mt-4 fs-4">Beskrivning:</p>
               <p class="card-text mt-3">${product.description}</p>
               <div>
-              <button class="add-to-cart btn btn-light fw-bold mt-3 d-block m-auto" data-id="${product.id}">
+              <button class="add-to-cart btn btn-light mt-3 d-block m-auto" data-id="${product.id}">
                 Lägg till i varukorgen
               </button>
             </div>

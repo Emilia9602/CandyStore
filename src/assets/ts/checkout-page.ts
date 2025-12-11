@@ -8,16 +8,21 @@ import type {
   orderData,
   oneCandyOrderData,
   completedOrder,
-  CartItem
+  CartItem,
 } from "./bortakvall-API.types";
-import {
-  OrderComplete
-} from "./bortakvall-API";
+import { OrderComplete } from "./bortakvall-API";
 import {
   checkoutCartListEl,
   checkoutForm,
   arrowLeft,
-  name, surName, adress, postNr, place, phone, email
+  name,
+  surName,
+  adress,
+  postNr,
+  place,
+  phone,
+  email,
+  BASE_URL,
 } from "./selector";
 
 //Go back one page
@@ -62,6 +67,7 @@ const renderCart = () => {
       let candyDataOrderItem: CandyDataOrderItem = {
         product_id: item.id,
         product_name: item.name,
+        images: { thumbnail: item.images.thumbnail, large: item.images.large },
         qty: item.cartQty,
         item_price: item.price,
         item_total: 0,
@@ -80,12 +86,26 @@ const calculateItemTotal = () => {
 
 const showCart = () => {
   checkoutCart.forEach((item) => {
-    listHtml += `<li>${item.qty}x ${item.product_name} - ${item.item_total} kr</li>`;
+    console.log(item);
+    listHtml += `
+    <div class="row p-2 product-checkout-section">
+      <img src="${BASE_URL}${item.images.thumbnail}" class="col-3 checkout-product-image rounded-3 p-0">
+      <p class="col-5 text-start fs-xl-5">${item.product_name}</p>
+      <p class="col-5 text-end pe-2">${item.qty}x ${item.item_price}kr</p>
+    </div>
+    `;
     totalPrice = totalPrice + item.item_total;
   });
 
-  checkoutCartListEl!.innerHTML = listHtml;
-  checkoutCartListEl!.innerHTML += `<li id="checkoutTotal">Totalt - ${totalPrice} kr</li>`;
+  checkoutCartListEl!.innerHTML += listHtml;
+
+  document.querySelector(".checkoutTotal")!.innerHTML += `
+    <hr>
+    <div class="d-flex justify-content-between px-2">
+      <p>Totalt:</p>
+      <p class="fs-4">${totalPrice}kr</p>
+    </div>
+    `;
 };
 
 //Get orderded products to correct type in new array
@@ -94,8 +114,12 @@ const getOrderItems = () => {
     let oneCandyOrderData: oneCandyOrderData = {
       product_id: product.product_id,
       qty: product.qty,
+      images: {
+        thumbnail: product.images.thumbnail,
+        large: product.images.large,
+      },
       item_price: product.item_price,
-      item_total: product.item_total
+      item_total: product.item_total,
     };
     wantThisCandy.push(oneCandyOrderData);
   });

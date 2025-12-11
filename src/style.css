@@ -8,7 +8,7 @@ body {
 .hero {
   text-align: center;
   padding: 1.5rem 1rem;
-  background: #f8eff0;
+  background-color: #f8eff0;
   border-radius: 0.8rem;
   margin: 0 1rem 1rem;
 }
@@ -47,7 +47,7 @@ body {
 
 .circle span {
   font-size: 2rem;
-  background: #f8eff0;
+  background-color: #f8eff0;
   padding: 1rem;
   border-radius: 50%;
   border: 1px solid #ddd;
@@ -66,7 +66,7 @@ body {
 }
 
 .card {
-  background-color: rgba(248, 239, 240, 0.8);
+  background-color: #f8eff0;
   border: 1px solid #222;
   max-width: 160px;
   border-radius: 10px;
