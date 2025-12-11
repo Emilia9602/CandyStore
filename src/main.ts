@@ -12,12 +12,11 @@ import {
   cartProductSection,
   cartCheckoutButton,
   candyCardMain,
-  BASE_URL
+  BASE_URL,
+  sortButton,
+  restoreButton,
 } from "./assets/ts/selector";
-import {
-  getProductsData,
-  getOneProduct
-} from "./assets/ts/bortakvall-API";
+import { getProductsData, getOneProduct } from "./assets/ts/bortakvall-API";
 import {
   type CandyData,
   type CartItem,
@@ -135,16 +134,72 @@ const renderCartProducts = async () => {
   )!.textContent = `${totalPrice}kr`;
 };
 
+const sortProductsByName = (arr: CandyData[]) => {
+  arr.sort((a: CandyData, b: CandyData) => a.name.localeCompare(b.name));
+};
+
+const sortProductsByNameReverse = (arr: CandyData[]) => {
+  arr.sort((a: CandyData, b: CandyData) => b.name.localeCompare(a.name));
+};
+
+const renderCandyProductsSorted = (products: CandyData[]) => {
+  let renderCandyCards: string = "";
+
+  products.map((product) => {
+    renderCandyCards += `
+        <div class="card" data-id="${product.id}">
+          <img
+            src="${BASE_URL}${product.images.thumbnail}"
+            class="card-img-top"
+            alt="Bild på godis"
+          />
+          <div class="card-body d-flex flex-column p-3">
+            <h5 class="card-title candyCardTitle">${product.name}</h5>
+            <p class="card-text">Pris: ${product.price}kr</p>
+            <div class="card-button-container d-flex gap-1 justify-content-center mt-auto">
+            <button class="btn btn-light btn-sm add-to-cart" data-id="${product.id}">
+              Lägg i varukorg
+            </button>
+            <a href="src/assets/html/product-page.html"
+              class="btn btn-light btn-sm goToProductPage"
+              data-id="${product.id}">
+              <i class="fa-solid fa-circle-info"></i>
+            </a>
+            </div>
+          </div>
+        </div>
+    `;
+  });
+  candyCardMain.innerHTML = renderCandyCards;
+};
+
+restoreButton.addEventListener("click", () => {
+  renderCandyProducts();
+});
+
 //Render all the candy cards on first page
 const renderCandyProducts = async () => {
   const fetchedProducts = await getProductsData();
+  const fetchedProductsWithoutData = fetchedProducts.data;
+  let sorted = false;
+  sortButton.addEventListener("click", () => {
+    if (!sorted) {
+      sortProductsByName(fetchedProductsWithoutData);
+      renderCandyProductsSorted(fetchedProductsWithoutData);
+    } else {
+      sortProductsByNameReverse(fetchedProductsWithoutData);
+      renderCandyProductsSorted(fetchedProductsWithoutData);
+    }
+
+    sorted = !sorted;
+  });
 
   let renderCandyCards: string = "";
+  let countCandyInstock = 0;
   let countCandy = 0;
-  fetchedProducts.data.map((product: CandyData) => {
-
+  fetchedProductsWithoutData.map((product: CandyData) => {
+    countCandy++;
     if (product.stock_status === "instock") {
-      countCandy++;
       renderCandyCards += `
         <div class="card candyCard" data-id="${product.id}">
           <img
@@ -169,7 +224,6 @@ const renderCandyProducts = async () => {
         </div>
     `;
     } else if (product.stock_status === "outofstock") {
-      countCandy++;
       renderCandyCards += `
         <div class="card candyCard" data-id="${product.id}">
           <img
@@ -197,9 +251,10 @@ const renderCandyProducts = async () => {
   });
 
   //Shows productcount on first page
-  document.querySelector(
-    ".count-candy"
-  )!.innerHTML = `<p class="m-0">Antal: ${countCandy}</p>`;
+  document.querySelector(".count-candy")!.innerHTML = `
+  <p class="m-0 btn btn-light">${countCandyInstock} i lager</p>
+  <p class="m-0 btn btn-light">Antal: ${countCandy}</p>
+  `;
   candyCardMain.innerHTML = renderCandyCards;
 
   candyCardMain.addEventListener("click", async (e) => {
