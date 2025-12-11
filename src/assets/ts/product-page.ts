@@ -122,6 +122,10 @@ const renderCandyProduct = async () => {
       <i class="fa-solid fa-circle-xmark text-danger fs-5"></i>
       <p class="m-0 ms-2">(0) I lager</p>
     `;
+    document.querySelector(".addBtn")!.innerHTML = `
+    <button class="btn btn-light btn-sm add-to-cart" disabled>
+      Ej i lager
+    </button>`
   }
 };
 
@@ -194,7 +198,7 @@ const renderCandyData = (product: productPageOneCandyData) => {
               <div class="description-container">
               <p class="card-text mt-4 fs-4">Beskrivning:</p>
               <p class="card-text mt-3">${product.description}</p>
-              <div>
+              <div class="addBtn">
               <button class="add-to-cart btn btn-light fw-bold mt-3 d-block m-auto" data-id="${product.id}">
                 Lägg till i varukorgen
               </button>
