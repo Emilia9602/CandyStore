@@ -118,6 +118,9 @@ const renderCandyProduct = async () => {
   renderCandyData(fetchedProducts.data);
 
   if (fetchedProducts.data.stock_status === "outofstock") {
+    document
+      .querySelector<HTMLButtonElement>(".add-to-cart")!
+      .classList.add("disabled");
     document.querySelector(".stock-wrapper")!.innerHTML = `
       <i class="fa-solid fa-circle-xmark text-danger fs-5"></i>
       <p class="m-0 ms-2">(0) I lager</p>

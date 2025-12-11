@@ -253,8 +253,8 @@ const renderCandyProducts = async () => {
 
   //Shows productcount on first page
   document.querySelector(".count-candy")!.innerHTML = `
-  <p class="m-0 btn btn-light">${countCandyInstock} i lager</p>
-  <p class="m-0 btn btn-light">Antal: ${countCandy}</p>
+  <p class="m-0 btn btn-light btn-sm">${countCandyInstock} i lager</p>
+  <p class="m-0 btn btn-light btn-sm">Antal: ${countCandy}</p>
   `;
   candyCardMain.innerHTML = renderCandyCards;
 
