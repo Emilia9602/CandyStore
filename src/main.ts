@@ -200,6 +200,7 @@ const renderCandyProducts = async () => {
   fetchedProductsWithoutData.map((product: CandyData) => {
     countCandy++;
     if (product.stock_status === "instock") {
+      countCandyInstock++;
       renderCandyCards += `
         <div class="card candyCard" data-id="${product.id}">
           <img
