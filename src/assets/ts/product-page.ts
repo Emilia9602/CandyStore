@@ -16,10 +16,7 @@ import {
   cartSection,
   otherProductsCarousel,
 } from "./selector";
-import { 
-  getOneProduct, 
-  getProductsData 
-} from "./bortakvall-API";
+import { getOneProduct, getProductsData } from "./bortakvall-API";
 import type {
   CartItem,
   productPageOneCandyData,
@@ -128,7 +125,7 @@ const renderCandyProduct = async () => {
     document.querySelector(".addBtn")!.innerHTML = `
     <button class="btn btn-light btn-sm add-to-cart" disabled>
       Ej i lager
-    </button>`
+    </button>`;
   }
 };
 
@@ -212,13 +209,10 @@ const renderCandyData = (product: productPageOneCandyData) => {
               <div class="description-container">
               <p class="card-text mt-4 fs-4">Beskrivning:</p>
               <p class="card-text mt-3">${product.description}</p>
-<<<<<<< HEAD
               <div class="addBtn">
               <button class="add-to-cart btn btn-light fw-bold mt-3 d-block m-auto" data-id="${product.id}">
-=======
               <div>
               <button class="add-to-cart btn btn-light mt-3 d-block m-auto" data-id="${product.id}">
->>>>>>> feature/kalles-extra
                 Lägg till i varukorgen
               </button>
             </div>
