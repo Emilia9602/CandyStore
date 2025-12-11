@@ -29,6 +29,7 @@ export interface CartItem extends Product {
 export interface CandyDataOrderItem {
   product_id: number;
   product_name: string;
+  images: { thumbnail: string; large: string };
   qty: number;
   item_price: number;
   item_total: number;

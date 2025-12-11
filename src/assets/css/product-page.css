@@ -38,7 +38,7 @@ body {
   color: #ec8638;
 }
 .card-body {
-  background-color: rgba(248, 239, 240, 0.8);
+  background-color: #f8eff0;
 }
 .rating-star {
   color: #ec8638;
@@ -62,9 +62,9 @@ body {
 
 .other-product-container {
   width: 180px;
-  background-color: rgba(248, 239, 240, 0.8);
-  border-top-right-radius: 8px;
-  border-top-left-radius: 8px;
+  border: 1px solid #c7c2c2;
+  background-color: #f8eff0;
+  border-radius: 8px;
   flex: 0 0 auto;
   transition: transform 0.2s ease;
 }

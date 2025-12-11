@@ -157,7 +157,7 @@ const renderCandyProductsSorted = (products: CandyData[]) => {
           <div class="card-body d-flex flex-column p-3">
             <h5 class="card-title candyCardTitle">${product.name}</h5>
             <p class="card-text">Pris: ${product.price}kr</p>
-            <div class="card-button-container d-flex gap-1 justify-content-center mt-auto">
+            <div class="card-button-container d-flex gap-1 justify-content-between mt-auto">
             <button class="btn btn-light btn-sm add-to-cart" data-id="${product.id}">
               Lägg i varukorg
             </button>
@@ -237,7 +237,7 @@ const renderCandyProducts = async () => {
           <div class="card-body d-flex flex-column p-3">
             <h5 class="card-title candyCardTitle">${product.name}</h5>
             <p class="card-text">Pris: ${product.price}kr</p>
-            <div class="card-button-container d-flex gap-1 justify-content-center mt-auto">
+            <div class="card-button-container d-flex gap-1 justify-content-between mt-auto">
             <button class="btn btn-light btn-sm add-to-cart" data-id="${product.id}">
               Lägg i varukorg
             </button>
@@ -261,7 +261,11 @@ const renderCandyProducts = async () => {
           <div class="card-body d-flex flex-column p-3">
             <h5 class="card-title candyCardTitle">${product.name}</h5>
             <p class="card-text">Pris: ${product.price}kr</p>
+<<<<<<< HEAD
             <div class="card-button-container d-flex gap-1 justify-content-center mt-auto">
+=======
+            <div class="card-button-container d-flex gap-1 justify-content-between mt-auto">
+>>>>>>> feature/kalles-extra
             <button class="btn btn-light btn-sm add-to-cart" disabled>
               Ej i lager
             </button>

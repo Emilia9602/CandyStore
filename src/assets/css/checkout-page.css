@@ -4,36 +4,34 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
 }
 
 .checkoutDiv {
-  background-color: rgb(248, 239, 240, 0.9);
-  min-width: 70%;
+  background-color: #f8eff0;
+  border: 1px solid #b3afaf;
+  max-width: 600px;
+  max-height: 750px;
 }
 
-#checkoutCartList {
-  margin-top: 7px;
-  margin-bottom: 7px;
+.product-checkout-section {
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex-grow: 1;
 }
 
-.checkoutForm {
-  min-width: 70%;
+.checkout-form-container {
+  background-color: #f8eff0;
+  border: 1px solid #b3afaf;
+  max-width: 600px;
+  max-height: 750px;
 }
 
-#checkoutTotal {
-  text-decoration: underline;
+.checkout-product-image {
+  max-width: 75px;
 }
 
 .arrowLeft:hover {
   cursor: pointer;
-}
-
-@media (min-width: 992px) {
-  .checkoutDiv {
-    min-width: 50%;
-  }
-
-  .checkoutForm {
-    min-width: 50%;
-  }
 }
