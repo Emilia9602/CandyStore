@@ -12,9 +12,12 @@ import {
   cartProductSection,
   cartCheckoutButton,
   candyCardMain,
-  BASE_URL,
+  BASE_URL
 } from "./assets/ts/selector";
-import { getProductsData, getOneProduct } from "./assets/ts/bortakvall-API";
+import {
+  getProductsData,
+  getOneProduct
+} from "./assets/ts/bortakvall-API";
 import {
   type CandyData,
   type CartItem,
@@ -139,9 +142,11 @@ const renderCandyProducts = async () => {
   let renderCandyCards: string = "";
   let countCandy = 0;
   fetchedProducts.data.map((product: CandyData) => {
-    countCandy++;
-    renderCandyCards += `
-        <div class="card" data-id="${product.id}">
+
+    if (product.stock_status === "instock") {
+      countCandy++;
+      renderCandyCards += `
+        <div class="card candyCard" data-id="${product.id}">
           <img
             src="${BASE_URL}${product.images.thumbnail}"
             class="card-img-top"
@@ -163,6 +168,32 @@ const renderCandyProducts = async () => {
           </div>
         </div>
     `;
+    } else if (product.stock_status === "outofstock") {
+      countCandy++;
+      renderCandyCards += `
+        <div class="card candyCard" data-id="${product.id}">
+          <img
+            src="${BASE_URL}${product.images.thumbnail}"
+            class="card-img-top"
+            alt="Bild på godis"
+          />
+          <div class="card-body d-flex flex-column p-3">
+            <h5 class="card-title candyCardTitle">${product.name}</h5>
+            <p class="card-text">Pris: ${product.price}kr</p>
+            <div class="card-button-container d-flex gap-1 justify-content-center mt-auto">
+            <button class="btn btn-light btn-sm add-to-cart" disabled>
+              Ej i lager
+            </button>
+            <a href="src/assets/html/product-page.html"
+              class="btn btn-light btn-sm goToProductPage"
+              data-id="${product.id}">
+              <i class="fa-solid fa-circle-info"></i>
+            </a>
+            </div>
+          </div>
+        </div>
+    `;
+    }
   });
 
   //Shows productcount on first page
