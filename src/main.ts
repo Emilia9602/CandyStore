@@ -200,7 +200,6 @@ const renderCandyProducts = async () => {
   let countCandy = 0;
   fetchedProductsWithoutData.map((product: CandyData) => {
     const onSale = product.on_sale;
-    console.log(onSale);
     const saleIcon = onSale
     ? `<span class="badge bg-danger">EXTRAPRIS!</span>`
     : "";
@@ -301,18 +300,6 @@ const renderCandyProducts = async () => {
     }
   });
 };
-
-//ska inte va kvar
-  candyCardMain.addEventListener("click", async (e) => {
-
-  const target = e.target as HTMLElement;
-
-  if (target.classList.contains("card")) {
-    const productData: OneCandyData = await getOneProduct (Number(target.dataset.id));
-    console.log(productData);
-  }
-})
-//
 
 //Hämtar kundvagn från LocalStorage
 let localStorageCart: CartItem[] = JSON.parse(
