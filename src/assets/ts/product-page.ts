@@ -141,8 +141,13 @@ const renderOtherProducts = async () => {
   let otherProductsList = "";
 
   otherProducts.map((product) => {
+    const onSale = product.on_sale;
+    const saleIcon = onSale
+      ? `<span class="badge bg-danger w-100 rounded-bottom-0 fs-6">EXTRA PRIS!</span>`
+      : "";
     otherProductsList += `
     <div class="other-product-container" data-id=${product.id}>
+    ${saleIcon}
       <img src="${BASE_URL}${product.images.large}" />
       <div class="other-rating-star py-2 px-2 fs-6">
         <i class="fa-solid fa-star"></i>
@@ -175,7 +180,14 @@ otherProductsCarousel.addEventListener("click", (e) => {
 //Function how to render choosen product on product-page
 const renderCandyData = (product: productPageOneCandyData) => {
   let renderCandy: string = "";
+
+  const onSale = product.on_sale;
+  const saleIcon = onSale
+    ? `<span class="badge bg-danger fs-6 mb-auto">EXTRA PRIS!</span>`
+    : "";
+
   renderCandy += `
+  
       <div class="product-img-info-container row justify-content-center mt-5">
         <div class="img-cotnainer col-12 col-lg-6 d-flex flex-column">
           <img src="${BASE_URL}${product.images.large}" alt="Bild på godiset" class="product-img img-fluid">
@@ -183,7 +195,10 @@ const renderCandyData = (product: productPageOneCandyData) => {
         <div class="product-info col-12 col-lg-6 d-flex flex-column mt-4 mt-lg-0">
           <div class="card mb-md-4">
             <div class="card-body p-xxl-4">
-              <h5 class="card-title fs-3">${product.name}</h5>
+            <div class="d-flex justify-content-between">
+            <h5 class="card-title fs-3">${product.name}</h5>
+              ${saleIcon}
+            </div>
               <div class="rating-wrapper d-flex align-items-center">
                 <div class="rating-star">
                   <i class="fa-solid fa-star"></i>

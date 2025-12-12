@@ -203,7 +203,7 @@ const renderCandyProducts = async () => {
   fetchedProductsWithoutData.map((product: CandyData) => {
     const onSale = product.on_sale;
     const saleIcon = onSale
-      ? `<span class="badge bg-danger">EXTRAPRIS!</span>`
+      ? `<span class="badge bg-danger rounded-bottom-0 fs-6">EXTRA PRIS!</span>`
       : "";
 
     countCandy++;
