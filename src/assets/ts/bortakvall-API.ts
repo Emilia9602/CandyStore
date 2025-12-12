@@ -1,10 +1,6 @@
 //Import everything needed
-import {
-  BASE_URL
-} from "./selector";
-import type {
-  orderData
-} from "./bortakvall-API.types";
+import { BASE_URL } from "./selector";
+import type { orderData } from "./bortakvall-API.types";
 
 //Get all products from API
 export const getProductsData = async () => {
@@ -31,13 +27,15 @@ export const getOneProduct = async (id: number) => {
 //Function to POST completed order and get success or fail answer
 export const OrderComplete = async (order: orderData) => {
   const response = await fetch(
-    "https://www.bortakvall.se/api/v2/users/83/orders", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(order),
-  });
+    "https://www.bortakvall.se/api/v2/users/83/orders",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(order),
+    }
+  );
 
   if (!response.ok) {
     throw new Error(`HTTP Error ${response.status}: ${response.statusText}`);

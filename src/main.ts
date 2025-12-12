@@ -33,7 +33,7 @@ closeCart?.addEventListener("click", () => {
 });
 
 cartCheckoutButton.addEventListener("click", () => {
-  window.location.href = "/src/assets/html/checkout-page.html";
+  window.location.href = `${import.meta.env.BASE_URL}checkout-page.html`;
 });
 
 const deleteProductFromCart = (id: number) => {
@@ -146,7 +146,6 @@ const renderCandyProductsSorted = (products: CandyData[]) => {
   let renderCandyCards: string = "";
 
   products.map((product) => {
-
     renderCandyCards += `
         <div class="card" data-id="${product.id}">
           <img
@@ -195,15 +194,18 @@ const renderCandyProducts = async () => {
     sorted = !sorted;
   });
 
+  console.log("JS körs");
+  console.log(import.meta.env.BASE_URL);
+
   let renderCandyCards: string = "";
   let countCandyInstock = 0;
   let countCandy = 0;
   fetchedProductsWithoutData.map((product: CandyData) => {
     const onSale = product.on_sale;
     const saleIcon = onSale
-    ? `<span class="badge bg-danger">EXTRAPRIS!</span>`
-    : "";
-    
+      ? `<span class="badge bg-danger">EXTRAPRIS!</span>`
+      : "";
+
     countCandy++;
     if (product.stock_status === "instock") {
       countCandyInstock++;
@@ -219,10 +221,12 @@ const renderCandyProducts = async () => {
             <h5 class="card-title candyCardTitle">${product.name}</h5>
             <p class="card-text">Pris: ${product.price}kr</p>
             <div class="card-button-container d-flex gap-1 justify-content-between mt-auto">
-            <button class="btn btn-light btn-sm add-to-cart" data-id="${product.id}">
+            <button class="btn btn-light btn-sm add-to-cart" data-id="${
+              product.id
+            }">
               Lägg i varukorg
             </button>
-            <a href="src/assets/html/product-page.html"
+            <a href="${import.meta.env.BASE_URL}product-page.html"
               class="btn btn-light btn-sm goToProductPage"
               data-id="${product.id}">
               <i class="fa-solid fa-circle-info"></i>
@@ -296,7 +300,7 @@ const renderCandyProducts = async () => {
       const id = card.dataset.id;
       console.log(id);
       localStorage.setItem("currentId", JSON.stringify(id));
-      window.location.href = "/src/assets/html/product-page.html";
+      window.location.href = `${import.meta.env.BASE_URL}product-page.html`;
     }
   });
 };

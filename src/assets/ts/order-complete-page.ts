@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../css/order-complete-page.css";
 import "../css/global.css";
-import { arrowLeft, startPageButton, completeDiv, BASE_URL } from "./selector";
+import { arrowLeft, completeDiv, BASE_URL } from "./selector";
 import type {
   completedOrder,
   CartItem,
@@ -12,12 +12,7 @@ import type {
 
 //Go back one page
 arrowLeft!.addEventListener("click", () => {
-  window.location.href = "/";
-});
-
-//Go to start-page
-startPageButton!.addEventListener("click", () => {
-  window.location.href = "/";
+  window.location.href = `${import.meta.env.BASE_URL}`;
 });
 
 //Get finished order from local storage and parse
@@ -64,8 +59,8 @@ const orderSuccessOrFail = (data: completedOrder) => {
           </p>
           <p id="orderP" class="fs-2 mb-0 mt-4">Beställning:</p>
           <div id="orderNamesUl" class="p-3 gap-1"></div>
-          <button class="startpage-button btn btn-light mt-4 mb-4">
-            Gå till startsidan
+          <button class="startpage-button btn btn-light mt-4 mb-4 fs-5">
+            Gå till startsidan ➜
           </button>
           `;
 
@@ -101,6 +96,11 @@ const orderSuccessOrFail = (data: completedOrder) => {
           </button>
           `;
   }
+
+  //Go to start-page
+  document.querySelector(".startpage-button")!.addEventListener("click", () => {
+    window.location.href = `${import.meta.env.BASE_URL}`;
+  });
 };
 
 //Activate functions

@@ -26,11 +26,11 @@ import type {
 
 //Go back one page
 arrowLeft!.addEventListener("click", () => {
-  window.location.href = "/";
+  window.location.href = `${import.meta.env.BASE_URL}`;
 });
 
 cartCheckoutButton.addEventListener("click", () => {
-  window.location.href = "/src/assets/html/checkout-page.html";
+  window.location.href = `${import.meta.env.BASE_URL}checkout-page.html`;
 });
 
 cartIcon?.addEventListener("click", () => {
@@ -40,10 +40,6 @@ cartIcon?.addEventListener("click", () => {
 
 closeCart?.addEventListener("click", () => {
   cartOverlay?.classList.add("invisible");
-});
-
-cartCheckoutButton.addEventListener("click", () => {
-  window.location.href = "/src/assets/html/checkout-page.html";
 });
 
 //Create variables
@@ -142,7 +138,6 @@ const getRandomSix = (arr: CandyData[]) => {
 const renderOtherProducts = async () => {
   const fetchedProducts = await getProductsData();
   const otherProducts = getRandomSix(fetchedProducts.data);
-  let count = 0;
   let otherProductsList = "";
 
   otherProducts.map((product) => {
@@ -173,7 +168,7 @@ otherProductsCarousel.addEventListener("click", (e) => {
     const cardEl = target.closest(".other-product-container") as HTMLElement;
     const currentId = cardEl.dataset.id;
     localStorage.setItem("currentId", JSON.stringify(currentId));
-    window.location.href = "/src/assets/html/product-page.html";
+    window.location.href = `${import.meta.env.BASE_URL}product-page.html`;
   }
 });
 

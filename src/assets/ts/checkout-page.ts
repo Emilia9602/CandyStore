@@ -27,7 +27,7 @@ import {
 
 //Go back one page
 arrowLeft!.addEventListener("click", () => {
-  window.location.href = "/";
+  window.location.href = `${import.meta.env.BASE_URL}`;
 });
 
 //Create variables
@@ -141,7 +141,9 @@ checkoutForm.addEventListener("submit", async (e) => {
   try {
     finishedOrder = await OrderComplete(order);
     localStorage.setItem("finishedOrder", JSON.stringify(finishedOrder));
-    window.location.href = "/src/assets/html/order-complete-page.html";
+    window.location.href = `${
+      import.meta.env.BASE_URL
+    }order-complete-page.html`;
   } catch (Error) {
     console.log(Error);
   }
