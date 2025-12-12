@@ -75,6 +75,7 @@
 .cart-product-trashcan {
   margin-top: auto;
 }
+
 .pagination .page-link {
   color: black;
 }
@@ -82,6 +83,7 @@
 .cart-close-button {
   transition: transform 0.2s;
 }
+
 .cart-close-button:hover {
   transform: scale(1.15);
 }
@@ -89,6 +91,7 @@
 .cart-checkout-button:hover {
   text-decoration: underline;
 }
+
 .checkout-button-section {
   margin-top: auto;
 }
@@ -133,6 +136,7 @@
     padding: 1rem 2rem;
     border-radius: 10px;
   }
+
   .cart-icon {
     font-size: 1.8rem;
   }

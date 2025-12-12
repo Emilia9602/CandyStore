@@ -1,3 +1,5 @@
+//All different types
+
 export interface CandyData {
   id: number;
   name: string;

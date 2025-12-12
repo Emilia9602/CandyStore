@@ -1,6 +1,10 @@
 //Import everything needed
-import { BASE_URL } from "./selector";
-import type { orderData } from "./bortakvall-API.types";
+import {
+  BASE_URL
+} from "./selector";
+import type {
+  orderData
+} from "./bortakvall-API.types";
 
 //Get all products from API
 export const getProductsData = async () => {
