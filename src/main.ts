@@ -146,6 +146,7 @@ const renderCandyProductsSorted = (products: CandyData[]) => {
   let renderCandyCards: string = "";
 
   products.map((product) => {
+
     renderCandyCards += `
         <div class="card" data-id="${product.id}">
           <img
@@ -198,11 +199,18 @@ const renderCandyProducts = async () => {
   let countCandyInstock = 0;
   let countCandy = 0;
   fetchedProductsWithoutData.map((product: CandyData) => {
+    const onSale = product.on_sale;
+    console.log(onSale);
+    const saleIcon = onSale
+    ? `<span class="badge bg-danger">EXTRAPRIS!</span>`
+    : "";
+    
     countCandy++;
     if (product.stock_status === "instock") {
       countCandyInstock++;
       renderCandyCards += `
         <div class="card candyCard" data-id="${product.id}">
+        ${saleIcon}
           <img
             src="${BASE_URL}${product.images.thumbnail}"
             class="card-img-top"
@@ -293,6 +301,18 @@ const renderCandyProducts = async () => {
     }
   });
 };
+
+//ska inte va kvar
+  candyCardMain.addEventListener("click", async (e) => {
+
+  const target = e.target as HTMLElement;
+
+  if (target.classList.contains("card")) {
+    const productData: OneCandyData = await getOneProduct (Number(target.dataset.id));
+    console.log(productData);
+  }
+})
+//
 
 //Hämtar kundvagn från LocalStorage
 let localStorageCart: CartItem[] = JSON.parse(

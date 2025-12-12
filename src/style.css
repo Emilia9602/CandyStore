@@ -80,6 +80,10 @@ body {
   transition: transform 0.2s ease;
 }
 
+.card .onSale {
+  background-color: red;
+}
+
 .card:hover {
   transform: scale(1.02);
 }
