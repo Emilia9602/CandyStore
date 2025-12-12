@@ -3,7 +3,11 @@ import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../css/order-complete-page.css";
 import "../css/global.css";
-import { arrowLeft, completeDiv, BASE_URL } from "./selector";
+import {
+  arrowLeft,
+  completeDiv,
+  BASE_URL
+} from "./selector";
 import type {
   completedOrder,
   CartItem,

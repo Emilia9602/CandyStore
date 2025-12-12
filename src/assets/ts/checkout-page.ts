@@ -10,7 +10,9 @@ import type {
   completedOrder,
   CartItem,
 } from "./bortakvall-API.types";
-import { OrderComplete } from "./bortakvall-API";
+import {
+  OrderComplete
+} from "./bortakvall-API";
 import {
   checkoutCartListEl,
   checkoutForm,
@@ -55,7 +57,7 @@ const order: orderData = {
   order_items: [],
 };
 
-//Show orderded products on checkout-page
+//Push cart and id in new arrays
 const renderCart = () => {
   localStorageCart.forEach((item) => {
     if (checkoutCart.some((cartItem) => item.id === cartItem.product_id)) {
@@ -78,12 +80,14 @@ const renderCart = () => {
   });
 };
 
+//Calculate total price
 const calculateItemTotal = () => {
   checkoutCart.forEach((item) => {
     item.item_total = item.qty * item.item_price;
   });
 };
 
+//Show ordered products on checkout-page
 const showCart = () => {
   checkoutCart.forEach((item) => {
     console.log(item);
@@ -141,9 +145,8 @@ checkoutForm.addEventListener("submit", async (e) => {
   try {
     finishedOrder = await OrderComplete(order);
     localStorage.setItem("finishedOrder", JSON.stringify(finishedOrder));
-    window.location.href = `${
-      import.meta.env.BASE_URL
-    }order-complete-page.html`;
+    window.location.href = `${import.meta.env.BASE_URL
+      }order-complete-page.html`;
   } catch (Error) {
     console.log(Error);
   }

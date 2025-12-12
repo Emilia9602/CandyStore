@@ -1,130 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:image/svg+xml,
         <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
           <text y='.9em' font-size='90'>🍬</text>
-        </svg>"
-    />
-    <title>Bortakväll</title>
-  </head>
-  <body>
-    <!-- Kundvagn -->
-    <div class="cart-overlay modal-backdrop invisible">
-      <div class="cart-section text-center p-2 d-flex flex-column">
-        <div class="cart-header-section d-flex justify-content-between">
-          <p class="invisible">x</p>
-          <img
-            src="src/assets/images/kundvagn-header.png"
-            alt="kundvagn-headerr"
-            class="cart-header-img"
-          />
-          <p class="cart-close-button pe-2">x</p>
+        </svg>" />
+  <title>Bortakväll</title>
+</head>
+
+<body>
+
+  <!-- Cart -->
+
+  <div class="cart-overlay modal-backdrop invisible">
+    <div class="cart-section text-center p-2 d-flex flex-column">
+      <div class="cart-header-section d-flex justify-content-between">
+        <p class="invisible">x</p>
+        <img src="src/assets/images/kundvagn-header.png" alt="kundvagn-headerr" class="cart-header-img" />
+        <p class="cart-close-button pe-2">x</p>
+      </div>
+      <div class="cart-product-section"></div>
+      <div class="botton-cart-container">
+        <div class="d-flex justify-content-between p-2">
+          <p>Totalt:</p>
+          <p class="total-price fs-5">0kr</p>
         </div>
-        <div class="cart-product-section"></div>
-        <div class="botton-cart-container">
-          <div class="d-flex justify-content-between p-2">
-            <p>Totalt:</p>
-            <p class="total-price fs-5">0kr</p>
-          </div>
-          <div class="checkout-button-section d-flex justify-content-center">
-            <button
-              class="cart-checkout-button btn btn-light p-4 pt-2 pb-2 mb-2"
-            >
-              Till Kassan
-            </button>
-          </div>
+        <div class="checkout-button-section d-flex justify-content-center">
+          <button class="cart-checkout-button btn btn-light p-4 pt-2 pb-2 mb-2">
+            Till Kassan
+          </button>
         </div>
       </div>
     </div>
-    <div class="container">
-      <header>
-        <div
-          class="header-container d-flex p-3 align-items-center justify-content-between mb-2"
-        >
-          <i class="fa-solid fa-arrow-left-long invisible"></i>
+  </div>
 
-          <h1>
-            <a href="/" class="d-flex justify-content-center">
-              <img src="src/assets/images/bortakvall-logo.png" class="w-75" />
-            </a>
-          </h1>
-          <div class="cart-icon cartHover">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span class="cart-count">0</span>
-          </div>
+  <!-- Header -->
+
+  <div class="container">
+    <header>
+      <div class="header-container d-flex p-3 align-items-center justify-content-between mb-2">
+        <i class="fa-solid fa-arrow-left-long invisible"></i>
+
+        <h1>
+          <a href="/" class="d-flex justify-content-center">
+            <img src="src/assets/images/bortakvall-logo.png" class="w-75" />
+          </a>
+        </h1>
+        <div class="cart-icon cartHover">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-count">0</span>
         </div>
-      </header>
-      <section class="hero">
-        <h2>Helgens räddning</h2>
-        <p>Över 100 sorter att välja mellan – allt i lösvikt.</p>
-      </section>
-      <section class="categories circles">
-        <div class="circle">
-          <span>🍬</span>
-          <p>Karameller</p>
+      </div>
+    </header>
+
+    <!-- Categories circles -->
+
+    <section class="hero">
+      <h2>Helgens räddning</h2>
+      <p>Över 100 sorter att välja mellan – allt i lösvikt.</p>
+    </section>
+    <section class="categories circles">
+      <div class="circle">
+        <span>🍬</span>
+        <p>Karameller</p>
+      </div>
+
+      <div class="circle">
+        <span>🍫</span>
+        <p>Choklad</p>
+      </div>
+
+      <div class="circle">
+        <span>🍭</span>
+        <p>Klubbor</p>
+      </div>
+
+      <div class="circle">
+        <span>🐻</span>
+        <p>Gelégodis</p>
+      </div>
+
+      <div class="circle">
+        <span>🍿</span>
+        <p>Snacks</p>
+      </div>
+    </section>
+
+    <!-- Sort and restore buttons, show all the products -->
+
+    <main>
+      <div class="product-topbar d-flex justify-content-between align-items-center py-3">
+        <div class="sort-filter d-flex gap-2">
+          <button class="restore-button btn btn-light btn-sm">
+            Återställ
+          </button>
+          <button class="sort-button btn btn-light btn-sm">A-Z / Z-A</button>
         </div>
 
-        <div class="circle">
-          <span>🍫</span>
-          <p>Choklad</p>
-        </div>
+        <div class="count-candy d-flex gap-2"></div>
+      </div>
 
-        <div class="circle">
-          <span>🍭</span>
-          <p>Klubbor</p>
-        </div>
+      <div class="productPageMain"></div>
+    </main>
 
-        <div class="circle">
-          <span>🐻</span>
-          <p>Gelégodis</p>
-        </div>
+    <!-- Footer -->
 
-        <div class="circle">
-          <span>🍿</span>
-          <p>Snacks</p>
-        </div>
-      </section>
-      <main>
-        <div
-          class="product-topbar d-flex justify-content-between align-items-center py-3"
-        >
-          <div class="sort-filter d-flex gap-2">
-            <button class="restore-button btn btn-light btn-sm">
-              Återställ
-            </button>
-            <button class="sort-button btn btn-light btn-sm">A-Z / Z-A</button>
-          </div>
+    <footer class="d-flex justify-content-between align-items-center py-3 border-top mt-3">
+      <span class="text-muted ms-2">© 2025 Bortakväll</span>
 
-          <div class="count-candy d-flex gap-2"></div>
-        </div>
+      <ul class="nav d-flex me-2">
+        <li class="ms-3">
+          <a class="text-muted" href="#"><i class="fa-brands fa-instagram fs-5"></i></a>
+        </li>
+        <li class="ms-3">
+          <a class="text-muted" href="#"><i class="fa-brands fa-facebook fs-5"></i></a>
+        </li>
+      </ul>
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </div>
+</body>
 
-        <div class="productPageMain"></div>
-      </main>
-
-      <footer
-        class="d-flex justify-content-between align-items-center py-3 border-top mt-3"
-      >
-        <span class="text-muted ms-2">© 2025 Bortakväll</span>
-
-        <ul class="nav d-flex me-2">
-          <li class="ms-3">
-            <a class="text-muted" href="#"
-              ><i class="fa-brands fa-instagram fs-5"></i
-            ></a>
-          </li>
-          <li class="ms-3">
-            <a class="text-muted" href="#"
-              ><i class="fa-brands fa-facebook fs-5"></i
-            ></a>
-          </li>
-        </ul>
-      </footer>
-      <script type="module" src="/src/main.ts"></script>
-    </div>
-  </body>
 </html>

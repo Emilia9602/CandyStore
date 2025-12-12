@@ -16,7 +16,10 @@ import {
   cartSection,
   otherProductsCarousel,
 } from "./selector";
-import { getOneProduct, getProductsData } from "./bortakvall-API";
+import {
+  getOneProduct,
+  getProductsData
+} from "./bortakvall-API";
 import type {
   CartItem,
   productPageOneCandyData,
@@ -29,24 +32,28 @@ arrowLeft!.addEventListener("click", () => {
   window.location.href = `${import.meta.env.BASE_URL}`;
 });
 
+//Go to checkout-page from cart
 cartCheckoutButton.addEventListener("click", () => {
   window.location.href = `${import.meta.env.BASE_URL}checkout-page.html`;
 });
 
+//Show cart
 cartIcon?.addEventListener("click", () => {
   cartOverlay?.classList.remove("invisible");
   renderCartProducts();
 });
 
+//Hide cart
 closeCart?.addEventListener("click", () => {
   cartOverlay?.classList.add("invisible");
 });
 
-//Create variables
+//Get choosen product from local storage and parse
 let localStorageCart: CartItem[] = JSON.parse(
   localStorage.getItem("cart") || "[]"
 );
 
+//Get amount of products in cart and show on cart icon
 const getCartAmount = () => {
   let totalQty: number = 0;
   localStorageCart.forEach((product) => {
@@ -56,6 +63,7 @@ const getCartAmount = () => {
     String(totalQty);
 };
 
+//Delete product from cart
 const deleteProductFromCart = (id: number) => {
   const filteredStorageCart = localStorageCart.filter((product) => {
     return product.id != id;
@@ -65,7 +73,7 @@ const deleteProductFromCart = (id: number) => {
   renderCartProducts();
 };
 
-//Render Cart products
+//Render cart products
 const renderCartProducts = async () => {
   let cartSectionHTML = "";
   let totalPrice = 0;
@@ -114,9 +122,10 @@ const renderCandyProduct = async () => {
   renderCandyData(fetchedProducts.data);
 
   if (fetchedProducts.data.stock_status === "outofstock") {
-    document
+    const addBtn = document
       .querySelector<HTMLButtonElement>(".add-to-cart")!
-      .classList.add("disabled");
+    addBtn.classList.add("disabled");
+    addBtn.textContent = "Ej i lager"
     document.querySelector(".stock-wrapper")!.innerHTML = `
       <i class="fa-solid fa-circle-xmark text-danger fs-5"></i>
       <p class="m-0 ms-2">(0) I lager</p>
@@ -124,6 +133,7 @@ const renderCandyProduct = async () => {
   }
 };
 
+//Get six random products to show underneath main product
 const getRandomSix = (arr: CandyData[]) => {
   const copy = [...arr];
 
@@ -134,7 +144,7 @@ const getRandomSix = (arr: CandyData[]) => {
 
   return copy.slice(0, 6);
 };
-
+//Render six random products underneath main product
 const renderOtherProducts = async () => {
   const fetchedProducts = await getProductsData();
   const otherProducts = getRandomSix(fetchedProducts.data);
@@ -166,6 +176,7 @@ const renderOtherProducts = async () => {
   otherProductsCarousel.innerHTML = otherProductsList;
 };
 
+//Listener for the six random products to go to their product-page
 otherProductsCarousel.addEventListener("click", (e) => {
   const target = e.target as HTMLElement;
 
@@ -177,7 +188,7 @@ otherProductsCarousel.addEventListener("click", (e) => {
   }
 });
 
-//Function how to render choosen product on product-page
+//Render choosen product on product-page
 const renderCandyData = (product: productPageOneCandyData) => {
   let renderCandy: string = "";
 
@@ -230,14 +241,17 @@ const renderCandyData = (product: productPageOneCandyData) => {
   oneProductMain.innerHTML = renderCandy;
 };
 
+//Listener to add product to cart
 oneProductMain.addEventListener("click", async (e) => {
   const target = e.target as HTMLElement;
   if (target.classList.contains("add-to-cart")) {
-    //Hämtar Produktdata
+
+    //Get productdata
     const productData: OneCandyData = await getOneProduct(
       Number(target.dataset.id)
     );
-    //Lägger till produkt i local storage
+
+    //Add product to local storage
     const existing = localStorageCart.find(
       (item) => item.id === productData.data.id
     );
@@ -251,6 +265,7 @@ oneProductMain.addEventListener("click", async (e) => {
   }
 });
 
+//Listener on cart and activate clicked function
 cartOverlay?.addEventListener("click", (e) => {
   const target = e.target as HTMLElement;
   if (!cartSection?.contains(e.target as Node)) {

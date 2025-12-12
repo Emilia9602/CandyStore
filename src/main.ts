@@ -16,26 +16,38 @@ import {
   sortButton,
   restoreButton,
 } from "./assets/ts/selector";
-import { getProductsData, getOneProduct } from "./assets/ts/bortakvall-API";
+import {
+  getProductsData,
+  getOneProduct
+} from "./assets/ts/bortakvall-API";
 import {
   type CandyData,
   type CartItem,
   type OneCandyData,
 } from "./assets/ts/bortakvall-API.types";
 
+//Create variables
+let renderCandyCards: string = "";
+let countCandyInstock = 0;
+let countCandy = 0;
+
+//Show cart
 cartIcon?.addEventListener("click", () => {
   cartOverlay?.classList.remove("invisible");
   renderCartProducts();
 });
 
+//Hide cart
 closeCart?.addEventListener("click", () => {
   cartOverlay?.classList.add("invisible");
 });
 
+//Go to checkout-page from cart
 cartCheckoutButton.addEventListener("click", () => {
   window.location.href = `${import.meta.env.BASE_URL}checkout-page.html`;
 });
 
+//Delete product from cart
 const deleteProductFromCart = (id: number) => {
   const filteredStorageCart = localStorageCart.filter((product) => {
     return product.id != id;
@@ -45,6 +57,7 @@ const deleteProductFromCart = (id: number) => {
   renderCartProducts();
 };
 
+//Get amount of products in cart and show on cart iconS
 const getCartAmount = () => {
   let totalQty: number = 0;
   localStorageCart.forEach((product) => {
@@ -54,6 +67,7 @@ const getCartAmount = () => {
     String(totalQty);
 };
 
+//Listener on cart and activate clicked function
 cartOverlay?.addEventListener("click", (e) => {
   const target = e.target as HTMLElement;
   if (!cartSection?.contains(e.target as Node)) {
@@ -97,6 +111,7 @@ cartOverlay?.addEventListener("click", (e) => {
   }
 });
 
+//Render cart products
 const renderCartProducts = async () => {
   let cartSectionHTML = "";
   let totalPrice = 0;
@@ -134,20 +149,32 @@ const renderCartProducts = async () => {
   )!.textContent = `${totalPrice}kr`;
 };
 
+//Sort products based on letters
 const sortProductsByName = (arr: CandyData[]) => {
   arr.sort((a: CandyData, b: CandyData) => a.name.localeCompare(b.name));
 };
 
+//Sort products reversed based on letters
 const sortProductsByNameReverse = (arr: CandyData[]) => {
   arr.sort((a: CandyData, b: CandyData) => b.name.localeCompare(a.name));
 };
 
+//Render sorted candy cards on page
 const renderCandyProductsSorted = (products: CandyData[]) => {
   let renderCandyCards: string = "";
 
-  products.map((product) => {
-    renderCandyCards += `
-        <div class="card" data-id="${product.id}">
+  products.map((product: CandyData) => {
+    const onSale = product.on_sale;
+    const saleIcon = onSale
+      ? `<span class="badge bg-danger">EXTRAPRIS!</span>`
+      : "";
+
+    countCandy++;
+    if (product.stock_status === "instock") {
+      countCandyInstock++;
+      renderCandyCards += `
+        <div class="card candyCard" data-id="${product.id}">
+        ${saleIcon}
           <img
             src="${BASE_URL}${product.images.thumbnail}"
             class="card-img-top"
@@ -160,6 +187,30 @@ const renderCandyProductsSorted = (products: CandyData[]) => {
             <button class="btn btn-light btn-sm add-to-cart" data-id="${product.id}">
               Lägg i varukorg
             </button>
+            <a href="${import.meta.env.BASE_URL}product-page.html"
+              class="btn btn-light btn-sm goToProductPage"
+              data-id="${product.id}">
+              <i class="fa-solid fa-circle-info"></i>
+            </a>
+            </div>
+          </div>
+        </div>
+    `;
+    } else if (product.stock_status === "outofstock") {
+      renderCandyCards += `
+        <div class="card candyCard" data-id="${product.id}">
+          <img
+            src="${BASE_URL}${product.images.thumbnail}"
+            class="card-img-top"
+            alt="Bild på godis"
+          />
+          <div class="card-body d-flex flex-column p-3">
+            <h5 class="card-title candyCardTitle">${product.name}</h5>
+            <p class="card-text">Pris: ${product.price}kr</p>
+            <div class="card-button-container d-flex gap-1 justify-content-between mt-auto">
+            <button class="btn btn-light btn-sm add-to-cart" disabled>
+              Ej i lager
+            </button>
             <a href="src/assets/html/product-page.html"
               class="btn btn-light btn-sm goToProductPage"
               data-id="${product.id}">
@@ -169,19 +220,25 @@ const renderCandyProductsSorted = (products: CandyData[]) => {
           </div>
         </div>
     `;
+    }
   });
   candyCardMain.innerHTML = renderCandyCards;
 };
 
+//Restore the sort filter to default mode on page
 restoreButton.addEventListener("click", () => {
   renderCandyProducts();
+  countCandy = 0;
+  countCandyInstock = 0;
 });
 
-//Render all the candy cards on first page
+//Render all the candy cards on first page + render them again if sorted
 const renderCandyProducts = async () => {
   const fetchedProducts = await getProductsData();
   const fetchedProductsWithoutData = fetchedProducts.data;
+
   let sorted = false;
+
   sortButton.addEventListener("click", () => {
     if (!sorted) {
       sortProductsByName(fetchedProductsWithoutData);
@@ -194,12 +251,6 @@ const renderCandyProducts = async () => {
     sorted = !sorted;
   });
 
-  console.log("JS körs");
-  console.log(import.meta.env.BASE_URL);
-
-  let renderCandyCards: string = "";
-  let countCandyInstock = 0;
-  let countCandy = 0;
   fetchedProductsWithoutData.map((product: CandyData) => {
     const onSale = product.on_sale;
     const saleIcon = onSale
@@ -221,9 +272,7 @@ const renderCandyProducts = async () => {
             <h5 class="card-title candyCardTitle">${product.name}</h5>
             <p class="card-text">Pris: ${product.price}kr</p>
             <div class="card-button-container d-flex gap-1 justify-content-between mt-auto">
-            <button class="btn btn-light btn-sm add-to-cart" data-id="${
-              product.id
-            }">
+            <button class="btn btn-light btn-sm add-to-cart" data-id="${product.id}">
               Lägg i varukorg
             </button>
             <a href="${import.meta.env.BASE_URL}product-page.html"
@@ -269,15 +318,18 @@ const renderCandyProducts = async () => {
   `;
   candyCardMain.innerHTML = renderCandyCards;
 
+  //Listener to add product to cart
   candyCardMain.addEventListener("click", async (e) => {
     const target = e.target as HTMLElement;
 
     if (target.classList.contains("add-to-cart")) {
-      //Hämtar Produktdata
+      
+      //Get productdata
       const productData: OneCandyData = await getOneProduct(
         Number(target.dataset.id)
       );
-      //Lägger till produkt i local storage
+      
+      //Add product to local storage
       const existing = localStorageCart.find(
         (item) => item.id === productData.data.id
       );
@@ -295,17 +347,15 @@ const renderCandyProducts = async () => {
     ) {
       const card = target.closest(".card") as HTMLElement;
       if (!card) return;
-      console.log(target.parentElement);
 
       const id = card.dataset.id;
-      console.log(id);
       localStorage.setItem("currentId", JSON.stringify(id));
       window.location.href = `${import.meta.env.BASE_URL}product-page.html`;
     }
   });
 };
 
-//Hämtar kundvagn från LocalStorage
+//Get cart from local storage and parse
 let localStorageCart: CartItem[] = JSON.parse(
   localStorage.getItem("cart") || "[]"
 );
