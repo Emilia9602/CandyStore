@@ -41,7 +41,7 @@ let listHtml = "";
 
 let checkoutCart: CheckoutCartItem[] = [];
 let wantThisCandy: CreateOrderItemRequest[] = [];
-let finishedOrder: ApiCompletedOrder | null = null; // ÄNDRA
+let finishedOrder: ApiCompletedOrder;
 
 const order: CreateOrderRequest = {
   customer_first_name: "",
