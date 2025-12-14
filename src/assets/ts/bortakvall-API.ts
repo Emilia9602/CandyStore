@@ -26,7 +26,6 @@ export const getOneProduct = async (id: number) => {
     throw new Error("Response was not ok");
   }
   const data: ApiOneCandyData = await response.json();
-  console.log(data);
   return data;
 };
 
@@ -48,6 +47,5 @@ export const OrderComplete = async (order: CreateOrderRequest) => {
   }
 
   const data: ApiCompletedOrder = await response.json();
-  console.log(data);
   return data;
 };

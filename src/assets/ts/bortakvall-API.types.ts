@@ -1,5 +1,3 @@
-//All different types
-
 // API Get all products type
 export interface ApiGetAllProducts {
   status: string;
