@@ -1,3 +1,5 @@
+/* -------------------------------------------------------*/
+
 // API Get all products type
 export interface ApiGetAllProducts {
   status: string;
@@ -18,6 +20,8 @@ export interface CandyData {
   };
 }
 
+/* -------------------------------------------------------*/
+
 // API Get ONE products type
 export interface ApiOneCandyData {
   status: string;
@@ -36,10 +40,14 @@ export interface OneCandyData {
   stock_status: string;
 }
 
+/* -------------------------------------------------------*/
+
 //CartItem with OneCandyData + cartQty
 export interface CartItem extends OneCandyData {
   cartQty: number;
 }
+
+/* -------------------------------------------------------*/
 
 // Full ORDER Request
 export interface CreateOrderRequest {
@@ -61,6 +69,8 @@ export interface CreateOrderItemRequest {
   item_price: number;
   item_total: number;
 }
+
+/* -------------------------------------------------------*/
 
 //Api Full ORDER Response
 export interface ApiCompletedOrder {
@@ -96,6 +106,8 @@ export interface CompletedOrderItem {
   item_price: number;
   item_total: number;
 }
+
+/* -------------------------------------------------------*/
 
 // Cart item used on checkout page
 export interface CheckoutCartItem {
