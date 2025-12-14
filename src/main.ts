@@ -20,7 +20,6 @@ import { getProductsData, getOneProduct } from "./assets/ts/bortakvall-API";
 import {
   type CandyData,
   type CartItem,
-  type OneCandyData,
 } from "./assets/ts/bortakvall-API.types";
 
 //Create variables

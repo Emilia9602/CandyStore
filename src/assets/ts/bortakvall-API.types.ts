@@ -64,7 +64,7 @@ export interface CreateOrderItemRequest {
   item_total: number;
 }
 
-// Full ORDER Response
+//Api Full ORDER Response
 export interface ApiCompletedOrder {
   status: string;
   data: CompletedOrder;
