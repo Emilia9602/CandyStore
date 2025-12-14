@@ -16,10 +16,7 @@ import {
   sortButton,
   restoreButton,
 } from "./assets/ts/selector";
-import {
-  getProductsData,
-  getOneProduct
-} from "./assets/ts/bortakvall-API";
+import { getProductsData, getOneProduct } from "./assets/ts/bortakvall-API";
 import {
   type CandyData,
   type CartItem,
@@ -166,7 +163,7 @@ const renderCandyProductsSorted = (products: CandyData[]) => {
   products.map((product: CandyData) => {
     const onSale = product.on_sale;
     const saleIcon = onSale
-      ? `<span class="badge bg-danger">EXTRAPRIS!</span>`
+      ? `<span class="badge bg-danger rounded-bottom-0 fs-6">EXTRA PRIS!</span>`
       : "";
 
     countCandy++;
@@ -184,7 +181,9 @@ const renderCandyProductsSorted = (products: CandyData[]) => {
             <h5 class="card-title candyCardTitle">${product.name}</h5>
             <p class="card-text">Pris: ${product.price}kr</p>
             <div class="card-button-container d-flex gap-1 justify-content-between mt-auto">
-            <button class="btn btn-light btn-sm add-to-cart" data-id="${product.id}">
+            <button class="btn btn-light btn-sm add-to-cart" data-id="${
+              product.id
+            }">
               Lägg i varukorg
             </button>
             <a href="${import.meta.env.BASE_URL}product-page.html"
@@ -272,7 +271,9 @@ const renderCandyProducts = async () => {
             <h5 class="card-title candyCardTitle">${product.name}</h5>
             <p class="card-text">Pris: ${product.price}kr</p>
             <div class="card-button-container d-flex gap-1 justify-content-between mt-auto">
-            <button class="btn btn-light btn-sm add-to-cart" data-id="${product.id}">
+            <button class="btn btn-light btn-sm add-to-cart" data-id="${
+              product.id
+            }">
               Lägg i varukorg
             </button>
             <a href="${import.meta.env.BASE_URL}product-page.html"
@@ -323,12 +324,9 @@ const renderCandyProducts = async () => {
     const target = e.target as HTMLElement;
 
     if (target.classList.contains("add-to-cart")) {
-      
       //Get productdata
-      const productData: OneCandyData = await getOneProduct(
-        Number(target.dataset.id)
-      );
-      
+      const productData = await getOneProduct(Number(target.dataset.id));
+
       //Add product to local storage
       const existing = localStorageCart.find(
         (item) => item.id === productData.data.id

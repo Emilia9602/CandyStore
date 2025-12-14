@@ -16,16 +16,8 @@ import {
   cartSection,
   otherProductsCarousel,
 } from "./selector";
-import {
-  getOneProduct,
-  getProductsData
-} from "./bortakvall-API";
-import type {
-  CartItem,
-  productPageOneCandyData,
-  OneCandyData,
-  CandyData,
-} from "./bortakvall-API.types";
+import { getOneProduct, getProductsData } from "./bortakvall-API";
+import type { CartItem, OneCandyData, CandyData } from "./bortakvall-API.types";
 
 //Go back one page
 arrowLeft!.addEventListener("click", () => {
@@ -118,14 +110,12 @@ const renderCandyProduct = async () => {
   const newId: number = JSON.parse(currentId);
 
   const fetchedProducts = await getOneProduct(newId);
-  console.log(fetchedProducts.data);
   renderCandyData(fetchedProducts.data);
 
   if (fetchedProducts.data.stock_status === "outofstock") {
-    const addBtn = document
-      .querySelector<HTMLButtonElement>(".add-to-cart")!
+    const addBtn = document.querySelector<HTMLButtonElement>(".add-to-cart")!;
     addBtn.classList.add("disabled");
-    addBtn.textContent = "Ej i lager"
+    addBtn.textContent = "Ej i lager";
     document.querySelector(".stock-wrapper")!.innerHTML = `
       <i class="fa-solid fa-circle-xmark text-danger fs-5"></i>
       <p class="m-0 ms-2">(0) I lager</p>
@@ -189,7 +179,7 @@ otherProductsCarousel.addEventListener("click", (e) => {
 });
 
 //Render choosen product on product-page
-const renderCandyData = (product: productPageOneCandyData) => {
+const renderCandyData = (product: OneCandyData) => {
   let renderCandy: string = "";
 
   const onSale = product.on_sale;
@@ -245,11 +235,8 @@ const renderCandyData = (product: productPageOneCandyData) => {
 oneProductMain.addEventListener("click", async (e) => {
   const target = e.target as HTMLElement;
   if (target.classList.contains("add-to-cart")) {
-
     //Get productdata
-    const productData: OneCandyData = await getOneProduct(
-      Number(target.dataset.id)
-    );
+    const productData = await getOneProduct(Number(target.dataset.id));
 
     //Add product to local storage
     const existing = localStorageCart.find(

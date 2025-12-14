@@ -3,13 +3,9 @@ import "bootstrap/dist/css/bootstrap.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../css/order-complete-page.css";
 import "../css/global.css";
-import {
-  arrowLeft,
-  completeDiv,
-  BASE_URL
-} from "./selector";
+import { arrowLeft, completeDiv, BASE_URL } from "./selector";
 import type {
-  completedOrder,
+  ApiCompletedOrder,
   CartItem,
   orderNamesArrayType,
 } from "./bortakvall-API.types";
@@ -20,8 +16,8 @@ arrowLeft!.addEventListener("click", () => {
 });
 
 //Get finished order from local storage and parse
-let orderFromLocalStorage: completedOrder = JSON.parse(
-  localStorage.getItem("finishedOrder") || "[]"
+let orderFromLocalStorage: ApiCompletedOrder = JSON.parse(
+  localStorage.getItem("finishedOrder") || "{}"
 );
 
 //Get cart from local storage and parse
@@ -37,7 +33,7 @@ let orderNames: orderNamesArrayType = {
 //Put cart from local storage in to orderNames array
 const getOrderNames = () => {
   cartFromLocalStorage.forEach((item) => {
-    let cartItem: CartItem = {
+    const cartItem: CartItem = {
       id: item.id,
       name: item.name,
       description: item.description,
@@ -45,13 +41,16 @@ const getOrderNames = () => {
       cartQty: item.cartQty,
       on_sale: item.on_sale,
       images: item.images,
+      stock_quantity: item.stock_quantity,
+      stock_status: item.stock_status,
     };
+
     orderNames.items.push(cartItem);
   });
 };
 
 //Function to show success or fail order on complete-page
-const orderSuccessOrFail = (data: completedOrder) => {
+const orderSuccessOrFail = (data: ApiCompletedOrder) => {
   if (data.status === "success") {
     completeDiv.innerHTML = `
           <h2 class=" pt-3 fs-1">Ordernummer: ${data.data.id}</h2>

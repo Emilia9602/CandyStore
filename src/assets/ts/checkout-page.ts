@@ -4,15 +4,13 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "../css/checkout-page.css";
 import "../css/global.css";
 import type {
-  CandyDataOrderItem,
-  orderData,
-  oneCandyOrderData,
-  completedOrder,
+  CheckoutCartItem,
+  CreateOrderRequest,
+  CreateOrderItemRequest,
   CartItem,
+  ApiCompletedOrder,
 } from "./bortakvall-API.types";
-import {
-  OrderComplete
-} from "./bortakvall-API";
+import { OrderComplete } from "./bortakvall-API";
 import {
   checkoutCartListEl,
   checkoutForm,
@@ -37,15 +35,15 @@ let localStorageCart: CartItem[] = JSON.parse(
   localStorage.getItem("cart") || "[]"
 );
 
-let checkoutCart: CandyDataOrderItem[] = [];
 let renderedItems: Number[] = [];
 let totalPrice = 0;
 let listHtml = "";
 
-let wantThisCandy: oneCandyOrderData[] = [];
-let finishedOrder: completedOrder[] = [];
+let checkoutCart: CheckoutCartItem[] = [];
+let wantThisCandy: CreateOrderItemRequest[] = [];
+let finishedOrder: ApiCompletedOrder | null = null; // ÄNDRA
 
-const order: orderData = {
+const order: CreateOrderRequest = {
   customer_first_name: "",
   customer_last_name: "",
   customer_address: "",
@@ -66,7 +64,7 @@ const renderCart = () => {
       );
       existingCartItem!.qty++;
     } else {
-      let candyDataOrderItem: CandyDataOrderItem = {
+      let candyDataOrderItem: CheckoutCartItem = {
         product_id: item.id,
         product_name: item.name,
         images: { thumbnail: item.images.thumbnail, large: item.images.large },
@@ -90,7 +88,6 @@ const calculateItemTotal = () => {
 //Show ordered products on checkout-page
 const showCart = () => {
   checkoutCart.forEach((item) => {
-    console.log(item);
     listHtml += `
     <div class="row p-2 product-checkout-section">
       <img src="${BASE_URL}${item.images.thumbnail}" class="col-3 checkout-product-image rounded-3 p-0">
@@ -114,18 +111,15 @@ const showCart = () => {
 
 //Get orderded products to correct type in new array
 const getOrderItems = () => {
+  wantThisCandy = [];
   checkoutCart.forEach((product) => {
-    let oneCandyOrderData: oneCandyOrderData = {
+    const item: CreateOrderItemRequest = {
       product_id: product.product_id,
       qty: product.qty,
-      images: {
-        thumbnail: product.images.thumbnail,
-        large: product.images.large,
-      },
       item_price: product.item_price,
       item_total: product.item_total,
     };
-    wantThisCandy.push(oneCandyOrderData);
+    wantThisCandy.push(item);
   });
 };
 
@@ -145,8 +139,9 @@ checkoutForm.addEventListener("submit", async (e) => {
   try {
     finishedOrder = await OrderComplete(order);
     localStorage.setItem("finishedOrder", JSON.stringify(finishedOrder));
-    window.location.href = `${import.meta.env.BASE_URL
-      }order-complete-page.html`;
+    window.location.href = `${
+      import.meta.env.BASE_URL
+    }order-complete-page.html`;
   } catch (Error) {
     console.log(Error);
   }

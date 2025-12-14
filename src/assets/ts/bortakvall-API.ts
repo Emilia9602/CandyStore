@@ -1,10 +1,11 @@
-//Import everything needed
 import {
-  BASE_URL
-} from "./selector";
-import type {
-  orderData
+  type ApiGetAllProducts,
+  type ApiOneCandyData,
+  type ApiCompletedOrder,
+  type CreateOrderRequest,
 } from "./bortakvall-API.types";
+//Import everything needed
+import { BASE_URL } from "./selector";
 
 //Get all products from API
 export const getProductsData = async () => {
@@ -13,7 +14,7 @@ export const getProductsData = async () => {
   if (!response.ok) {
     throw new Error("Response was not ok");
   }
-  const data = await response.json();
+  const data: ApiGetAllProducts = await response.json();
   return data;
 };
 
@@ -24,12 +25,13 @@ export const getOneProduct = async (id: number) => {
   if (!response.ok) {
     throw new Error("Response was not ok");
   }
-  const data = await response.json();
+  const data: ApiOneCandyData = await response.json();
+  console.log(data);
   return data;
 };
 
 //Function to POST completed order and get success or fail answer
-export const OrderComplete = async (order: orderData) => {
+export const OrderComplete = async (order: CreateOrderRequest) => {
   const response = await fetch(
     "https://www.bortakvall.se/api/v2/users/83/orders",
     {
@@ -45,7 +47,7 @@ export const OrderComplete = async (order: orderData) => {
     throw new Error(`HTTP Error ${response.status}: ${response.statusText}`);
   }
 
-  const data = await response.json();
-
+  const data: ApiCompletedOrder = await response.json();
+  console.log(data);
   return data;
 };
