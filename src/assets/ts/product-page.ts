@@ -136,16 +136,17 @@ const getRandomSix = (arr: CandyData[]) => {
 };
 //Render six random products underneath main product
 const renderOtherProducts = async () => {
-  const fetchedProducts = await getProductsData();
-  const otherProducts = getRandomSix(fetchedProducts.data);
-  let otherProductsList = "";
+  try {
+    const fetchedProducts = await getProductsData();
+    const otherProducts = getRandomSix(fetchedProducts.data);
+    let otherProductsList = "";
 
-  otherProducts.map((product) => {
-    const onSale = product.on_sale;
-    const saleIcon = onSale
-      ? `<span class="badge bg-danger w-100 rounded-bottom-0 fs-6">EXTRA PRIS!</span>`
-      : "";
-    otherProductsList += `
+    otherProducts.map((product) => {
+      const onSale = product.on_sale;
+      const saleIcon = onSale
+        ? `<span class="badge bg-danger w-100 rounded-bottom-0 fs-6">EXTRA PRIS!</span>`
+        : "";
+      otherProductsList += `
     <div class="other-product-container" data-id=${product.id}>
     ${saleIcon}
       <img src="${BASE_URL}${product.images.large}" />
@@ -162,8 +163,11 @@ const renderOtherProducts = async () => {
       </div>
     </div>
     `;
-  });
-  otherProductsCarousel.innerHTML = otherProductsList;
+    });
+    otherProductsCarousel.innerHTML = otherProductsList;
+  } catch (Error) {
+    console.log(Error);
+  }
 };
 
 //Listener for the six random products to go to their product-page
