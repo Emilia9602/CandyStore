@@ -1,10 +1,10 @@
+//Import everything needed
 import {
   type ApiGetAllProducts,
   type ApiOneCandyData,
   type ApiCompletedOrder,
   type CreateOrderRequest,
 } from "./bortakvall-API.types";
-//Import everything needed
 import { BASE_URL } from "./selector";
 
 //Get all products from API
@@ -12,7 +12,7 @@ export const getProductsData = async () => {
   const response = await fetch(`${BASE_URL}/api/v2/products`);
 
   if (!response.ok) {
-    throw new Error("Response was not ok");
+    throw new Error(`HTTP Error ${response.status}: ${response.statusText}`);
   }
   const data: ApiGetAllProducts = await response.json();
   return data;
@@ -23,7 +23,7 @@ export const getOneProduct = async (id: number) => {
   const response = await fetch(`${BASE_URL}/api/v2/products/${id}`);
 
   if (!response.ok) {
-    throw new Error("Response was not ok");
+    throw new Error(`HTTP Error ${response.status}: ${response.statusText}`);
   }
   const data: ApiOneCandyData = await response.json();
   return data;
@@ -43,7 +43,7 @@ export const OrderComplete = async (order: CreateOrderRequest) => {
   );
 
   if (!response.ok) {
-    throw new Error(`HTTP Error ${response.status}: ${response.statusText}`);
+    throw new Error(`HTTP Error ${response.status}: Not found`);
   }
 
   const data: ApiCompletedOrder = await response.json();

@@ -109,17 +109,24 @@ const renderCandyProduct = async () => {
 
   const newId: number = JSON.parse(currentId);
 
-  const fetchedProducts = await getOneProduct(newId);
-  renderCandyData(fetchedProducts.data);
+  try {
+    const fetchedProducts = await getOneProduct(newId);
+    renderCandyData(fetchedProducts.data);
 
-  if (fetchedProducts.data.stock_status === "outofstock") {
-    const addBtn = document.querySelector<HTMLButtonElement>(".add-to-cart")!;
-    addBtn.classList.add("disabled");
-    addBtn.textContent = "Ej i lager";
-    document.querySelector(".stock-wrapper")!.innerHTML = `
+    if (fetchedProducts.data.stock_status === "outofstock") {
+      const addBtn = document.querySelector<HTMLButtonElement>(".add-to-cart")!;
+      addBtn.classList.add("disabled");
+      addBtn.textContent = "Ej i lager";
+      document.querySelector(".stock-wrapper")!.innerHTML = `
       <i class="fa-solid fa-circle-xmark text-danger fs-5"></i>
       <p class="m-0 ms-2">(0) I lager</p>
     `;
+    }
+  } catch (Error) {
+    console.log(Error);
+    document.querySelector<HTMLDivElement>(".oneCandyErrorDiv")!.innerHTML = `
+  ${Error}
+  <p>Vi ber om ursäkt, något gick fel</p>`
   }
 };
 
@@ -167,6 +174,9 @@ const renderOtherProducts = async () => {
     otherProductsCarousel.innerHTML = otherProductsList;
   } catch (Error) {
     console.log(Error);
+    document.querySelector<HTMLDivElement>(".otherCandyErrorDiv")!.innerHTML = `
+    ${Error}
+    <p>Vi ber om ursäkt, något gick fel</p>`;
   }
 };
 
@@ -240,19 +250,24 @@ oneProductMain.addEventListener("click", async (e) => {
   const target = e.target as HTMLElement;
   if (target.classList.contains("add-to-cart")) {
     //Get productdata
-    const productData = await getOneProduct(Number(target.dataset.id));
+    try {
+      const productData = await getOneProduct(Number(target.dataset.id));
 
-    //Add product to local storage
-    const existing = localStorageCart.find(
-      (item) => item.id === productData.data.id
-    );
-    if (existing) {
-      existing.cartQty += 1;
-    } else {
-      localStorageCart.push({ ...productData.data, cartQty: 1 });
+      //Add product to local storage
+      const existing = localStorageCart.find(
+        (item) => item.id === productData.data.id
+      );
+      if (existing) {
+        existing.cartQty += 1;
+      } else {
+        localStorageCart.push({ ...productData.data, cartQty: 1 });
+      }
+      localStorage.setItem("cart", JSON.stringify(localStorageCart));
+      getCartAmount();
+    } catch (Error) {
+      console.log(Error);
+      alert(`${Error} Något gick fel`);
     }
-    localStorage.setItem("cart", JSON.stringify(localStorageCart));
-    getCartAmount();
   }
 });
 

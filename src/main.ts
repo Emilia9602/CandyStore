@@ -180,9 +180,8 @@ const renderCandyProductsSorted = (products: CandyData[]) => {
             <h5 class="card-title candyCardTitle">${product.name}</h5>
             <p class="card-text">Pris: ${product.price}kr</p>
             <div class="card-button-container d-flex gap-1 justify-content-between mt-auto">
-            <button class="btn btn-light btn-sm add-to-cart" data-id="${
-              product.id
-            }">
+            <button class="btn btn-light btn-sm add-to-cart" data-id="${product.id
+        }">
               Lägg i varukorg
             </button>
             <a href="${import.meta.env.BASE_URL}product-page.html"
@@ -232,33 +231,34 @@ restoreButton.addEventListener("click", () => {
 
 //Render all the candy cards on first page + render them again if sorted
 const renderCandyProducts = async () => {
-  const fetchedProducts = await getProductsData();
-  const fetchedProductsWithoutData = fetchedProducts.data;
+  try {
+    const fetchedProducts = await getProductsData();
+    const fetchedProductsWithoutData = fetchedProducts.data;
 
-  let sorted = false;
+    let sorted = false;
 
-  sortButton.addEventListener("click", () => {
-    if (!sorted) {
-      sortProductsByName(fetchedProductsWithoutData);
-      renderCandyProductsSorted(fetchedProductsWithoutData);
-    } else {
-      sortProductsByNameReverse(fetchedProductsWithoutData);
-      renderCandyProductsSorted(fetchedProductsWithoutData);
-    }
+    sortButton.addEventListener("click", () => {
+      if (!sorted) {
+        sortProductsByName(fetchedProductsWithoutData);
+        renderCandyProductsSorted(fetchedProductsWithoutData);
+      } else {
+        sortProductsByNameReverse(fetchedProductsWithoutData);
+        renderCandyProductsSorted(fetchedProductsWithoutData);
+      }
 
-    sorted = !sorted;
-  });
+      sorted = !sorted;
+    });
 
-  fetchedProductsWithoutData.map((product: CandyData) => {
-    const onSale = product.on_sale;
-    const saleIcon = onSale
-      ? `<span class="badge bg-danger rounded-bottom-0 fs-6">EXTRA PRIS!</span>`
-      : "";
+    fetchedProductsWithoutData.map((product: CandyData) => {
+      const onSale = product.on_sale;
+      const saleIcon = onSale
+        ? `<span class="badge bg-danger rounded-bottom-0 fs-6">EXTRA PRIS!</span>`
+        : "";
 
-    countCandy++;
-    if (product.stock_status === "instock") {
-      countCandyInstock++;
-      renderCandyCards += `
+      countCandy++;
+      if (product.stock_status === "instock") {
+        countCandyInstock++;
+        renderCandyCards += `
         <div class="card candyCard" data-id="${product.id}">
         ${saleIcon}
           <img
@@ -270,9 +270,8 @@ const renderCandyProducts = async () => {
             <h5 class="card-title candyCardTitle">${product.name}</h5>
             <p class="card-text">Pris: ${product.price}kr</p>
             <div class="card-button-container d-flex gap-1 justify-content-between mt-auto">
-            <button class="btn btn-light btn-sm add-to-cart" data-id="${
-              product.id
-            }">
+            <button class="btn btn-light btn-sm add-to-cart" data-id="${product.id
+          }">
               Lägg i varukorg
             </button>
             <a href="${import.meta.env.BASE_URL}product-page.html"
@@ -284,8 +283,8 @@ const renderCandyProducts = async () => {
           </div>
         </div>
     `;
-    } else if (product.stock_status === "outofstock") {
-      renderCandyCards += `
+      } else if (product.stock_status === "outofstock") {
+        renderCandyCards += `
         <div class="card candyCard" data-id="${product.id}">
           <img
             src="${BASE_URL}${product.images.thumbnail}"
@@ -308,8 +307,14 @@ const renderCandyProducts = async () => {
           </div>
         </div>
     `;
-    }
-  });
+      }
+    })
+  } catch (Error) {
+    console.log(Error);
+    document.querySelector<HTMLDivElement>(".candyErrorDiv")!.innerHTML = `
+  ${Error}
+  <p>Vi ber om ursäkt, något gick fel</p>`;
+  };
 
   //Shows productcount on first page
   document.querySelector(".count-candy")!.innerHTML = `
@@ -324,19 +329,24 @@ const renderCandyProducts = async () => {
 
     if (target.classList.contains("add-to-cart")) {
       //Get productdata
-      const productData = await getOneProduct(Number(target.dataset.id));
+      try {
+        const productData = await getOneProduct(Number(target.dataset.id));
 
-      //Add product to local storage
-      const existing = localStorageCart.find(
-        (item) => item.id === productData.data.id
-      );
-      if (existing) {
-        existing.cartQty += 1;
-      } else {
-        localStorageCart.push({ ...productData.data, cartQty: 1 });
+        //Add product to local storage
+        const existing = localStorageCart.find(
+          (item) => item.id === productData.data.id
+        );
+        if (existing) {
+          existing.cartQty += 1;
+        } else {
+          localStorageCart.push({ ...productData.data, cartQty: 1 });
+        }
+        localStorage.setItem("cart", JSON.stringify(localStorageCart));
+        getCartAmount();
+      } catch (Error) {
+        console.log(Error);
+        alert(`${Error} Något gick fel`);
       }
-      localStorage.setItem("cart", JSON.stringify(localStorageCart));
-      getCartAmount();
     }
     if (
       target.classList.contains("goToProductPage") ||
