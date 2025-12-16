@@ -139,13 +139,26 @@ checkoutForm.addEventListener("submit", async (e) => {
   try {
     finishedOrder = await OrderComplete(order);
     localStorage.setItem("finishedOrder", JSON.stringify(finishedOrder));
-    window.location.href = `${import.meta.env.BASE_URL
-      }order-complete-page.html`;
-  } catch (Error) {
-    console.log(Error);
-    document.querySelector<HTMLDivElement>(".checkoutErrorDiv")!.innerHTML = `
-    ${Error}
-    <p>Vi ber om ursäkt, något gick fel</p>`;
+    window.location.href = `${
+      import.meta.env.BASE_URL
+    }order-complete-page.html`;
+  } catch (error) {
+    console.error(error);
+
+    const candyErrorDiv = document.createElement("div");
+    candyErrorDiv.className =
+      "candyErrorDiv alert alert-warning text-center w-50 my-2 m-auto";
+
+    candyErrorDiv.innerHTML = `
+    <h5>${error}</h5>
+    <p class="mb-0">Kunde inte genomföra ordern!</p>
+  `;
+
+    document.querySelector(".before-error-div")!.before(candyErrorDiv);
+
+    setTimeout(() => {
+      candyErrorDiv.remove();
+    }, 5000);
   }
 });
 

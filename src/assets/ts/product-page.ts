@@ -122,11 +122,23 @@ const renderCandyProduct = async () => {
       <p class="m-0 ms-2">(0) I lager</p>
     `;
     }
-  } catch (Error) {
-    console.log(Error);
-    document.querySelector<HTMLDivElement>(".oneCandyErrorDiv")!.innerHTML = `
-  ${Error}
-  <p>Vi ber om ursäkt, något gick fel</p>`
+  } catch (error) {
+    console.error(error);
+
+    const candyErrorDiv = document.createElement("div");
+    candyErrorDiv.className =
+      "candyErrorDiv alert alert-warning text-center w-50 my-2 m-auto";
+
+    candyErrorDiv.innerHTML = `
+    <h5>${error}</h5>
+    <p class="mb-0">Kunde inte visa den valda produkten</p>
+  `;
+
+    document.querySelector("main")!.before(candyErrorDiv);
+
+    setTimeout(() => {
+      candyErrorDiv.remove();
+    }, 5000);
   }
 };
 
@@ -172,11 +184,23 @@ const renderOtherProducts = async () => {
     `;
     });
     otherProductsCarousel.innerHTML = otherProductsList;
-  } catch (Error) {
-    console.log(Error);
-    document.querySelector<HTMLDivElement>(".otherCandyErrorDiv")!.innerHTML = `
-    ${Error}
-    <p>Vi ber om ursäkt, något gick fel</p>`;
+  } catch (error) {
+    console.error(error);
+
+    const candyErrorDiv = document.createElement("div");
+    candyErrorDiv.className =
+      "candyErrorDiv alert alert-warning text-center w-50 my-2 m-auto";
+
+    candyErrorDiv.innerHTML = `
+    <h5>${error}</h5>
+    <p class="mb-0">Kunde inte visa ''Andra köpte också''</p>
+  `;
+
+    document.querySelector(".other-products-section")!.after(candyErrorDiv);
+
+    setTimeout(() => {
+      candyErrorDiv.remove();
+    }, 5000);
   }
 };
 
@@ -264,9 +288,23 @@ oneProductMain.addEventListener("click", async (e) => {
       }
       localStorage.setItem("cart", JSON.stringify(localStorageCart));
       getCartAmount();
-    } catch (Error) {
-      console.log(Error);
-      alert(`${Error} Något gick fel`);
+    } catch (error) {
+      console.error(error);
+
+      const candyErrorDiv = document.createElement("div");
+      candyErrorDiv.className =
+        "candyErrorDiv alert alert-warning text-center w-50 my-2 m-auto";
+
+      candyErrorDiv.innerHTML = `
+              <h5>${error}</h5>
+              <p class="mb-0">Kunde ej lägga till produkten i varukorgen</p>
+            `;
+
+      document.querySelector("main")!.before(candyErrorDiv);
+
+      setTimeout(() => {
+        candyErrorDiv.remove();
+      }, 5000);
     }
   }
 });

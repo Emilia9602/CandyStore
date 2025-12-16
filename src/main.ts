@@ -180,8 +180,9 @@ const renderCandyProductsSorted = (products: CandyData[]) => {
             <h5 class="card-title candyCardTitle">${product.name}</h5>
             <p class="card-text">Pris: ${product.price}kr</p>
             <div class="card-button-container d-flex gap-1 justify-content-between mt-auto">
-            <button class="btn btn-light btn-sm add-to-cart" data-id="${product.id
-        }">
+            <button class="btn btn-light btn-sm add-to-cart" data-id="${
+              product.id
+            }">
               Lägg i varukorg
             </button>
             <a href="${import.meta.env.BASE_URL}product-page.html"
@@ -270,8 +271,9 @@ const renderCandyProducts = async () => {
             <h5 class="card-title candyCardTitle">${product.name}</h5>
             <p class="card-text">Pris: ${product.price}kr</p>
             <div class="card-button-container d-flex gap-1 justify-content-between mt-auto">
-            <button class="btn btn-light btn-sm add-to-cart" data-id="${product.id
-          }">
+            <button class="btn btn-light btn-sm add-to-cart" data-id="${
+              product.id
+            }">
               Lägg i varukorg
             </button>
             <a href="${import.meta.env.BASE_URL}product-page.html"
@@ -308,13 +310,25 @@ const renderCandyProducts = async () => {
         </div>
     `;
       }
-    })
-  } catch (Error) {
-    console.log(Error);
-    document.querySelector<HTMLDivElement>(".candyErrorDiv")!.innerHTML = `
-  ${Error}
-  <p>Vi ber om ursäkt, något gick fel</p>`;
-  };
+    });
+  } catch (error) {
+    console.error(error);
+
+    const candyErrorDiv = document.createElement("div");
+    candyErrorDiv.className =
+      "candyErrorDiv alert alert-warning text-center w-50 my-2 m-auto";
+
+    candyErrorDiv.innerHTML = `
+    <h5>${error}</h5>
+    <p class="mb-0">Kunde inte visa våra produkter</p>
+    `;
+
+    candyCardMain.before(candyErrorDiv);
+
+    setTimeout(() => {
+      candyErrorDiv.remove();
+    }, 5000);
+  }
 
   //Shows productcount on first page
   document.querySelector(".count-candy")!.innerHTML = `
@@ -343,9 +357,23 @@ const renderCandyProducts = async () => {
         }
         localStorage.setItem("cart", JSON.stringify(localStorageCart));
         getCartAmount();
-      } catch (Error) {
-        console.log(Error);
-        alert(`${Error} Något gick fel`);
+      } catch (error) {
+        console.error(error);
+
+        const candyErrorDiv = document.createElement("div");
+        candyErrorDiv.className =
+          "candyErrorDiv alert alert-warning text-center w-50 my-2 m-auto";
+
+        candyErrorDiv.innerHTML = `
+          <h5>${error}</h5>
+          <p class="mb-0">Kunde ej lägga till produkten i varukorgen</p>
+        `;
+
+        candyCardMain.before(candyErrorDiv);
+
+        setTimeout(() => {
+          candyErrorDiv.remove();
+        }, 5000);
       }
     }
     if (
