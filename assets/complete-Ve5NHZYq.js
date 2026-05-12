@@ -1,4 +1,4 @@
-import{h as o,v as a,B as n}from"./selector-C0W9yTxM.js";o.addEventListener("click",()=>{window.location.href="./"});let l=JSON.parse(localStorage.getItem("finishedOrder")||"{}"),i=JSON.parse(localStorage.getItem("cart")||"[]"),c={items:[]};const d=()=>{i.forEach(t=>{const e={id:t.id,name:t.name,description:t.description,price:t.price,cartQty:t.cartQty,on_sale:t.on_sale,images:t.images,stock_quantity:t.stock_quantity,stock_status:t.stock_status};c.items.push(e)})},p=t=>{if(t.status==="success"){a.innerHTML=`
+import{a as o,r as a,B as n}from"./selector-DV-y1yVU.js";o.addEventListener("click",()=>{window.location.href="/CandyStore"});let l=JSON.parse(localStorage.getItem("finishedOrder")||"{}"),i=JSON.parse(localStorage.getItem("cart")||"[]"),c={items:[]};const d=()=>{i.forEach(t=>{const e={id:t.id,name:t.name,description:t.description,price:t.price,cartQty:t.cartQty,on_sale:t.on_sale,images:t.images,stock_quantity:t.stock_quantity,stock_status:t.stock_status};c.items.push(e)})},p=t=>{if(t.status==="success"){a.innerHTML=`
           <h2 class=" pt-3 fs-1">Ordernummer: ${t.data.id}</h2>
           <i class="fa-solid fa-circle-check fs-1 text-success d-block py-2 m-auto"></i>
           <h3 class="pt-2 fs-2">Tack för din beställning!</h3>
@@ -32,4 +32,4 @@ import{h as o,v as a,B as n}from"./selector-C0W9yTxM.js";o.addEventListener("cli
           <button class="startpage-button btn btn-secondary mt-4 mb-3">
             Gå till startsidan
           </button>
-          `;document.querySelector(".startpage-button").addEventListener("click",()=>{window.location.href="./"})};d();p(l);
+          `;document.querySelector(".startpage-button").addEventListener("click",()=>{window.location.href="/CandyStore"})};d();p(l);
